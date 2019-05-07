@@ -9,9 +9,7 @@ var db = require("./models");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public/css"));
-app.use(express.static("public/images"));
-app.use(express.static("public/js"));
+app.use(express.static("public"));
 
 var exphbs = require("express-handlebars");
 
@@ -22,9 +20,7 @@ var routes = require("./controllers/routes.js");
 app.use(routes);
 
 db.sequelize.sync({ force: false }).then(function () {
-    app.listen(PORT, () => {
-        console.log("App listening on PORT " + PORT);
-    });
+    app.listen(PORT,() => console.log(`Server listening on: http://localhost:${PORT}`));
 }).catch(function (error) {
     console.log(error);
 });
