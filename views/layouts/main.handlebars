@@ -22,17 +22,19 @@
 
 </head>
 
-<body class="bg-info">
+<body class="bg-info mt-4 pt-2">
 
-    <div class="container-fluid bg-white border rounded my-1">
+    <nav id="mainTopNavbar" class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="/">WestSide Marketplace</a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavBar" aria-controls="mainNavBar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand" href="/">WestSide Marketplace</a>
+
+        <div class="collapse navbar-collapse" id="mainNavBar">
+
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
                 </li>
@@ -42,20 +44,77 @@
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Account</a>
                 </li>
-                </ul>
-                <div class="my-2 my-lg-0">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="button">Login | Sign Up</button>
-                </div>
-            </div>
-        </nav>
+            </ul>
+
+        </div>
+
+        <div class="my-2 my-lg-0">
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#login-create-modal">Login | Sign Up</button>
+        </div>
+
+    </nav>
+
+    <div class="container-fluid bg-white border rounded my-1">
 
         {{{ body }}}
+
+        <!--Login Modal -->
+        <div class="modal fade" id="login-create-modal" tabindex="-1" role="dialog" aria-labelledby="login-create-modal-title" aria-hidden="true">
+
+            <div class="modal-dialog modal-dialog-centered" role="document">
+
+                <div class="modal-content p-1">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="login-create-modal-title">Welcome! <span class="text-success text-left"> Log-in </span> &nbsp; <span class="float-right text-primary"> Create Account </span></h5> 
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body p-4">
+                        
+                        <form>
+
+                            <div class="form-group">
+                                <label for="username-login">Username</label>
+                                <input type="text" class="form-control" id="username-login" aria-describedby="username login" placeholder="Enter Username">
+                                <small id="username-help" class="form-text text-muted">We'll never share your information with anyone else.</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="user-password">Password</label>
+                                <input type="password" class="form-control" id="user-password" placeholder="Password">
+                            </div>
+
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="remember-check">
+                                <label class="form-check-label" for="remember-check">Remember me</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Log-in</button>
+
+                        </form>
+
+                       
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 
         <nav class="navbar fixed-bottom navbar-light bg-light border p-2 d-flex align-items-center justify-content-center">
             <footer class="navbar-brand ">
                 <span class="small">Copyright &#169; 2019 project2</span>
             </footer>
         </nav>
+
+    </div>
+
 </body>
 
 </html>
