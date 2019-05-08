@@ -6,7 +6,7 @@ var router = express.Router();
 var db = require("../models");
 
 router.get("/", (req, res) => {
-    res.send("This is the homepage");
+    res.render("index");
 });
 
 router.get("*", (req, res) => {
