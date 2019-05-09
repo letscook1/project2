@@ -22,51 +22,63 @@
 
 </head>
 
-<body class="bg-info mt-4 pt-2">
+<body class="bg-info my-5 my-sm-4 py-5 py-lg-4 my-lg-4">
 
     <nav id="mainTopNavbar" class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavBar" aria-controls="mainNavBar" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavBar">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a class="navbar-brand" href="/">WestSide Marketplace</a>
+        <a class="navbar-brand" href="/">MarketPlace</a>
+    
 
         <div class="collapse navbar-collapse" id="mainNavBar">
 
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Shop</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Account</a>
+                </li>
+                <li class="nav-item dropdown d-none">
+                    <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <!-- Qill be a Partial containing Category Menu to navigate to a category Item page -->
+                    <a class="dropdown-item" href="#">Category 1</a>
+                    <a class="dropdown-item" href="#">Category 2</a>
+                    <a class="dropdown-item" href="#">Category 3</a>
+                        <!-- End of Partial for categories -->
+                    </div>
                 </li>
             </ul>
 
         </div>
 
-        <div class="my-2 my-lg-0">
-            <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#login-create-modal">Login | Sign Up</button>
+        <div class="my-2 my-lg-0 btn-group" role="group">
+            
+            <button type="button" class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#login-modal"><i class="fas fa-sign-in-alt"> </i> Log-in</button>
+            <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Create New Account</button>
         </div>
 
     </nav>
 
-    <div class="container-fluid bg-white border rounded my-1">
+    <div class="container-fluid bg-white my-0 my-lg-2">
 
         {{{ body }}}
 
         <!--Login Modal -->
-        <div class="modal fade" id="login-create-modal" tabindex="-1" role="dialog" aria-labelledby="login-create-modal-title" aria-hidden="true">
+        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-title" aria-hidden="true">
 
             <div class="modal-dialog modal-dialog-centered" role="document">
 
                 <div class="modal-content p-1">
 
                     <div class="modal-header">
-                        <h5 class="modal-title" id="login-create-modal-title">Welcome! <span class="text-success text-left"> Log-in </span> &nbsp; <span class="float-right text-primary"> Create Account </span></h5> 
+                        <h5 class="modal-title" id="login-modal-title">Welcome! <span class="text-primary font-weight-bold text-center"> Log-in! </span></h5> 
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -77,21 +89,21 @@
                         <form>
 
                             <div class="form-group">
-                                <label for="username-login">Username</label>
-                                <input type="text" class="form-control" id="username-login" aria-describedby="username login" placeholder="Enter Username">
+                                <label for="username-login">Username: </label>
+                                <input type="text" class="form-control" id="username-login" aria-describedby="username login" placeholder="Username" autocomplete="username">
                                 <small id="username-help" class="form-text text-muted">We'll never share your information with anyone else.</small>
                             </div>
                             
                             <div class="form-group">
-                                <label for="user-password">Password</label>
-                                <input type="password" class="form-control" id="user-password" placeholder="Password">
+                                <label for="user-password">Password: </label>
+                                <input type="password" class="form-control" id="user-password" placeholder="Password" autocomplete="current-password">
                             </div>
 
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="remember-check">
                                 <label class="form-check-label" for="remember-check">Remember me</label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Log-in</button>
+                            <button type="submit" class="float-right btn btn-primary font-weight-bold"><i class="fas fa-sign-in-alt"> </i> Log-in </button>
 
                         </form>
 
@@ -100,7 +112,6 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                     
                 </div>
