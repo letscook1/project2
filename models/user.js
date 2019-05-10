@@ -12,11 +12,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        first_name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        last_name: {
+        full_name: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -47,7 +43,7 @@ module.exports = function (sequelize, DataTypes) {
             foreignKey: {name: 'userId', allowNull: false},
             onDelete: "cascade"
         });
-        User.hasOne(models.carts, {
+        User.hasMany(models.cart_items, {
             foreignKey: {name: 'userId', allowNull: false},
             onDelete: "cascade"
         });
