@@ -3,14 +3,18 @@ module.exports = function (sequelize, DataTypes) {
         num: {
             type: DataTypes.INTEGER,
             allowNull: false
+        },
+        each_price: {
+            type: DataTypes.DECIMAL(10, 2),
+            allowNull: false
         }
     }, {
         freezeTableName: true,
         timestamps: false
     });
     CartItem.associate = function (models) {
-        CartItem.belongsTo(models.carts, {
-            foreignKey: {name: 'cartId', allowNull: false},
+        CartItem.belongsTo(models.users, {
+            foreignKey: {name: 'userId', allowNull: false},
             onDelete: "cascade"
         });
         CartItem.belongsTo(models.products, {

@@ -15,6 +15,11 @@ module.exports = function (sequelize, DataTypes) {
         price: {
             type: DataTypes.DECIMAL(10,2),
             allowNull: false
+        },
+        stock: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
+            allowNull: false
         }
     }, {
         freezeTableName: true
