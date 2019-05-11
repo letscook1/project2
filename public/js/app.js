@@ -10,12 +10,14 @@ $(document).ready(function () {
         $.ajax("/api/account/login", {
             type: "POST",
             data: loginCheck
-        }).then(function(response) {
-            
         });
     });
 
-    //if (req.isAuthenticated()) {}
+    // if (req.isAuthenticated()) {
+    //     console.log("User: " + req.userId + " is logged in!");
+    // } else {
+    //     console.log("User is NOT logged in!");
+    // }
 
     $("#create-new-account").on("click",(event)=>{
         event.preventDefault();
