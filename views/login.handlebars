@@ -1,0 +1,50 @@
+{{!-- Page to login instead of having a modal  --}}
+
+<div class="row">
+    <div class="col-lg-10">
+        <form>
+            <div class="form-group">
+                <label for="username-login">Username: </label>
+                <input type="text" class="form-control" id="username-login" aria-describedby="username login" placeholder="Username" autocomplete="username">
+                <small id="username-help" class="form-text text-muted">We'll never share your information with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="user-password">Password: </label>
+                <input type="password" class="form-control" id="user-password" placeholder="Password" autocomplete="current-password">
+            </div>
+                <button id="login_btn" type="submit" class="btn-block btn btn-primary font-weight-bold"><i class="fas fa-sign-in-alt"> </i> Log-in </button>
+        </form>     
+    </div>
+</div>
+
+<!-- Previous Login Modal 
+<button id="login-nav-btn" type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#login-modal"><i class="fas fa-sign-in-alt"> </i> Log-in</button>
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content p-1">
+            <div class="modal-header">
+                <h5 class="modal-title" id="login-modal-title">Welcome! <span class="text-primary font-weight-bold text-center"> Log-in! </span></h5> 
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4">              
+                <form>
+                    <div class="form-group">
+                        <label for="username-login">Username: </label>
+                        <input type="text" class="form-control" id="username-login" aria-describedby="username login" placeholder="Username" autocomplete="username">
+                        <small id="username-help" class="form-text text-muted">We'll never share your information with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-password">Password: </label>
+                        <input type="password" class="form-control" id="user-password" placeholder="Password" autocomplete="current-password">
+                    </div>
+                        <button id="login_btn" type="submit" class="btn-block btn btn-primary font-weight-bold"><i class="fas fa-sign-in-alt"> </i> Log-in </button>
+                </form>     
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>-->

@@ -1,0 +1,31 @@
+{{!-- will be the template to hold individual category cards and single items inside them to place in index --}}
+<div class="col-md-6 col-lg-4 col-xl-3">
+    <div class="card text-white p-1 m-2 text-center">
+        <div class="card-header text-secondary shadow px-0 px-0">
+            <h4 class="display-4">{{this.dataValues.name}}</h4>
+        </div>
+        <div class="card-body p-0">
+            <img src="./images/default.jpg" class="card-img-top" alt="Category Display image">
+            <p class="card-text">{{this.dataValues.description}}</p>
+
+            {{#each this.dataValues.products}}
+            {{#if @first}}
+                <div class="card text-center bg-secondary p-0 m-0">
+                    <span class="badge badge-primary">Item:</span>
+                    <h5 class="card-title my-0 py-2"> {{this.name}}</h5>
+                    <div class="card-body p-1">
+                        <div>
+                            <span class="badge badge-primary py-2 mt-1 mb-0">ItemID: {{this.id}}</span>
+                            | 
+                            <span class="badge badge-primary py-2 mt-1 mb-0">Cost: ${{this.price}}</span>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+            {{/each}}
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-primary" href="/category/{{this.dataValues.id}}"> Browse {{this.dataValues.name}}</a>
+        </div>
+    </div>
+</div>

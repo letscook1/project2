@@ -1,131 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- CDNs for fontawesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css" integrity="sha384-QokYePQSOwpBDuhlHOsX0ymF6R/vLk/UQVz3WHa6wygxI5oGTmDTv8wahFOSspdm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css" integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq" crossorigin="anonymous">
-    <!-- our css -->
-    <link rel="stylesheet" href="/css/style.css" type="text/css"/>
-    <!-- CDNs for jQuery, Popper.js and Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <!-- our javascript -->
-    <script src="/js/app.js"></script>
-    <!--Title to display across all pages -->
-    <title>WestSide Marketplace</title>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- CDNs for fontawesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css" integrity="sha384-QokYePQSOwpBDuhlHOsX0ymF6R/vLk/UQVz3WHa6wygxI5oGTmDTv8wahFOSspdm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css" integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq" crossorigin="anonymous">
+        <!-- our css -->
+        <link rel="stylesheet" href="/css/style.css" type="text/css"/>
+        <!-- CDNs for jQuery, Popper.js and Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- our javascript -->
+        <script src="/js/app.js"></script>
+        <!--Title to display across all pages -->
+        <title>WestSide Marketplace</title>
+    </head>
+    <body class="bg-secondary my-4 my-sm-3 my-md-4 my-lg-5 py-5 py-lg-4">
 
-</head>
+        {{>navbar}}
 
-<body class="bg-info my-5 my-sm-4 py-5 py-lg-4 my-lg-4">
+        <div class="container-fluid my-0 my-lg-2 rounded">
 
-    <nav id="mainTopNavbar" class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+            {{{ body }}}
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavBar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <a class="navbar-brand" href="/">MarketPlace</a>
-    
-
-        <div class="collapse navbar-collapse" id="mainNavBar">
-
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Account</a>
-                </li>
-                <li class="nav-item dropdown d-none">
-                    <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categories
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <!-- Qill be a Partial containing Category Menu to navigate to a category Item page -->
-                    <a class="dropdown-item" href="#">Category 1</a>
-                    <a class="dropdown-item" href="#">Category 2</a>
-                    <a class="dropdown-item" href="#">Category 3</a>
-                        <!-- End of Partial for categories -->
-                    </div>
-                </li>
-            </ul>
+            <nav class="navbar fixed-bottom navbar-light bg-dark  p-2 d-flex align-items-center justify-content-center">
+                <footer class="navbar-brand ">
+                    <span class="small text-white">Copyright &#169; 2019 Mike Gullo & Vincent Shury</span>
+                </footer>
+            </nav>
 
         </div>
-
-        <div class="my-2 my-lg-0 btn-group" role="group">
-            
-            <button type="button" class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#login-modal"><i class="fas fa-sign-in-alt"> </i> Log-in</button>
-            <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Create New Account</button>
-        </div>
-
-    </nav>
-
-    <div class="container-fluid bg-white my-0 my-lg-2">
-
-        {{{ body }}}
-
-        <!--Login Modal -->
-        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-title" aria-hidden="true">
-
-            <div class="modal-dialog modal-dialog-centered" role="document">
-
-                <div class="modal-content p-1">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="login-modal-title">Welcome! <span class="text-primary font-weight-bold text-center"> Log-in! </span></h5> 
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-body p-4">
-                        
-                        <form>
-
-                            <div class="form-group">
-                                <label for="username-login">Username: </label>
-                                <input type="text" class="form-control" id="username-login" aria-describedby="username login" placeholder="Username" autocomplete="username">
-                                <small id="username-help" class="form-text text-muted">We'll never share your information with anyone else.</small>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="user-password">Password: </label>
-                                <input type="password" class="form-control" id="user-password" placeholder="Password" autocomplete="current-password">
-                            </div>
-
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="remember-check">
-                                <label class="form-check-label" for="remember-check">Remember me</label>
-                            </div>
-                            <button id="login_btn" type="submit" class="float-right btn btn-primary font-weight-bold"><i class="fas fa-sign-in-alt"> </i> Log-in </button>
-
-                        </form>
-
-                       
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-
-        <nav class="navbar fixed-bottom navbar-light bg-light border p-2 d-flex align-items-center justify-content-center">
-            <footer class="navbar-brand ">
-                <span class="small">Copyright &#169; 2019 project2</span>
-            </footer>
-        </nav>
-
-    </div>
-
-</body>
-
+    </body>
 </html>

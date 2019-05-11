@@ -1,0 +1,18 @@
+{{!-- will be the template to be placed inside the categories.handlebars file to show all the item cards from the database with a else statement for error placeholder cards --}}
+<div class="col-md-6 col-lg-4 col-xl-3">
+    <div class="card text-white p-1 m-2 text-center">
+        <div class="card-header text-secondary shadow px-0 px-0">
+          <span class="badge badge-primary">Item: </span><h4 class="display-4">{{this.dataValues.name}}</h4>
+        </div>
+        <div class="card-body p-0">
+            <img src="./images/default.jpg" class="card-img-top" alt="Category Display image">
+            <p class="card-text">{{this.dataValues.description}}</p>
+            <span class="badge badge-primary py-2 mt-1 mb-0">ItemID: {{this.dataValues.id}}</span> |  
+            <span class="badge badge-primary py-2 mt-1 mb-0">Cost: ${{this.dataValues.price}}</span>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-primary" href="/category/{{this.dataValues.id}}"> Browse {{this.dataValues.name}}</a>
+        </div>
+    </div>
+</div>
+   
