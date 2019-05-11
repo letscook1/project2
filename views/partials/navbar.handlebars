@@ -22,11 +22,9 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown">Categories</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item disabled" href="#">Select A Category</a>
-                    <!-- Partial containing Category Menu to navigate to a category Item page -->
                     {{#each category}}
                         <a class="dropdown-item" href="/category/{{this.dataValues.id}}">{{this.dataValues.name}}</a>
                     {{/each}}
-                    <!-- End of Partial for categories -->
                 </div>
             </li>
         </ul>
