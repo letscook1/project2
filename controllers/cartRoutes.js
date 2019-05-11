@@ -6,7 +6,7 @@ var router = express.Router();
 var db = require("../models");
 
 // delete an item from the cart
-router.delete("/", (req, res) => {
+router.delete("/api/cart/", (req, res) => {
     db.cart_items.destroy({
         where: { id: req.body.id }
     }).then(function (data) {
@@ -15,7 +15,7 @@ router.delete("/", (req, res) => {
 });
 
 // update the quantity of an item in the cart
-router.put("/", (req, res) => {
+router.put("/api/cart/", (req, res) => {
     db.cart_items.update({
         num: req.body.num
     }, { where: { id: req.body.id }
@@ -25,7 +25,7 @@ router.put("/", (req, res) => {
 });
 
 // add an item to the cart
-router.post("/", (req, res) => {
+router.post("/api/cart/", (req, res) => {
     db.cart_items.create({
         num: req.body.num,
         each_price: req.body.each_price,
@@ -43,7 +43,7 @@ router.post("/", (req, res) => {
 var orderId = 0;
 var userId = 0;
 // first find the cart that has been submitted
-router.post("/submitted", (req, res, next) => {
+router.post("/api/cart/submitted", (req, res, next) => {
     userId = req.body.id;
     db.cart_items.findAll({
         attributes: ['id', 'num', 'each_price', 'productId'],
@@ -69,7 +69,7 @@ router.post("/submitted", (req, res, next) => {
     next();
 });
 // next, delete the cart and related cart_items of the cartId that was submitted
-router.post("/submitted", (req, res) => {
+router.post("/api/cart/submitted", (req, res) => {
     db.cart_items.destroy({
         where: { userId: userId }
     }).then(function () {
