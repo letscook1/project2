@@ -24,20 +24,23 @@ router.put("/api/account/", (req, res) => {
 
 // find all of a user's orders
 router.get("/api/account/orders", (req, res) => {
-    db.users.findAll({
+    db.orders.findAll({
         attributes: ['id', 'name', 'description'],
+        where: { userId: req.userId },
         order: [['id', 'ASC']]
     }).then(function (data) {
-        res.render("account", data);
+        res.render("account", { data });
     });
 });
 
 // find a specific order
 router.get("/api/account/orders/:id", (req, res) => {
-    db.users.findAll({
-
+    db.orders.findOne({
+        attributes: ['id', 'name', 'description'],
+        where: { userId: req.userId },
+        order: [['id', 'ASC']]
     }).then(function (data) {
-        res.render("account", data);
+        res.render("account", { data });
     });
 });
 
@@ -59,9 +62,8 @@ router.post("/api/account/register", (req, res) => {
 
 // login with an existing username and password
 var userId = 0;
-var username = "";
-var email = "";
 router.post("/api/account/login", (req, res) => {
+    console.log("POST to api/account/login");
     db.users.findOne({
         attributes: ['id', 'username', 'email'],
         where: {
@@ -71,13 +73,11 @@ router.post("/api/account/login", (req, res) => {
     }).then(function (data) {
         if (data) {
             userId = data.id;
-            username = data.username;
-            email = data.email;
         }
         if (userId) {
-            console.log("\nUser is being logged in!\n");
             req.login(userId, function (err) {
                 if (err) throw err;
+                console.log("\nUser is being logged in!\n");
                 res.redirect("/");
             });
         } else {

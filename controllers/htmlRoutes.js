@@ -19,7 +19,12 @@ router.get("/", (req, res) => {
             { model: db.products, attributes: ['id', 'name', 'description', 'image_url', 'price'] }
         ]
     }).then(function (category) {
-        res.render("index", { category });
+        console.log("foundAll. category:"+category);
+        res.render("categories", { category });
+    }).catch(function(error){
+        console.log("error="+error);
+    }).error(function(err){
+        console.log("err="+err);
     });
 });
 
@@ -30,7 +35,7 @@ router.get("/category/:id", (req, res) => {
         where: { categoryId: req.params.id },
         order: [['id', 'ASC']]
     }).then(function (data) {
-        res.render("categories", data);
+        res.render("category-items", { data });
     });
 });
 
@@ -73,17 +78,16 @@ router.get("/register", (req, res) => {
 });
 
 router.get("/cart", (req, res) => {
-    res.render("checkout");
-    // db.cart_items.findAll({
-    //     attributes: ['id', 'num', 'each_price'],
-    //     where: { userId: req.userId.id },
-    //     order: [['id', 'ASC']],
-    //     include: [
-    //         { model: db.products, attributes: ['id', 'name', 'description'] }
-    //     ]
-    // }).then(function (data) {
-    //     res.render("checkout", {data});
-    // });
+    db.cart_items.findAll({
+        attributes: ['id', 'num', 'each_price'],
+        where: { userId: req.userId.id },
+        order: [['id', 'ASC']],
+        include: [
+            { model: db.products, attributes: ['id', 'name', 'description'] }
+        ]
+    }).then(function (data) {
+        res.render("checkout", { data });
+    });
 });
 
 // catch all for undefined routes that goes to our 404 error page

@@ -2,7 +2,8 @@
 
 $(document).ready(function () {
 
-    $("#login_btn").on("click", function () {
+    $("#login_btn").on("click", function (event) {
+        event.preventDefault();
         var loginCheck = {
             username : $("#username-login").val(),
             password : $("#user-password").val()
@@ -10,12 +11,14 @@ $(document).ready(function () {
         $.ajax("/api/account/login", {
             type: "POST",
             data: loginCheck
-        }).then(function(response) {
-            
         });
     });
 
-    //if (req.isAuthenticated()) {}
+    // if (req.isAuthenticated()) {
+    //     console.log("User: " + req.userId + " is logged in!");
+    // } else {
+    //     console.log("User is NOT logged in!");
+    // }
 
     $("#create-new-account").on("click",(event)=>{
         event.preventDefault();
