@@ -2,7 +2,8 @@
 
 $(document).ready(function () {
 
-    $("#login_btn").on("click", function () {
+    $("#login_btn").on("click", function (event) {
+        event.preventDefault();
         var loginCheck = {
             username : $("#username-login").val(),
             password : $("#user-password").val()

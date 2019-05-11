@@ -62,9 +62,8 @@ router.post("/api/account/register", (req, res) => {
 
 // login with an existing username and password
 var userId = 0;
-var username = "";
-var email = "";
 router.post("/api/account/login", (req, res) => {
+    console.log("POST to api/account/login");
     db.users.findOne({
         attributes: ['id', 'username', 'email'],
         where: {
@@ -74,8 +73,6 @@ router.post("/api/account/login", (req, res) => {
     }).then(function (data) {
         if (data) {
             userId = data.id;
-            username = data.username;
-            email = data.email;
         }
         if (userId) {
             req.login(userId, function (err) {

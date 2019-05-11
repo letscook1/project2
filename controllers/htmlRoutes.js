@@ -19,7 +19,12 @@ router.get("/", (req, res) => {
             { model: db.products, attributes: ['id', 'name', 'description', 'image_url', 'price'] }
         ]
     }).then(function (category) {
-        res.render("index", { category });
+        console.log("foundAll. category:"+category);
+        res.render("categories", { category });
+    }).catch(function(error){
+        console.log("error="+error);
+    }).error(function(err){
+        console.log("err="+err);
     });
 });
 
