@@ -7,7 +7,7 @@ var passport = require("passport");
 var db = require("../models");
 
 // update account info
-router.put("/", (req, res) => {
+router.put("/api/account/", (req, res) => {
     db.users.update({
         username: req.body.username,
         password: req.body.password,
@@ -23,7 +23,7 @@ router.put("/", (req, res) => {
 });
 
 // find all of a user's orders
-router.get("/orders", (req, res) => {
+router.get("/api/account/orders", (req, res) => {
     db.users.findAll({
         attributes: ['id', 'name', 'description'],
         order: [['id', 'ASC']]
@@ -33,7 +33,7 @@ router.get("/orders", (req, res) => {
 });
 
 // find a specific order
-router.get("/orders/:id", (req, res) => {
+router.get("/api/account/orders/:id", (req, res) => {
     db.users.findAll({
 
     }).then(function (data) {
@@ -42,7 +42,7 @@ router.get("/orders/:id", (req, res) => {
 });
 
 // register for an account
-router.post("/register", (req, res) => {
+router.post("/api/account/register", (req, res) => {
     db.users.create({
         username: req.body.username,
         password: req.body.password,
@@ -61,7 +61,7 @@ router.post("/register", (req, res) => {
 var userId = 0;
 var username = "";
 var email = "";
-router.post("/login", (req, res) => {
+router.post("/api/account/login", (req, res) => {
     db.users.findOne({
         attributes: ['id', 'username', 'email'],
         where: {
@@ -78,7 +78,8 @@ router.post("/login", (req, res) => {
             console.log("\nUser is being logged in!\n");
             req.login(userId, function (err) {
                 if (err) throw err;
-                res.redirect("/");
+                res.json(data);
+                // res.redirect("/");
             });
         } else {
             console.log("\nNo match found for the submitted username and/or password!\n");
