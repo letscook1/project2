@@ -18,8 +18,8 @@ router.get("/", (req, res) => {
         include: [
             { model: db.products, attributes: ['id', 'name', 'description', 'image_url', 'price'] }
         ]
-    }).then(function (data) {
-        res.render("index", data);
+    }).then(function (category) {
+        res.render("index", { category });
     });
 });
 
@@ -54,6 +54,36 @@ router.get("/search/:criteria", (req, res) => {
     }).then(function (data) {
         res.json(data);
     });
+});
+
+// passport's logout function
+router.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/");
+});
+
+// login page
+router.get("/login", (req, res) => {
+    res.render("login");
+});
+
+// register page
+router.get("/register", (req, res) => {
+    res.render("account");
+});
+
+router.get("/cart", (req, res) => {
+    res.render("checkout");
+    // db.cart_items.findAll({
+    //     attributes: ['id', 'num', 'each_price'],
+    //     where: { userId: req.userId.id },
+    //     order: [['id', 'ASC']],
+    //     include: [
+    //         { model: db.products, attributes: ['id', 'name', 'description'] }
+    //     ]
+    // }).then(function (data) {
+    //     res.render("checkout", {data});
+    // });
 });
 
 // catch all for undefined routes that goes to our 404 error page

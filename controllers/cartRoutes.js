@@ -5,20 +5,6 @@ var router = express.Router();
 
 var db = require("../models");
 
-// send data to display the current cart
-router.get("/", (req, res) => {
-    db.cart_items.findAll({
-        attributes: ['id', 'num', 'each_price'],
-        where: { userId: req.userId.id },
-        order: [['id', 'ASC']],
-        include: [
-            { model: db.products, attributes: ['id', 'name', 'description'] }
-        ]
-    }).then(function (data) {
-        res.render("checkout", data);
-    });
-});
-
 // delete an item from the cart
 router.delete("/", (req, res) => {
     db.cart_items.destroy({

@@ -16,7 +16,6 @@ $(document).ready(function () {
     });
 
     //if (req.isAuthenticated()) {}
-    
 
     $("#create-new-account").on("click",(event)=>{
         event.preventDefault();
