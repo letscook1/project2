@@ -6,6 +6,7 @@ var passport = require("passport");
 
 var db = require("../models");
 
+// update account info
 router.put("/", (req, res) => {
     db.users.update({
         username: req.body.username,
@@ -21,6 +22,7 @@ router.put("/", (req, res) => {
     });
 });
 
+// find all of a user's orders
 router.get("/orders", (req, res) => {
     db.users.findAll({
         attributes: ['id', 'name', 'description'],
@@ -30,6 +32,7 @@ router.get("/orders", (req, res) => {
     });
 });
 
+// find a specific order
 router.get("/orders/:id", (req, res) => {
     db.users.findAll({
 
@@ -38,6 +41,7 @@ router.get("/orders/:id", (req, res) => {
     });
 });
 
+// register for an account
 router.post("/register", (req, res) => {
     db.users.create({
         username: req.body.username,
@@ -59,10 +63,10 @@ router.get("/logout", (req, res) => {
     res.redirect("/");
 });
 
+// login with an existing username and password
 var userId = 0;
 var username = "";
 var email = "";
-
 router.post("/login", (req, res) => {
     db.users.findOne({
         attributes: ['id', 'username', 'email'],

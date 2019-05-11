@@ -2,9 +2,6 @@
 
 $(document).ready(function () {
 
-    var user = false;
-    var username = "";
-
     $("#login_btn").on("click", function () {
         var loginCheck = {
             username : $("#username-login").val(),
