@@ -1,39 +1,10 @@
-<div class="row my-1">
-      <!-- Example Card set up of how the dynamic Main view page will look -->
-    <div class="card col-4">
-      <img src="..." class="card-img-top img-thumbnail" alt="Category Example Item image">
-      <div class="card-body">
-        <h5 class="card-title">Category Heading</h5>
-        <p class="card-text">Possibly the Category data here, or the example item content here. </p>
-        <a href="#" class="btn btn-primary"> Link to Browse (Category Name) </a>
-      </div>
-    </div>
-
-    <div class="card col-4">
-      <img src="..." class="card-img-top img-thumbnail" alt="Category Example Item image">
-        <div class="card-body">
-          <h5 class="card-title">Category Heading</h5>
-          <p class="card-text">Possibly the Category data here, or the example item content here. </p>
-          <a href="#" class="btn btn-primary"> Link to Browse (Category Name) </a>
-        </div>
-    </div>
-
-    <div class="card col-4">
-      <img src="..." class="card-img-top img-thumbnail" alt="Category Example Item image">
-      <div class="card-body">
-        <h5 class="card-title">Category Heading</h5>
-        <p class="card-text">Possibly the Category data here, or the example item content here. </p>
-        <a href="#" class="btn btn-primary"> Link to Browse (Category Name) </a>
-      </div>
-    </div>
-
-    <div class="card col-4">
-      <img src="..." class="card-img-top img-thumbnail" alt="Category Example Item image">
-      <div class="card-body">
-        <h5 class="card-title">Category Heading</h5>
-        <p class="card-text">Possibly the Category data here, or the example item content here. </p>
-        <a href="#" class="btn btn-primary"> Link to Browse (Category Name) </a>
-      </div>
-    </div>
-
+<div class="jumbotron text-center my-0 py-3 px-0">
+  <h1 class="display-4 font-weight-bold px-0"> Browse Categories!</h1>
+</div>
+{{!-- View all category page where clicking will take you to browse all items in one category --}}
+<div class="row my-3 mx-0 no-gutters">
+  <!-- Category Cards -->
+  {{#each category}}
+    {{>category-cards}}
+  {{/each}}
 </div>

@@ -15,8 +15,55 @@ $(document).ready(function () {
         });
     });
 
-    if (req.isAuthenticated()) {
+    //if (req.isAuthenticated()) {}
+    
 
-    }
+    $("#create-new-account").on("click",(event)=>{
+        event.preventDefault();
+
+        let newUser = {
+            username: $("#create-username").val().trim() ,
+            password: $("#create-password").val().trim() ,
+            email: $("#create-email").val().trim() ,
+            full_name:$("#create-name").val().trim(),
+            address: $("#create-address").val().trim() ,
+            city: $("#create-city").val().trim(),
+            state: $("#user-state").val(),
+            zip_code:  $("#create-zipcode").val().trim()
+        }
+        
+        console.log(newUser);
+
+        // $.ajax("/register", {
+        //     type: "POST",
+        //     data: newUser
+        // }).then(function(response) {});
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });
