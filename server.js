@@ -35,13 +35,13 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 var cartRoutes = require("./controllers/cartRoutes.js");
-app.use('/api/cart', cartRoutes);
+app.use(cartRoutes);
 
 var accountRoutes = require("./controllers/accountRoutes.js");
-app.use('/api/account', accountRoutes);
+app.use(accountRoutes);
 
 var htmlRoutes = require("./controllers/htmlRoutes.js");
-app.use('/', htmlRoutes);
+app.use(htmlRoutes);
 
 db.sequelize.sync({ force: false }).then(function () {
     app.listen(PORT, () => console.log(`Server listening on: http://localhost:${PORT}`));
