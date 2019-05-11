@@ -33,36 +33,13 @@ $(document).ready(function () {
         
         console.log(newUser);
 
-        // $.ajax("/register", {
-        //     type: "POST",
-        //     data: newUser
-        // }).then(function(response) {});
-
+        $.ajax("/api/account/register", {
+            type: "POST",
+            data: newUser
+        }).then(function(response) {
+            console.log(newUser);
+        });
 
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 });

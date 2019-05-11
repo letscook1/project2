@@ -1,59 +1,6 @@
-{{!-- Page to update account / view order history later if applicable  --}}
-<div class="col-12 my-4 py-4 px-0">
-    <form class="shadow p-sm-2 p-md-4 mb-5 bg-white rounded">
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="create-name">Full Name</label>
-          <input type="text" class="form-control" id="create-name" placeholder="Full Name: John Doe" autocomplete="name">
-        </div>
-
-        <div class="form-group col-md-6">
-          <label for="create-email">Email</label>
-          <input type="email" class="form-control" id="create-email" placeholder="Email:  Email-123@email.com">
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="create-username">Username</label>
-          <input type="text" class="form-control" id="create-username" placeholder="Username: user-216" autocomplete="username">
-        </div>
-
-        <div class="form-group col-md-6">
-          <label for="create-password">Password</label>
-          <input type="password" class="form-control" id="create-password" placeholder="Password" autocomplete="new-password">
-          <small id="create-password-help" class="text-muted">REQUIREMENTS FOR PASSWORD HERE</small>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="create-address">Address</label>
-        <input type="text" class="form-control" id="create-address" placeholder="1234 Main St" autocomplete="street-address">
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="create-city">City</label>
-          <input type="text" class="form-control" id="create-city" placeholder="Enter your City: (Cleveland)">
-        </div>
-
-        <div class="form-group col-md-3">
-          <label for="user-state">State</label>
-          <select id="user-state" class="form-control">
-            <option selected disabled>Choose...</option>
-            {{>statedropdown}}
-            {{!-- OH is just example, will need to store array of states to send back as valid inputs on page load in the states file or hard code all the states here/in partial --}}
-            {{!-- {{#each state}} --}}
-          </select>
-        </div>
-
-        <div class="form-group col-md-3">
-          <label for="create-zipcode">Zipcode:</label>
-          <input type="text" class="form-control" id="create-zipcode" autocomplete="postal-code" placeholder="12345">
-        </div>
-      </div>
-      
-      {{!-- End of form  --}}
-      <button id="create-new-account" type="submit" class="btn btn-primary">Create Account</button>
-  </form>
-</div>
+{{!-- Page to Create / edit & update account with option to view order history later if applicable  --}}
+{{#if user}}
+{{>update-account}}
+{{else}}
+{{>create-new-account}}
+{{/if}}
