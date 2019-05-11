@@ -78,8 +78,7 @@ router.post("/api/account/login", (req, res) => {
             console.log("\nUser is being logged in!\n");
             req.login(userId, function (err) {
                 if (err) throw err;
-                res.json(data);
-                // res.redirect("/");
+                res.redirect("/");
             });
         } else {
             console.log("\nNo match found for the submitted username and/or password!\n");
