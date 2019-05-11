@@ -3,7 +3,8 @@ displays All items in stock for one Category --}}
 <div class="jumbotron text-center my-0 py-3 px-0">
   <h1 class="display-4 font-weight-bold px-0"> Browse Items!</h1>
 </div>
-
-{{#each category-item}}
-  {{>items}}
-{{/each}}
+<div class="row my-3 mx-0 no-gutters">
+  {{#each categoryitems}}
+    {{>items}}
+  {{/each}}
+</div>
