@@ -6,10 +6,10 @@ var router = express.Router();
 var db = require("../models");
 
 // send data to display the current cart
-router.get("/:id", (req, res) => {
+router.get("/", (req, res) => {
     db.cart_items.findAll({
         attributes: ['id', 'num', 'each_price'],
-        where: { userId: req.params.id },
+        where: { userId: req.userId.id },
         order: [['id', 'ASC']],
         include: [
             { model: db.products, attributes: ['id', 'name', 'description'] }
@@ -32,6 +32,7 @@ router.delete("/", (req, res) => {
 router.put("/", (req, res) => {
     db.cart_items.update({
         num: req.body.num
+    }, { where: { id: req.body.id }
     }).then(function (data) {
         res.redirect("/");
     });
@@ -51,10 +52,10 @@ router.post("/", (req, res) => {
     });
 });
 
+// route for processing a submitted order
 // set variables for submitting an order
 var orderId = 0;
 var userId = 0;
-
 // first find the cart that has been submitted
 router.post("/submitted", (req, res, next) => {
     userId = req.body.id;
@@ -81,7 +82,6 @@ router.post("/submitted", (req, res, next) => {
     });
     next();
 });
-
 // next, delete the cart and related cart_items of the cartId that was submitted
 router.post("/submitted", (req, res) => {
     db.cart_items.destroy({

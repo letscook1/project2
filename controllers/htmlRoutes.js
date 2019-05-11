@@ -2,14 +2,18 @@
 
 var express = require("express");
 var router = express.Router();
+const Sequelize = require('sequelize');
+const op = Sequelize.Op;
 
 var db = require("../models");
 
+// find all categories and one product from each category
 router.get("/", (req, res) => {
     console.log(req.user);
     console.log(req.isAuthenticated());
     db.categories.findAll({
         attributes: ['id', 'name', 'description'],
+        group: ['id'],
         order: [['id', 'ASC']],
         include: [
             { model: db.products, attributes: ['id', 'name', 'description', 'image_url', 'price'] }
@@ -19,39 +23,42 @@ router.get("/", (req, res) => {
     });
 });
 
+// find all products in a specific category
 router.get("/category/:id", (req, res) => {
     db.products.findAll({
         attributes: ['id', 'name', 'description', 'image_url', 'price'],
+        where: { categoryId: req.params.id },
+        order: [['id', 'ASC']]
+    }).then(function (data) {
+        res.render("categories", data);
+    });
+});
+
+// search for products with the search criteria in the name or description
+router.get("/search/:criteria", (req, res) => {
+    db.products.findAll({
+        attributes: ['id', 'name', 'description', 'image_url', 'price'],
         where: {
-            categoryId: req.params.id
+            [op.or]: [
+                Sequelize.where(
+                    Sequelize.fn('lower', Sequelize.col('name')),
+                    { [op.like]: '%' + req.params.criteria + '%' }
+                ),
+                Sequelize.where(
+                    Sequelize.fn('lower', Sequelize.col('description')),
+                    { [op.like]: '%' + req.params.criteria + '%' }
+                )
+            ]
         },
         order: [['id', 'ASC']]
     }).then(function (data) {
         res.json(data);
-        // res.render("categories", data);
     });
 });
 
-// search route
-// find matches in either the product name or dexcription
-router.get("/search/:criteria", (req, res) => {
-
-});
-
+// catch all for undefined routes that goes to our 404 error page
 router.get("*", (req, res) => {
     res.render("error");
 });
 
 module.exports = router;
-
-// app.get('/some_path',checkAuthentication,function(req,res){
-//     //do something only if user is authenticated
-// });
-// function checkAuthentication(req,res,next){
-//     if(req.isAuthenticated()){
-//         //req.isAuthenticated() will return true if user is logged in
-//         next();
-//     } else{
-//         res.redirect("/login");
-//     }
-// }
