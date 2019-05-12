@@ -2,12 +2,6 @@
 
 $(document).ready(function () {
 
-    // if (req.isAuthenticated()) {
-    //     console.log("User: " + req.userId + " is logged in!");
-    // } else {
-    //     console.log("User is NOT logged in!");
-    // }
-
     $("#login_btn").on("click", function (event) {
         event.preventDefault();
         var loginCheck = {
@@ -18,7 +12,7 @@ $(document).ready(function () {
             type: "POST",
             data: loginCheck
         }).then(function(response) {
-            console.log("testing");
+            
         });
     });
 

@@ -1,6 +1,14 @@
 {{!-- Page to Create / edit & update account with option to view order history later if applicable  --}}
-{{#if user}}
-{{>update_account}}
-{{else}}
-{{>create_new_account}}
-{{/if}}
+<div class="row d-flex justify-content-center">
+    <div class="col-10 shadow-lg p-3 mb-5 mt-3 bg-white rounded">
+        {{#if user}}
+            {{#with account}}
+                    {{>update_account}}
+                {{else}}
+                    {{>update_account}}
+            {{/with}}
+        {{else}}
+            {{>create_new_account}}
+        {{/if}}
+    </div>
+</div>
