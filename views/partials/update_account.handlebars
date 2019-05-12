@@ -43,15 +43,13 @@
 
     <div class="form-group col-6 col-md-2">
       <label for="update-user-state">Update-State</label>
-      <select id="update-user-state" class="form-control">
+      <select id="update-user-state" class="form-control state-options">
         {{#if state}}
           <option selected disabled>{{state}}</option>
         {{else}}
           <option selected disabled>Choose...</option>
           {{/if}}
-        {{>statedropdown}}
-        {{!-- OH is just example, will need to store array of states to send back as valid inputs on page load in the states file or hard code all the states here/in partial --}}
-        {{!-- {{#each state}} --}}
+        {{!-- {{>statedropdown}} --}}
       </select>
     </div>
 

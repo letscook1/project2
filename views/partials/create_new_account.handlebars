@@ -39,11 +39,9 @@
 
     <div class="form-group col-md-3">
       <label for="user-state">State</label>
-      <select id="user-state" class="form-control">
+      <select id="user-state" class="form-control state-options">
         <option selected disabled>Choose...</option>
-        {{>statedropdown}}
-        {{!-- OH is just example, will need to store array of states to send back as valid inputs on page load in the states file or hard code all the states here/in partial --}}
-        {{!-- {{#each state}} --}}
+        {{!-- {{>statedropdown}} --}}
       </select>
     </div>
 
