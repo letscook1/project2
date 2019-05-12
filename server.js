@@ -34,11 +34,8 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-var cartRoutes = require("./controllers/cartRoutes.js");
-app.use(cartRoutes);
-
-var accountRoutes = require("./controllers/accountRoutes.js");
-app.use(accountRoutes);
+var apiRoutes = require("./controllers/apiRoutes.js");
+app.use(apiRoutes);
 
 var htmlRoutes = require("./controllers/htmlRoutes.js");
 app.use(htmlRoutes);

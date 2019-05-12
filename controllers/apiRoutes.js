@@ -1,0 +1,181 @@
+"use strict";
+
+var express = require("express");
+var router = express.Router();
+var passport = require("passport");
+
+var db = require("../models");
+
+// delete an item from the cart
+router.delete("/api/cart/", (req, res) => {
+    db.cart_items.destroy({
+        where: { id: req.body.id }
+    }).then(function (data) {
+        res.redirect("/");
+    });
+});
+
+// update the quantity of an item in the cart
+router.put("/api/cart/", (req, res) => {
+    db.cart_items.update({
+        num: req.body.num
+    }, {
+            where: { id: req.body.id }
+        }).then(function (data) {
+            res.redirect("/");
+        });
+});
+
+// add an item to the cart
+router.post("/api/cart/", (req, res) => {
+    db.cart_items.create({
+        num: req.body.num,
+        each_price: req.body.each_price,
+        userId: req.body.userId,
+        productId: req.body.productId
+    }, {
+            where: { id: req.body.id }
+        }).then(function (data) {
+            res.redirect("/");
+        });
+});
+
+// route for processing a submitted order
+// set variables for submitting an order
+var orderId = 0;
+var userId = 0;
+// first find the cart that has been submitted
+router.post("/api/cart/submitted", (req, res, next) => {
+    userId = req.body.id;
+    db.cart_items.findAll({
+        attributes: ['id', 'num', 'each_price', 'productId'],
+        where: { userId: req.body.id }
+    }).then(function (data) {
+        // then add the submitted cart to the orders table, then add each of the items from cart_items to the order_items table with the correct orderID
+        db.orders.create({
+            shipping_cost: req.body.shipping_cost,
+            order_total: req.body.order_total,
+            userId: userId
+        }).then(function (result) {
+            orderId = result.id;
+            data.forEach(function (element) {
+                db.order_items.create({
+                    num: element.num,
+                    each_price: element.each_price,
+                    orderId: orderId,
+                    productId: element.productId
+                });
+            });
+        });
+    });
+    next();
+});
+// next, delete the cart and related cart_items of the cartId that was submitted
+router.post("/api/cart/submitted", (req, res) => {
+    db.cart_items.destroy({
+        where: { userId: userId }
+    }).then(function () {
+        res.render("checkout");
+    });
+});
+
+// update account info
+router.put("/api/account", (req, res) => {
+    db.users.update({
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        full_name: req.body.full_name,
+        address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        zip_code: req.body.zip_code
+    }).then(function (data) {
+        res.render("account", data);
+    });
+});
+
+router.post("/api/test", (req, res) => {
+    res.redirect("/");
+});
+
+// find all of a user's orders
+router.get("/api/account/orders", (req, res) => {
+    db.orders.findAll({
+        attributes: ['id', 'name', 'description'],
+        where: { userId: req.userId },
+        order: [['id', 'ASC']]
+    }).then(function (data) {
+        res.render("account", { data });
+    });
+});
+
+// find a specific order
+router.get("/api/account/orders/:id", (req, res) => {
+    db.orders.findOne({
+        attributes: ['id', 'name', 'description'],
+        where: { userId: req.userId },
+        order: [['id', 'ASC']]
+    }).then(function (data) {
+        res.render("account", { data });
+    });
+});
+
+// register for an account
+router.post("/api/account/register", (req, res) => {
+    db.users.create({
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        full_name: req.body.full_name,
+        address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        zip_code: req.body.zip_code
+    }).then(function (data) {
+        redirect("/login");
+    });
+});
+
+// login with an existing username and password
+var userId = 0;
+router.post("/api/account/login", (req, res) => {
+    db.users.findOne({
+        attributes: ['id', 'username', 'email'],
+        where: {
+            username: "user1"
+        }
+    }).then(function (data) {
+        // bcrypt.compare(password, data.password, (err, isMatch) => {
+        //     if(err) throw err;
+        //     if (isMatch) {
+        //         return done(null, userId);
+        //     } else {
+        //         return done(null, false, { message: "Password incorrect" });
+        //     }
+        // });
+        if (data) {
+            userId = data.id;
+        }
+        if (userId) {
+            req.login(userId, function (err) {
+                if (err) throw err;
+                console.log("\nUser is being logged in!\n");
+                res.redirect("/");
+            });
+        } else {
+            console.log("\nNo match found for the submitted username and/or password!\n");
+            res.redirect("/login");
+        }
+    });
+});
+
+passport.serializeUser(function (userId, done) {
+    done(null, userId);
+});
+
+passport.deserializeUser(function (userId, done) {
+    done(null, userId);
+});
+
+module.exports = router;
