@@ -11,8 +11,9 @@ router.delete("/api/cart/", (req, res) => {
     db.cart_items.destroy({
         where: { id: req.body.id }
     }).then(function (data) {
-        res.redirect("/");
+        res.redirect("/cart");
     });
+    res.redirect("/cart");
 });
 
 // update the quantity of an item in the cart
@@ -22,7 +23,7 @@ router.put("/api/cart/", (req, res) => {
     }, {
             where: { id: req.body.id }
         }).then(function (data) {
-            res.redirect("/");
+            res.redirect("/cart");
         });
 });
 
@@ -36,7 +37,7 @@ router.post("/api/cart/", (req, res) => {
     }, {
             where: { id: req.body.id }
         }).then(function (data) {
-            res.redirect("/");
+            res.redirect("/cart");
         });
 });
 
@@ -75,7 +76,7 @@ router.post("/api/cart/submitted", (req, res) => {
     db.cart_items.destroy({
         where: { userId: userId }
     }).then(function () {
-        res.render("checkout");
+        res.render("submitted", { orderId: orderId, user: req.isAuthenticated() });
     });
 });
 
@@ -91,33 +92,7 @@ router.put("/api/account", (req, res) => {
         state: req.body.state,
         zip_code: req.body.zip_code
     }).then(function (data) {
-        res.render("account", data);
-    });
-});
-
-router.post("/api/test", (req, res) => {
-    res.redirect("/");
-});
-
-// find all of a user's orders
-router.get("/api/account/orders", (req, res) => {
-    db.orders.findAll({
-        attributes: ['id', 'name', 'description'],
-        where: { userId: req.userId },
-        order: [['id', 'ASC']]
-    }).then(function (data) {
-        res.render("account", { data });
-    });
-});
-
-// find a specific order
-router.get("/api/account/orders/:id", (req, res) => {
-    db.orders.findOne({
-        attributes: ['id', 'name', 'description'],
-        where: { userId: req.userId },
-        order: [['id', 'ASC']]
-    }).then(function (data) {
-        res.render("account", { data });
+        res.redirect("/account");
     });
 });
 
@@ -133,7 +108,7 @@ router.post("/api/account/register", (req, res) => {
         state: req.body.state,
         zip_code: req.body.zip_code
     }).then(function (data) {
-        redirect("/login");
+        res.send("success").end();
     });
 });
 
@@ -141,9 +116,9 @@ router.post("/api/account/register", (req, res) => {
 var userId = 0;
 router.post("/api/account/login", (req, res) => {
     db.users.findOne({
-        attributes: ['id', 'username', 'email'],
+        attributes: ['id', 'username', 'password'],
         where: {
-            username: "user1"
+            username: req.body.username
         }
     }).then(function (data) {
         // bcrypt.compare(password, data.password, (err, isMatch) => {
@@ -154,18 +129,24 @@ router.post("/api/account/login", (req, res) => {
         //         return done(null, false, { message: "Password incorrect" });
         //     }
         // });
+
+        // bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
+        //     // res == true
+        // });
+        // bcrypt.compare(someOtherPlaintextPassword, hash, function(err, res) {
+        //     // res == false
+        // });
+
         if (data) {
             userId = data.id;
-        }
-        if (userId) {
             req.login(userId, function (err) {
                 if (err) throw err;
                 console.log("\nUser is being logged in!\n");
-                res.redirect("/");
+                res.send("success").end();
             });
         } else {
             console.log("\nNo match found for the submitted username and/or password!\n");
-            res.redirect("/login");
+            res.end();
         }
     });
 });
