@@ -108,7 +108,7 @@ router.post("/api/account/register", (req, res) => {
         state: req.body.state,
         zip_code: req.body.zip_code
     }).then(function (data) {
-        res.redirect("/login");
+        res.send("success").end();
     });
 });
 
@@ -116,7 +116,7 @@ router.post("/api/account/register", (req, res) => {
 var userId = 0;
 router.post("/api/account/login", (req, res) => {
     db.users.findOne({
-        attributes: ['id', 'username', 'email'],
+        attributes: ['id', 'username', 'password'],
         where: {
             username: req.body.username
         }
@@ -129,18 +129,26 @@ router.post("/api/account/login", (req, res) => {
         //         return done(null, false, { message: "Password incorrect" });
         //     }
         // });
+
+        // bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
+        //     // res == true
+        // });
+        // bcrypt.compare(someOtherPlaintextPassword, hash, function(err, res) {
+        //     // res == false
+        // });
+
         if (data) {
             userId = data.id;
-        }
-        if (userId) {
             req.login(userId, function (err) {
                 if (err) throw err;
                 console.log("\nUser is being logged in!\n");
-                res.redirect("/");
+                res.send("success");
+                res.end();
             });
         } else {
             console.log("\nNo match found for the submitted username and/or password!\n");
-            res.redirect("/login");
+            res.send("failed");
+            res.end;
         }
     });
 });

@@ -11,6 +11,11 @@ $(document).ready(function () {
         $.post("/api/account/login", loginCheck)
             .then(function (response) {
                 console.log(response);
+                if (response === "success") {
+                    $(location).attr('href', '/');
+                } else {
+                    $(location).attr('href', '/login');
+                } 
             });
     });
 
@@ -34,7 +39,11 @@ $(document).ready(function () {
             type: "POST",
             data: newUser
         }).then(function (response) {
-            console.log(newUser);
+            if (response === "success") {
+                $(location).attr('href', '/login');
+            } else {
+                $(location).attr('href', '/register');
+            } 
         });
 
     });

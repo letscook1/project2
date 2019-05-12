@@ -75,7 +75,8 @@ router.get("/logout", (req, res) => {
 // login page
 router.get("/login", (req, res) => {
     if (req.isAuthenticated()) {
-        res.redirect("/account")
+        console.log(response);
+        res.redirect("/")
     }
     else {
         db.categories.findAll({
