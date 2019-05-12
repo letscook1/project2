@@ -13,9 +13,7 @@ $(document).ready(function () {
                 console.log(response);
                 if (response === "success") {
                     $(location).attr('href', '/');
-                } else {
-                    $(location).attr('href', '/login');
-                } 
+                }
             });
     });
 

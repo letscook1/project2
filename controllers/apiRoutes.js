@@ -142,13 +142,11 @@ router.post("/api/account/login", (req, res) => {
             req.login(userId, function (err) {
                 if (err) throw err;
                 console.log("\nUser is being logged in!\n");
-                res.send("success");
-                res.end();
+                res.send("success").end();
             });
         } else {
             console.log("\nNo match found for the submitted username and/or password!\n");
-            res.send("failed");
-            res.end;
+            res.end();
         }
     });
 });
