@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/letscook1/project2#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "connect-session-sequelize": "^6.0.0",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
