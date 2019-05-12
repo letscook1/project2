@@ -19,12 +19,7 @@ router.get("/", (req, res) => {
             { model: db.products, attributes: ['id', 'name', 'description', 'image_url', 'price'] }
         ]
     }).then(function (category) {
-        console.log("foundAll. category:"+category);
         res.render("categories", { category });
-    }).catch(function(error){
-        console.log("error="+error);
-    }).error(function(err){
-        console.log("err="+err);
     });
 });
 
@@ -74,20 +69,42 @@ router.get("/login", (req, res) => {
 
 // register page
 router.get("/register", (req, res) => {
-    res.render("account");
+    if (req.isAuthenticated()) {
+        res.redirect("/account");
+    }
+    else {
+        res.render("account", { user: false });
+    }
+});
+
+// user account page
+router.get("/account", (req, res) => {
+    db.users.findOne({
+        attributes: ['id', 'username', 'email', 'full_name', 'address', 'city', 'state', 'zip_code'],
+        where: {
+            id: 1
+        }
+    }).then(function (user) {
+        res.render("account", { user });
+    });
 });
 
 router.get("/cart", (req, res) => {
-    db.cart_items.findAll({
-        attributes: ['id', 'num', 'each_price'],
-        where: { userId: req.userId.id },
-        order: [['id', 'ASC']],
-        include: [
-            { model: db.products, attributes: ['id', 'name', 'description'] }
-        ]
-    }).then(function (data) {
-        res.render("checkout", { data });
-    });
+    if (req.isAuthenticated()) {
+        db.cart_items.findAll({
+            attributes: ['id', 'num', 'each_price', 'productId'],
+            where: { userId: req.user },
+            order: [['id', 'ASC']],
+            include: [
+                { model: db.products, attributes: ['name', 'description'] }
+            ]
+        }).then(function (data) {
+            res.render("checkout", { data });
+        });
+    }
+    else {
+        res.redirect("/login");
+    }
 });
 
 // catch all for undefined routes that goes to our 404 error page
