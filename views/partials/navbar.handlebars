@@ -13,29 +13,33 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home</a>
             </li>
+            {{#if user}}
             <li class="nav-item">
                 <a class="nav-link" href="/account">Account</a>
             </li>
+            {{/if}}
             {{!--  Could set up a if statement here to not display the category button if there is nothing to display sent --}}
+            {{#if category}}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown">Categories</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item disabled" href="#">Select A Category</a>
                     {{#each category}}
-                        <a class="dropdown-item" href="/category/{{this.dataValues.id}}">{{this.dataValues.name}}</a>
+                        <a class="dropdown-item" href="/category/{{dataValues.id}}">{{dataValues.name}}</a>
                     {{/each}}
                 </div>
             </li>
+            {{/if}}
         </ul>
 
     </div>
 
     <div class="my-0 btn-group" role="group">
         {{#if user}}
-                <a class="btn btn-primary my-0" href="/logout"> Log-Out! <i class="fas fa-sign-in-alt"> </i></a>
+                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#logout-modal">Log-Out <i class="fas fa-sign-out-alt"></i></button>
             {{else}}
-                <a class="btn btn-primary my-2 my-sm-0" href="/login"><i class="fas fa-sign-in-alt"> </i> Log-In!</i></a>
-                <a class="btn btn-primary my-2 my-sm-0" href="/register">Sign Up! <i class="fas fa-plus"> </i></a>
+                <a class="btn btn-primary my-2" href="/login"><i class="fas fa-sign-in-alt"> </i> Log-In!</i></a>
+                <a class="btn btn-primary my-2" href="/register">Sign Up! <i class="fas fa-user-plus"></i></a>
         {{/if}}
     </div>
 

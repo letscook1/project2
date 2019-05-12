@@ -23,17 +23,20 @@
     <body class="bg-secondary my-4 my-sm-3 my-md-4 my-lg-5 py-5 py-lg-4">
 
         {{>navbar}}
-
-        <div class="container-fluid my-0 my-lg-2 rounded">
+        
+        <div class="container-fluid my-0 rounded">
 
             {{{ body }}}
 
-            <nav class="navbar fixed-bottom navbar-light bg-dark  p-2 d-flex align-items-center justify-content-center">
-                <footer class="navbar-brand ">
-                    <span class="small text-white">Copyright &#169; 2019 Mike Gullo & Vincent Shury</span>
+            <nav class="navbar fixed-bottom navbar-light bg-dark  p-1 justify-content-center">
+                <footer class="navbar-brand">
+                    <span class="small text-white">Copyright &#169; 2019 Mike, Vince, & Michelle</span>
                 </footer>
             </nav>
 
         </div>
+        <!--Log out modal-->
+        {{>logout_modal}}
+
     </body>
 </html>
