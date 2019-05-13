@@ -68,9 +68,10 @@ router.get("/search/:criteria", (req, res) => {
 
 // passport's logout function
 router.get("/logout", (req, res) => {
-    req.session.destroy();
     req.logout();
-    setTimeout(function(){ res.redirect("/"); }, 1000);
+    req.session.destroy(function (err) {
+        res.redirect('/');
+    });
 });
 
 // login page
@@ -156,14 +157,14 @@ router.get("/account/orders/:id", (req, res) => {
             order: [['id', 'ASC']]
         }).then(function (category) {
             db.orders.findOne({
-            attributes: ['id', 'name', 'description'],
-            where: { userId: req.userId },
-            order: [['id', 'ASC']]
-        }).then(function (data) {
-            res.render("account", { data, category, user: req.isAuthenticated() });
+                attributes: ['id', 'name', 'description'],
+                where: { userId: req.userId },
+                order: [['id', 'ASC']]
+            }).then(function (data) {
+                res.render("account", { data, category, user: req.isAuthenticated() });
+            });
         });
-        });
-        
+
     }
     else {
         res.redirect("/login");

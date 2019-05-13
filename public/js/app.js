@@ -44,7 +44,7 @@ $(document).ready(function () {
                 $(location).attr('href', '/login');
             } else {
                 $(location).attr('href', '/register');
-            } 
+            }
         });
 
     });
