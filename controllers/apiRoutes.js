@@ -4,6 +4,9 @@ var express = require("express");
 var router = express.Router();
 var passport = require("passport");
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 var db = require("../models");
 
 // delete an item from the cart
@@ -98,55 +101,51 @@ router.put("/api/account", (req, res) => {
 
 // register for an account
 router.post("/api/account/register", (req, res) => {
-    db.users.create({
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        full_name: req.body.full_name,
-        address: req.body.address,
-        city: req.body.city,
-        state: req.body.state,
-        zip_code: req.body.zip_code
-    }).then(function (data) {
-        res.send("success").end();
+    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+        db.users.create({
+            username: req.body.username,
+            password: hash,
+            email: req.body.email,
+            full_name: req.body.full_name,
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            zip_code: req.body.zip_code
+        }).then(function (data) {
+            res.send("success").end();
+        });
     });
 });
 
 // login with an existing username and password
 var userId = 0;
+var pwd = "";
 router.post("/api/account/login", (req, res) => {
+    pwd = req.body.password;
     db.users.findOne({
         attributes: ['id', 'username', 'password'],
         where: {
             username: req.body.username
         }
     }).then(function (data) {
-        // bcrypt.compare(password, data.password, (err, isMatch) => {
-        //     if(err) throw err;
-        //     if (isMatch) {
-        //         return done(null, userId);
-        //     } else {
-        //         return done(null, false, { message: "Password incorrect" });
-        //     }
-        // });
-
-        // bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
-        //     // res == true
-        // });
-        // bcrypt.compare(someOtherPlaintextPassword, hash, function(err, res) {
-        //     // res == false
-        // });
-
         if (data) {
-            userId = data.id;
-            req.login(userId, function (err) {
+            bcrypt.compare(pwd, data.password, function (err, isMatch) {
                 if (err) throw err;
-                console.log("\nUser is being logged in!\n");
-                res.send("success").end();
+                if (isMatch) {
+                    userId = data.id;
+                    req.login(userId, function (err) {
+                        if (err) throw err;
+                        console.log("\nUser is being logged in!\n");
+                        res.send("success").end();
+                    });
+                } else {
+                    console.log("\nPassword not valid!\n");
+                    res.send("Password not valid!").end();
+                }
             });
         } else {
-            console.log("\nNo match found for the submitted username and/or password!\n");
-            res.end();
+            console.log("\nNo match found for the submitted username!\n");
+            res.send("Username not found!").end();
         }
     });
 });

@@ -50,13 +50,7 @@ INSERT INTO categories (name, description) VALUES
 
 -- inserts for users
 INSERT INTO users (username, password, email, full_name, address, city, state, zip_code, createdAt, updatedAt) VALUES
-('user1', 'password1', 'test@test.com', 'John Doe', '123 Main St', 'Somewhere', 'Ohio', '44123', '2019-05-08 21:09:01', '2019-05-08 21:09:01'),
-('user2', 'password2', 'mail@mail.com', 'Mary Smith', '999 Vine Ave', 'MyTown', 'New York', '44567', '2019-05-08 21:09:01', '2019-05-08 21:09:01');
-
--- inserts for carts
--- INSERT INTO carts (userId) VALUES
--- (1),
--- (2);
+('mike', '$2b$10$6ovU8giiTYBSIVMc7GLy5evwtzAZcaWpxLamt7BNotH.JUdZ7btnC', 'test@test.com', 'My Name', '123 Main St', 'Cleveland', 'OH', '44124', '2019-05-08 21:09:01', '2019-05-08 21:09:01');
 
 -- inserts for cart_items
 INSERT INTO cart_items (num, each_price, userId, productId) VALUES
