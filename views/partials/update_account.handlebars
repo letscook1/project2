@@ -43,15 +43,13 @@
 
     <div class="form-group col-6 col-md-2">
       <label for="update-user-state">Update-State</label>
-      <select id="update-user-state" class="form-control">
+      <select id="update-user-state" class="form-control state-options">
         {{#if state}}
           <option selected disabled>{{state}}</option>
         {{else}}
           <option selected disabled>Choose...</option>
-          {{/if}}
-        {{>statedropdown}}
-        {{!-- OH is just example, will need to store array of states to send back as valid inputs on page load in the states file or hard code all the states here/in partial --}}
-        {{!-- {{#each state}} --}}
+        {{/if}}
+          {{!-- JS will append the state options from form.js --}}
       </select>
     </div>
 
@@ -62,5 +60,5 @@
 
   </div>
   {{!-- End of form  --}}
-  <button id="create-new-account" type="submit" class="btn btn-primary">Edit Account <i class="ml-3 fas fa-users-cog"></i></button>
+  <button id="update-account" type="submit" class="btn btn-primary">Edit Account <i class="ml-3 fas fa-users-cog"></i></button>
 </form>

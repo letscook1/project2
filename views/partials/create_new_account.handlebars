@@ -13,15 +13,21 @@
   </div>
 
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-12">
       <label for="create-username">Username</label>
       <input type="text" class="form-control" id="create-username" placeholder="Username: user-216" autocomplete="username">
     </div>
 
-    <div class="form-group col-md-6">
+    <div class="form-group col-sm-6 col-md-6">
       <label for="create-password">Password</label>
       <input type="password" class="form-control" id="create-password" placeholder="Password" autocomplete="new-password">
       <small id="create-password-help" class="text-muted">REQUIREMENTS FOR PASSWORD HERE</small>
+    </div>
+
+    <div class="form-group col-sm-6 col-md-6 ">
+      <label for="create-password-verify">Verify Password</label>
+      <input type="password" class="form-control" id="create-password-verify" placeholder="Password" autocomplete="new-password">
+      <small id="create-password-verify-help" class="text-muted">REQUIREMENTS FOR PASSWORD HERE</small>
     </div>
     
   </div>
@@ -39,11 +45,9 @@
 
     <div class="form-group col-md-3">
       <label for="user-state">State</label>
-      <select id="user-state" class="form-control">
+      <select id="user-state" class="form-control state-options">
         <option selected disabled>Choose...</option>
-        {{>statedropdown}}
-        {{!-- OH is just example, will need to store array of states to send back as valid inputs on page load in the states file or hard code all the states here/in partial --}}
-        {{!-- {{#each state}} --}}
+        {{!-- JS will append the state options from form.js --}}
       </select>
     </div>
 
