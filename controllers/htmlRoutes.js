@@ -116,7 +116,7 @@ router.get("/account", (req, res) => {
             db.users.findOne({
                 attributes: ['id', 'username', 'email', 'full_name', 'address', 'city', 'state', 'zip_code'],
                 where: {
-                    id: 1
+                    id: req.user
                 }
             }).then(function (account) {
                 res.render("account", { account, category, user: req.isAuthenticated() });
