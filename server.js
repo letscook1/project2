@@ -1,7 +1,10 @@
 "use strict";
 
 var express = require("express");
+var Sequelize = require('sequelize');
+var cookieParser = require('cookie-parser')
 var app = express();
+app.use(cookieParser())
 
 var PORT = process.env.PORT || 3000;
 
@@ -11,21 +14,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-// var Sequelize = require('sequelize');
 var session = require("express-session");
 var passport = require("passport");
-// var SequelizeStore = require('connect-session-sequelize')(session.Store);
-// new SequelizeStore({
-//     checkExpirationInterval: 15 * 60 * 1000,
-//     expiration: 24 * 60 * 60 * 1000
-// });
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 app.use(session({
     secret: 'asdwelhjt',
-    resave: false,
-    saveUninitialized: false,
+    store: new SequelizeStore({
+        db: db.sequelize
+      }),
+      resave: false, // we support the touch method so per the express-session docs this should be set to false
+      // proxy: true // if you do SSL outside of node.
+    saveUninitialized: false
     // cookie: { secure: true }
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -68,8 +68,9 @@ router.get("/search/:criteria", (req, res) => {
 
 // passport's logout function
 router.get("/logout", (req, res) => {
+    req.session.destroy();
     req.logout();
-    res.redirect("/");
+    setTimeout(function(){ res.redirect("/"); }, 1000);
 });
 
 // login page
