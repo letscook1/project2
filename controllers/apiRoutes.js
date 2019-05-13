@@ -31,7 +31,7 @@ router.put("/api/cart/", (req, res) => {
 });
 
 // add an item to the cart
-router.post("/api/cart/", (req, res) => {
+router.post("/api/cart", (req, res) => {
     db.cart_items.create({
         num: req.body.num,
         each_price: req.body.each_price,
