@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a class="navbar-brand " href="/">Market Place</a>
+    <a class="navbar-brand" href="/">Market Place</a>
 
     <div class="collapse navbar-collapse" id="mainNavBar">
 
@@ -14,33 +14,59 @@
                 <a class="nav-link" href="/">Home</a>
             </li>
             {{#if user}}
-            <li class="nav-item">
-                <a class="nav-link" href="/account">Account</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/account">Account</a>
+                </li>
             {{/if}}
-            {{!--  Could set up a if statement here to not display the category button if there is nothing to display sent --}}
+                {{!--  Could set up a if statement here to not display the category button if there is nothing to display sent --}}
             {{#if category}}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown">Categories</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item disabled" href="#">Select A Category</a>
-                    {{#each category}}
-                        <a class="dropdown-item" href="/category/{{dataValues.id}}">{{dataValues.name}}</a>
-                    {{/each}}
-                </div>
-            </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown">Categories</a>
+                    <div class="dropdown-menu mb-2">
+                        <a class="dropdown-item disabled" href="#">Select A Category</a>
+                        {{#each category}}
+                            <a class="dropdown-item" href="/category/{{dataValues.id}}">{{dataValues.name}}</a>
+                        {{/each}}
+                    </div>
+                </li>
             {{/if}}
         </ul>
 
+        <form class="navbar-form m-0 p-0 navbar-right">
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button class="btn btn-primary px-1" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+        </form>
     </div>
 
-    <div class="my-0 btn-group" role="group">
+    {{!-- <div class="btn-group">
+        <div id="login-dropdown" class="dropdown-menu dropdown-menu-right p-0 m-5">
+            <form class="p-0">
+                <div class="form-group">
+                    <label for="username-login">Username: </label>
+                    <input type="text" class="form-control" id="username-login" placeholder="Username" autocomplete="username">
+                    <small id="username-help" class="form-text text-muted">We'll never share your information with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="user-password">Password: </label>
+                    <input type="password" class="form-control" id="user-password" placeholder="Password" autocomplete="current-password">
+                </div>
+                    <button id="login_btn" type="submit" class="btn-block btn btn-primary font-weight-bold"><i class="fas fa-sign-in-alt"> </i> Log-in </button>
+            </form>     
+        </div>
+    </div> --}}
+
+    <div class="my-0 px-0 btn-group" role="group"> 
         {{#if user}}
                 <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#logout-modal">Log-Out <i class="fas fa-sign-out-alt"></i></button>
             {{else}}
-                <a class="btn btn-primary my-2" href="/login"><i class="fas fa-sign-in-alt"> </i> Log-In!</a>
+                <a class="btn btn-primary my-2" href="/login">Log-In! <i class="fas fa-sign-in-alt"> </i> </a>
+                 {{!-- <button type="button" class="btn btn-primary dropdown-toggle my-2" data-target="#login-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                     Log-in <i class="fas fa-sign-in-alt"> </i></button> --}}
                 <a class="btn btn-primary my-2" href="/register">Sign Up! <i class="fas fa-user-plus"></i></a>
         {{/if}}
     </div>
-
 </nav>

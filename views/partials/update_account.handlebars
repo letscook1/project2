@@ -48,8 +48,8 @@
           <option selected disabled>{{state}}</option>
         {{else}}
           <option selected disabled>Choose...</option>
-          {{/if}}
-        {{!-- {{>statedropdown}} --}}
+        {{/if}}
+          {{!-- JS will append the state options from form.js --}}
       </select>
     </div>
 
@@ -60,5 +60,5 @@
 
   </div>
   {{!-- End of form  --}}
-  <button id="create-new-account" type="submit" class="btn btn-primary">Edit Account <i class="ml-3 fas fa-users-cog"></i></button>
+  <button id="update-account" type="submit" class="btn btn-primary">Edit Account <i class="ml-3 fas fa-users-cog"></i></button>
 </form>

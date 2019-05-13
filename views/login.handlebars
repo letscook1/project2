@@ -1,18 +1,22 @@
 {{!-- Page to login  --}}
 
-<div class="row">
-    <div class="col-lg-10 m-auto" >
+<div class="row d-flex justify-content-center">
+    <div class="col-10 col-md-6 shadow-lg p-5 my-5 bg-white rounded" >
         <form>
             <div class="form-group">
                 <label for="username-login">Username: </label>
                 <input type="text" class="form-control" id="username-login" placeholder="Username" autocomplete="username">
                 <small id="username-help" class="form-text text-muted">We'll never share your information with anyone else.</small>
             </div>
+            
             <div class="form-group">
                 <label for="user-password">Password: </label>
-                <input type="password" class="form-control" id="user-password" placeholder="Password" autocomplete="current-password">
+                <input type="password" class="form-control " id="user-password" placeholder="Password" autocomplete="current-password">
             </div>
-                <button id="login_btn" type="submit" class="btn-block btn btn-primary font-weight-bold"><i class="fas fa-sign-in-alt"> </i> Log-in </button>
+            <div class="my-2">
+                <small id="login_error" class="invisible text-break text-center text-danger font-weight-bolder bg-warning py-2"></small>
+            </div>
+                <button id="login_btn" type="submit" class="btn-block btn btn-primary font-weight-bold mt-3"> Log-in <i class="fas fa-sign-in-alt"> </i></button>
         </form>     
     </div>
 </div>

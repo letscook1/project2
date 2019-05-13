@@ -5,17 +5,17 @@
             <h4 class="display-4">{{dataValues.name}}</h4>
         </div>
         <div class="card-body p-0">
-            <img src="../images/default.jpg" class="card-img-top" alt="Category Display image">
+            {{!-- Will need to fill in src with the  --}}
+            <img src="../images/default.jpg" class="border card-img-top w-50" alt="{{dataValues.name}} Display image">
             <p class="card-text">{{dataValues.description}}</p>
 
             {{#each dataValues.products}}
                 <div class="card text-center bg-secondary p-0 m-0">
                     <span class="badge badge-primary">Item:</span>
-                    <h5 class="card-title my-0 py-2"> {{name}}</h5>
+                    <h5 class="card-title my-0 py-2">{{name}}</h5>
                     <div class="card-body p-1">
                         <div>
-                            <span class="badge badge-primary py-2 mt-1 mb-0">ItemID: {{id}}</span>
-                            | 
+                            <span class="badge badge-primary py-2 mt-1 mb-0">ItemID: {{id}}</span>| 
                             <span class="badge badge-primary py-2 mt-1 mb-0">Cost: ${{price}}</span>
                         </div>
                     </div>
