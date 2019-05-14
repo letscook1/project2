@@ -1,14 +1,14 @@
-{{!-- will be the template to hold individual category cards and single items inside them to place in index --}}
+{{!-- template to hold individual category cards and single items inside them to place in index --}}
 <div class="col-md-6 col-lg-4 col-xl-3">
     <div class="card text-white p-1 m-2 text-center">
         <div class="card-header text-secondary shadow px-0 px-0">
             <h4 class="display-4">{{dataValues.name}}</h4>
         </div>
         <div class="card-body p-0">
-            {{!-- Will need to fill in src with the  --}}
+            {{!-- Will need to fill in src with the source from database --}}
             <img src="../images/default.jpg" class="border card-img-top w-50" alt="{{dataValues.name}} Display image">
             <p class="card-text">{{dataValues.description}}</p>
-
+            {{!-- Loop to display products from this category --}}
             {{#each dataValues.products}}
                 <div class="card text-center bg-secondary p-0 m-0">
                     <span class="badge badge-primary">Item:</span>
