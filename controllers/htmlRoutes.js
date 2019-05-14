@@ -110,7 +110,7 @@ router.get("/account", (req, res) => {
             order: [['id', 'ASC']]
         }).then(function (category) {
             db.users.findOne({
-                attributes: ['id', 'username', 'email', 'full_name', 'address', 'city', 'state', 'zip_code'],
+                attributes: ['id', 'username', 'email'],
                 where: {
                     id: req.user
                 }

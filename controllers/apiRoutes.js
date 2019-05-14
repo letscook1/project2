@@ -92,12 +92,7 @@ router.put("/api/account", (req, res) => {
     db.users.update({
         username: req.body.username,
         password: req.body.password,
-        email: req.body.email,
-        full_name: req.body.full_name,
-        address: req.body.address,
-        city: req.body.city,
-        state: req.body.state,
-        zip_code: req.body.zip_code
+        email: req.body.email
     }).then(function (data) {
         res.redirect("/account");
     });
@@ -109,12 +104,7 @@ router.post("/api/account/register", (req, res) => {
         db.users.create({
             username: req.body.username,
             password: hash,
-            email: req.body.email,
-            full_name: req.body.full_name,
-            address: req.body.address,
-            city: req.body.city,
-            state: req.body.state,
-            zip_code: req.body.zip_code
+            email: req.body.email
         }).then(function (result) {
             if (result.id) {
                 res.send("success").end();
