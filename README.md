@@ -1,6 +1,27 @@
 # MarketPlace
 An Ecommerce Marketplace based off of a store inventory and user database that allows a user to place an order for items/services and checkout.
 
+## Presentation:
+
+We initially planned on building a game, but switched over to something with more real-world applications.
+
+So, we built an online store with a full shopping experience.
+
+Users must be logged in to add items to their cart.
+
+Once a user is registered and logged in, they can edit their account info, add items to their cart and checkout.
+
+We included a session store in our database so users will remain logged in even if the server is restarted... logging them out only when they've clicked Logout.
+
+User passwords are hashed and salted before they are added to the database.
+
+We included 4 new npm packages as our new technologies:
+* passport and express-session to create, use and manage user sessions
+* connect-session-sequelize to save sessions to the database
+* validator for input validation
+
+---
+
 ## What the project does:
 
 * 
@@ -16,7 +37,7 @@ To use this project, you'll need to do the following:
 
 * If you're running it locally on your pc, also perform these steps:
 
-    * run 'npm i' from the terminal (this will install the npm modules: bcrypt, connect-session-sequelize, cookie-parser, express, express-handlebars, express-session, mysql2, passport, sequelize and validator)
+    * run 'npm i' from the terminal (this will install the npm modules: bcrypt, connect-session-sequelize, express, express-handlebars, express-session, mysql2, passport, sequelize and validator)
     * create a mysql database using the schema in: **schema.sql** (this will create the database, but it won't have any tables... just yet)
     * run 'server.js' to dynamically the tables necessary
     * populate the newly created database with the data in: **seeds.sql**
@@ -54,7 +75,6 @@ The above **config/pwd.js** file was utilized to keep our local MySQL passwords 
 ## NPM Packages used in this project
 * bcrypt (https://www.npmjs.com/package/bcrypt)
 * connect-session-sequelize (https://www.npmjs.com/package/connect-session-sequelize)
-* cookie-parser (https://www.npmjs.com/package/cookie-parser)
 * express (https://www.npmjs.com/package/express)
 * express-handlebars (https://www.npmjs.com/package/express-handlebars)
 * express-session (https://www.npmjs.com/package/express-session)
