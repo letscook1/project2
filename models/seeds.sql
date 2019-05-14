@@ -26,9 +26,9 @@ INSERT INTO categories (name, description, image_name) VALUES
 
 -- inserts for users
 INSERT INTO users (username, password, email, full_name, address, city, state, zip_code, createdAt, updatedAt) VALUES
-('mike', '$2b$10$6ovU8giiTYBSIVMc7GLy5evwtzAZcaWpxLamt7BNotH.JUdZ7btnC', 'test@test.com', 'My Name', '123 Main St', 'Cleveland', 'OH', '44124', '2019-05-08 21:09:01', '2019-05-08 21:09:01'),
-('jdoe', '$2b$10$A3DkmZhJI/ZRSHyBQLc4U.IDiGtuPYPZo8Ffcg4Gs9C290H5Lskya', 'johndoe@gmail.com', 'John Doe', '2345 N High St', 'Sometown', 'MS', '223344', '2019-05-08 21:09:01', '2019-05-08 21:09:01'),
-('janedoe', '$2b$10$dFcPPJQ6iijpdaHH475xqOoYJq3Q7YY3itx.Hotly.XL9y3URc1m6', 'janedoe@gmail.com', 'Jane Doe', '2345 N High St', 'Sometown', 'MS', '223344', '2019-05-08 21:09:01', '2019-05-08 21:09:01');
+('mike', '$2b$10$6ovU8giiTYBSIVMc7GLy5evwtzAZcaWpxLamt7BNotH.JUdZ7btnC', 'test@test.com', '2019-05-08 21:09:01', '2019-05-08 21:09:01'),
+('jdoe', '$2b$10$A3DkmZhJI/ZRSHyBQLc4U.IDiGtuPYPZo8Ffcg4Gs9C290H5Lskya', 'johndoe@gmail.com', '2019-05-08 21:09:01', '2019-05-08 21:09:01'),
+('janedoe', '$2b$10$dFcPPJQ6iijpdaHH475xqOoYJq3Q7YY3itx.Hotly.XL9y3URc1m6', 'janedoe@gmail.com', '2019-05-08 21:09:01', '2019-05-08 21:09:01');
 
 -- inserts for cart_items
 INSERT INTO cart_items (num, each_price, userId, productId) VALUES

@@ -11,26 +11,6 @@ module.exports = function (sequelize, DataTypes) {
         email: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        full_name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        address: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        city: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        state: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        zip_code: {
-            type: DataTypes.INTEGER,
-            allowNull: false
         }
     }, {
         freezeTableName: true
