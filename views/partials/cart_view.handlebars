@@ -1,0 +1,34 @@
+
+<table class="table table-sm table-hover table-striped table-bordered table-dark text-center m-auto">
+    <caption>Viewing Cart</caption>
+    <thead>
+        <tr>
+            <th scope="col">Item</th>
+            <th scope="col">$ Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#if cart}}
+            {{#each cart}}
+                <tr>
+                    {{#with product}}
+                        <th scope="row" data-toggle="tooltip" title="Item {{name}}: {{description}}">{{name}}</th>
+                    {{/with}}
+                    <td title="Item: {{dataValues.product.name}} Item cost: {{dataValues.each_price}} $">$ {{dataValues.each_price}}</td>
+                    <td>
+                        <input type="number" class="update-quantity form-control form-control-sm p-0 m-0 text-center" name="quantity" min="1" value="{{dataValues.num}}"  data-toggle="tooltip" title="Update Cart Quantity">
+                    </td>
+                    <td>
+                        <button type="button" class="delete-item close text-white" value="{{dataValues.productId}}" aria-label="Close" data-toggle="tooltip" title="Remove item from Cart"><span aria-hidden="true">&times;</span></button>
+                    </td>
+                </tr>
+            {{/each}}        
+        {{else}}
+        <tr>
+            <th scope="row" colspan="4" class="text-danger text-dark bg-warning">No items in cart! Add items to cart to make a purchase.<i class="fas fa-cart-plus"></i></th>
+        </tr>
+        {{/if}}
+    </tbody>
+</table>
