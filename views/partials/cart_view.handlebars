@@ -1,12 +1,12 @@
-
-<table class="table table-sm table-hover table-striped table-bordered table-dark text-center m-auto">
-    <caption>Viewing Cart</caption>
-    <thead>
+<!-- Cart page , for viewing the users current order and make adjustments as needed. -->
+<table class="table table-sm table-hover table-striped table-dark text-center m-auto">
+    <caption><i class="fas fa-arrow-circle-up"></i> Your Shopping Cart <i class="fas fa-shopping-cart"></i></caption>
+    <thead class="thead-light">
         <tr>
-            <th scope="col">Item</th>
-            <th scope="col">$ Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Remove</th>
+            <th id="name-row-head" title="Name of Item" scope="col">Item</th>
+            <th id="cost-row-head" title="Cost of item in US$" scope="col"><i class="fas fa-dollar-sign"></i> Cost</th>
+            <th id="update-row-head" title="Quantity ordering of Item" scope="col"><span class="d-none d-xl-inline">Cart </span>Quantity</th>
+            <th id="delete-row-head" title="Remove item from cart by clicking the X" scope="col">Remove<span class="d-none d-xl-inline"> From Cart <i class="fas fa-trash"></i></span></th>
         </tr>
     </thead>
     <tbody>
@@ -14,21 +14,50 @@
             {{#each cart}}
                 <tr>
                     {{#with product}}
-                        <th scope="row" data-toggle="tooltip" title="Item {{name}}: {{description}}">{{name}}</th>
+                        <th class="name-row" scope="row" title="Item {{name}}: {{description}}">{{name}}</th>
                     {{/with}}
-                    <td title="Item: {{dataValues.product.name}} Item cost: {{dataValues.each_price}} $">$ {{dataValues.each_price}}</td>
-                    <td>
-                        <input type="number" class="update-quantity form-control form-control-sm p-0 m-0 text-center" name="quantity" min="1" value="{{dataValues.num}}"  data-toggle="tooltip" title="Update Cart Quantity">
+                    <td class="cost-row" title="{{dataValues.product.name}} ${{dataValues.each_price}} "><i class="fas fa-dollar-sign"></i> {{dataValues.each_price}}</td>
+                    <td class="update-row" title="Update Cart Quantity">
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <button class="update-quantity badge-dark badge badge-sm" type="button"><i class="fas fa-cog"></i></button>
+                            </div>
+                            <input type="number" class="form-control form-control-sm p-0 m-0 mx-auto text-center" name="quantity" min="1" value="{{dataValues.num}}" >
+                        </div>
                     </td>
-                    <td>
-                        <button type="button" class="delete-item close text-white" value="{{dataValues.productId}}" aria-label="Close" data-toggle="tooltip" title="Remove item from Cart"><span aria-hidden="true">&times;</span></button>
-                    </td>
+                    <td class="delete-row" title="Remove item from Cart">
+                        <div>
+                            <button type="button" class="delete-item badge badge-sm badge-danger px-lg-2 mr-3 mr-md-5" data-id="{{dataValues.productId}}" value="{{dataValues.productId}}"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </td> 
                 </tr>
-            {{/each}}        
+            {{/each}}               
         {{else}}
         <tr>
-            <th scope="row" colspan="4" class="text-danger text-dark bg-warning">No items in cart! Add items to cart to make a purchase.<i class="fas fa-cart-plus"></i></th>
+            <th scope="row" colspan="4" class="text-danger text-dark bg-warning py-3">Oh it looks like there is no items in your cart! Add items to cart to make a purchase.<i class="fas fa-cart-plus"></i></th>
         </tr>
         {{/if}}
     </tbody>
 </table>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Confirm Order <i class="fas fa-arrow-right"></i> <i class="fas fa-shopping-cart"> Checkout </i></button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
