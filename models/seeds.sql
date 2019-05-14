@@ -25,7 +25,7 @@ INSERT INTO categories (name, description, image_name) VALUES
 ('eGames', 'Shop at eGames!', 'egames.png');
 
 -- inserts for users
-INSERT INTO users (username, password, email, full_name, address, city, state, zip_code, createdAt, updatedAt) VALUES
+INSERT INTO users (username, password, email, createdAt, updatedAt) VALUES
 ('mike', '$2b$10$6ovU8giiTYBSIVMc7GLy5evwtzAZcaWpxLamt7BNotH.JUdZ7btnC', 'test@test.com', '2019-05-08 21:09:01', '2019-05-08 21:09:01'),
 ('jdoe', '$2b$10$A3DkmZhJI/ZRSHyBQLc4U.IDiGtuPYPZo8Ffcg4Gs9C290H5Lskya', 'johndoe@gmail.com', '2019-05-08 21:09:01', '2019-05-08 21:09:01'),
 ('janedoe', '$2b$10$dFcPPJQ6iijpdaHH475xqOoYJq3Q7YY3itx.Hotly.XL9y3URc1m6', 'janedoe@gmail.com', '2019-05-08 21:09:01', '2019-05-08 21:09:01');
