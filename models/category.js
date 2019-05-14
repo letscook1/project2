@@ -7,6 +7,10 @@ module.exports = function (sequelize, DataTypes) {
         description: {
             type: DataTypes.TEXT,
             allowNull: true
+        },
+        image_name: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     }, {
         freezeTableName: true,

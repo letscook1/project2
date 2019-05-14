@@ -39,8 +39,12 @@ router.post("/api/cart", (req, res) => {
         productId: req.body.productId
     }, {
             where: { id: req.body.id }
-        }).then(function (data) {
-            res.redirect("/cart");
+        }).then(function (result) {
+            if (result.id) {
+                res.send("success").end();
+            } else {
+                res.send("failed").end();
+            }
         });
 });
 
@@ -79,7 +83,7 @@ router.post("/api/cart/submitted", (req, res) => {
     db.cart_items.destroy({
         where: { userId: userId }
     }).then(function () {
-        res.render("submitted", { orderId: orderId, user: req.isAuthenticated() });
+        res.send("submitted", { orderId: orderId, user: req.isAuthenticated() }).end();
     });
 });
 
@@ -111,8 +115,12 @@ router.post("/api/account/register", (req, res) => {
             city: req.body.city,
             state: req.body.state,
             zip_code: req.body.zip_code
-        }).then(function (data) {
-            res.send("success").end();
+        }).then(function (result) {
+            if (result.id) {
+                res.send("success").end();
+            } else {
+                res.send("failed").end();
+            }
         });
     });
 });

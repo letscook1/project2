@@ -12,12 +12,8 @@ router.get("/", (req, res) => {
     console.log(req.user);
     console.log(req.isAuthenticated());
     db.categories.findAll({
-        attributes: ['id', 'name', 'description'],
-        group: ['id'],
-        order: [['id', 'ASC']],
-        include: [
-            { model: db.products, attributes: ['id', 'name', 'description', 'image_url', 'price'] }
-        ]
+        attributes: ['id', 'name', 'description', 'image_name'],
+        order: [['id', 'ASC']]
     }).then(function (category) {
         res.render("categories", { category, user: req.isAuthenticated() });
     });
@@ -26,11 +22,11 @@ router.get("/", (req, res) => {
 // find all products in a specific category
 router.get("/category/:id", (req, res) => {
     db.categories.findAll({
-        attributes: ['id', 'name', 'description'],
+        attributes: ['id', 'name', 'description', 'image_name'],
         order: [['id', 'ASC']]
     }).then(function (category) {
         db.products.findAll({
-            attributes: ['id', 'name', 'description', 'image_url', 'price'],
+            attributes: ['id', 'name', 'description', 'image_name', 'price'],
             where: { categoryId: req.params.id },
             order: [['id', 'ASC']]
         }).then(function (categoryitems) {
@@ -42,11 +38,11 @@ router.get("/category/:id", (req, res) => {
 // search for products with the search criteria in the name or description
 router.get("/search/:criteria", (req, res) => {
     db.categories.findAll({
-        attributes: ['id', 'name', 'description'],
+        attributes: ['id', 'name', 'description', 'image_name'],
         order: [['id', 'ASC']]
     }).then(function (category) {
         db.products.findAll({
-            attributes: ['id', 'name', 'description', 'image_url', 'price'],
+            attributes: ['id', 'name', 'description', 'image_name', 'price'],
             where: {
                 [op.or]: [
                     Sequelize.where(
@@ -82,7 +78,7 @@ router.get("/login", (req, res) => {
     }
     else {
         db.categories.findAll({
-            attributes: ['id', 'name', 'description'],
+            attributes: ['id', 'name', 'description', 'image_name'],
             order: [['id', 'ASC']]
         }).then(function (category) {
             res.render("login", { category, user: req.isAuthenticated() });
@@ -98,7 +94,7 @@ router.get("/register", (req, res) => {
     }
     else {
         db.categories.findAll({
-            attributes: ['id', 'name', 'description'],
+            attributes: ['id', 'name', 'description', 'image_name'],
             order: [['id', 'ASC']]
         }).then(function (category) {
             res.render("account", { category, user: false });
@@ -110,13 +106,13 @@ router.get("/register", (req, res) => {
 router.get("/account", (req, res) => {
     if (req.isAuthenticated()) {
         db.categories.findAll({
-            attributes: ['id', 'name', 'description'],
+            attributes: ['id', 'name', 'description', 'image_name'],
             order: [['id', 'ASC']]
         }).then(function (category) {
             db.users.findOne({
                 attributes: ['id', 'username', 'email', 'full_name', 'address', 'city', 'state', 'zip_code'],
                 where: {
-                    id: 1
+                    id: req.user
                 }
             }).then(function (account) {
                 res.render("account", { account, category, user: req.isAuthenticated() });
@@ -132,7 +128,7 @@ router.get("/account", (req, res) => {
 router.get("/account/orders", (req, res) => {
     if (req.isAuthenticated()) {
         db.categories.findAll({
-            attributes: ['id', 'name', 'description'],
+            attributes: ['id', 'name', 'description', 'image_name'],
             order: [['id', 'ASC']]
         }).then(function (category) {
             db.orders.findAll({
@@ -153,7 +149,7 @@ router.get("/account/orders", (req, res) => {
 router.get("/account/orders/:id", (req, res) => {
     if (req.isAuthenticated()) {
         db.categories.findAll({
-            attributes: ['id', 'name', 'description'],
+            attributes: ['id', 'name', 'description', 'image_name'],
             order: [['id', 'ASC']]
         }).then(function (category) {
             db.orders.findOne({
@@ -174,7 +170,7 @@ router.get("/account/orders/:id", (req, res) => {
 router.get("/cart", (req, res) => {
     if (req.isAuthenticated()) {
         db.categories.findAll({
-            attributes: ['id', 'name', 'description'],
+            attributes: ['id', 'name', 'description', 'image_name'],
             order: [['id', 'ASC']]
         }).then(function (category) {
             db.cart_items.findAll({
@@ -197,7 +193,7 @@ router.get("/cart", (req, res) => {
 // catch all for undefined routes that goes to our 404 error page
 router.get("*", (req, res) => {
     db.categories.findAll({
-        attributes: ['id', 'name', 'description'],
+        attributes: ['id', 'name', 'description', 'image_name'],
         order: [['id', 'ASC']]
     }).then(function (category) {
         res.render("error", { category, user: req.isAuthenticated() });
