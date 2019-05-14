@@ -1,23 +1,23 @@
 'use strict';
 
 $(document).ready(function() {
-  // $("#login_btn").on("click", (event) => {
-  //     event.preventDefault();
-  //     var loginCheck = {
-  //         username: $("#username-login").val(),
-  //         password: $("#user-password").val()
-  //     }
-  //     $.post("/api/account/login", loginCheck)
-  //         .then(function (response) {
-  //             console.log(response);
-  //             if (response === "success") {
-  //                 $(location).attr('href', '/');
-  //             } else {
-  //                 $("#login_error").removeClass("invisible");
-  //                 $("#login_error").text(response);
-  //             }
-  //         });
-  // });
+  $("#login_btn").on("click", (event) => {
+      event.preventDefault();
+      var loginCheck = {
+          username: $("#username-login").val().trim(),
+          password: $("#user-password").val().trim()
+      }
+      $.post("/api/account/login", loginCheck)
+          .then(function (response) {
+              console.log(response);
+              if (response === "success") {
+                  $(location).attr('href', '/');
+              } else {
+                  $("#login_error").removeClass("invisible");
+                  $("#login_error").text(response);
+              }
+          });
+  });
 
   $('#create-new-account').on('click', event => {
     event.preventDefault();
