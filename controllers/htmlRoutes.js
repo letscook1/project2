@@ -131,7 +131,7 @@ router.get("/account/orders", (req, res) => {
             order: [['id', 'ASC']]
         }).then(function (category) {
             db.orders.findAll({
-                attributes: ['id', 'name', 'description'],
+                attributes: ['id', 'order_total', 'createdAt'],
                 where: { userId: req.userId },
                 order: [['id', 'ASC']]
             }).then(function (data) {
@@ -146,17 +146,20 @@ router.get("/account/orders", (req, res) => {
 
 // find a specific order
 router.get("/account/orders/:id", (req, res) => {
+    var order_id = id;
     if (req.isAuthenticated()) {
         db.categories.findAll({
             attributes: ['id', 'name', 'description', 'image_name'],
             order: [['id', 'ASC']]
         }).then(function (category) {
             db.orders.findOne({
-                attributes: ['id', 'name', 'description'],
-                where: { userId: req.userId },
-                order: [['id', 'ASC']]
-            }).then(function (data) {
-                res.render("account", { data, category, user: req.isAuthenticated() });
+                attributes: ['id', 'order_total', 'createdAt'],
+                where: { id: order_id },
+                include: [
+                    { model: db.order_items, attributes: ['id', 'num', 'each_price', 'productId'] }
+                ]
+            }).then(function (order) {
+                res.render("orders", { order, category, user: req.isAuthenticated() });
             });
         });
 
