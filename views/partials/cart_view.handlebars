@@ -32,12 +32,29 @@
                       </div>
                   </td> 
               </tr>
-          {{/each}}               
+          {{/each}}
+          <tr>
+              <th colspan="2">Total Cost of items: <span id="cart-item-cost" class="badge badge-primary p-2">###</span> </th>
+              <td colspan="2"><span class="d-none d-lg-inline">Number of items</span> Ordered:<span id="cart-item-quantity" class="badge badge-primary p-2">###</span></td>
+          </tr>               
       {{else}}
       <tr>
-          <th scope="row" colspan="4" class="text-danger text-dark bg-warning py-3">Oh it looks like there is no items in your cart! Add items to cart to make a purchase.<i class="fas fa-cart-plus"></i></th>
+          <th scope="row" colspan="4" class="text-danger text-dark bg-warning py-3">No items currently in your cart! Add items to cart to make a purchase.<i class="fas fa-cart-plus"></i></th>
       </tr>
       {{/if}}
   </tbody>    
 </table>
 <caption><i class="fas fa-arrow-circle-up"></i> Your Shopping Cart <i class="fas fa-shopping-cart"></i></caption>
+{{!-- Make purchase button if there is a cart --}}
+{{#if cart}}
+    <div class="m-auto w-50 px-2">
+        <button type="button" id="display-payment-button" class="btn btn-primary btn-block mb-3" data-toggle="modal" data-target="#payment-modal">
+            <i class="fas fa-dollar-sign"> Pay </i> <i class="fas fa-arrow-right"> </i> <i class="fas fa-shopping-cart"> Checkout</i>
+        </button>
+    </div>
+    {{>payment_modal}}
+{{else}}
+    <div class="m-auto w-50 px-sm-1 px-md-5">
+        <a class="btn btn-primary btn-block mb-3" href="/"><i class="fas fa-store-alt"> Browse All Categories</i></a>
+    </div>
+{{/if}}
