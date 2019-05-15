@@ -26,40 +26,40 @@
 
     </div>
     <h4 class="p-2">Payment <i class="fas fa-file-invoice-dollar"></i></h4>
-    <div class="form-row my-3">
+    <div class="form-row my-3 read-only-form">
 
         <div class="col">
             <div class="custom-control custom-control-inline custom-radio">
-                <input id="pay-cc" name="pay" type="radio" class="custom-control-input" checked="" autocomplete="cc-type">
+                <input disabled id="pay-cc" name="pay" type="radio" class="custom-control-input" checked="" autocomplete="cc-type">
                 <label class="custom-control-label badge badge-primary p-2" for="pay-cc"><i class="fas fa-credit-card"> Credit</i></label>
             </div>
         </div>
         <div class="col">
             <div class="custom-control custom-control-inline custom-radio">
-                <input id="pay-debit" name="pay" type="radio" class="custom-control-input" autocomplete="cc-type">
+                <input disabled id="pay-debit" name="pay" type="radio" class="custom-control-input" autocomplete="cc-type">
                 <label class="custom-control-label badge badge-primary p-2" for="pay-debit"><i class="fas fa-credit-card"> Debit</i></label>
             </div>
         </div>
 
         <div class="col">
             <div class="custom-control custom-control-inline custom-radio">
-                <input id="pay-paypal" name="pay" type="radio" class="custom-control-input" autocomplete="cc-type">
+                <input  disabled id="pay-paypal" name="pay" type="radio" class="custom-control-input" autocomplete="cc-type">
                 <label class="custom-control-label badge badge-primary p-2" for="pay-paypal">PayPal </label>
             </div>
         </div>
         <div class="col">
             <div class="custom-control custom-control-inline custom-radio">
-                <input id="pay-btc" name="pay" type="radio" class="custom-control-input">
+                <input disabled id="pay-btc" name="pay" type="radio" class="custom-control-input">
                 <label class="custom-control-label badge badge-primary p-2" for="pay-btc"> BTC</label>
             </div>
         </div>
     </div>
 
-    <div class="form-row py-2 my-2">
+    <div class="form-row py-2 my-2 read-only-form">
 
         <div class="col-12">
             <label for="cc-name">Name on card</label>
-            <input type="text" class="form-control" id="cc-name" placeholder="John Doe" required="" autocomplete="cc-name">
+            <input readonly type="text" class="form-control" id="cc-name" placeholder="John Doe" required="" autocomplete="cc-name">
             <small class="text-muted">Full name as displayed on card</small>
             <div class="invalid-feedback">
                 Name on card is required
@@ -68,7 +68,7 @@
 
         <div class="col-7">
             <label for="cc-number">Credit card number</label>
-            <input type="text" class="form-control" id="cc-number" placeholder="0000-0000-0000-0000" required="" autocomplete="cc-number">
+            <input readonly type="text" class="form-control" id="cc-number" placeholder="0000-0000-0000-0000" required="" autocomplete="cc-number">
             <div class="invalid-feedback">
                 Credit card number is required!
             </div>
@@ -76,7 +76,7 @@
 
         <div class="col-3">
             <label for="cc-expiration">Expiration</label>
-            <input type="text" class="form-control" id="cc-expiration" placeholder="07/19" required="" autocomplete="cc-exp">
+            <input readonly type="text" class="form-control" id="cc-expiration" placeholder="07/19" required="" autocomplete="cc-exp">
             <div class="invalid-feedback">
             Expiration date required
             </div>
@@ -84,7 +84,7 @@
 
         <div class="col-2">
             <label for="cc-cvv">CVV</label>
-            <input type="text" class="form-control" id="cc-cvv" placeholder="000" required="" autocomplete="cc-csc">
+            <input readonly type="text" class="form-control" id="cc-cvv" placeholder="000" required="" autocomplete="cc-csc">
             <div class="invalid-feedback">
                 Security code required
             </div>
