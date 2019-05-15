@@ -31,22 +31,6 @@ router.put("/api/cart/", (req, res) => {
 });
 
 // add an item to the cart
-// router.post("/api/cart", (req, res) => {
-//     db.cart_items.create({
-//         num: req.body.num,
-//         each_price: req.body.each_price,
-//         userId: req.body.userId,
-//         productId: req.body.productId
-//     }, {
-//             where: { id: req.body.id }
-//         }).then(function (result) {
-//             if (result.id) {
-//                 res.send("success").end();
-//             } else {
-//                 res.send("failed").end();
-//             }
-//         });
-// });
 router.post("/api/cart", (req, res) => {
     db.cart_items.findOrCreate({
         where: { userId: req.user, productId: req.body.productId },
@@ -141,18 +125,19 @@ router.post("/api/account/register", (req, res) => {
         //     }
         // });
         db.users.findOrCreate({
-            username: req.body.username,
-            password: hash,
-            email: req.body.email
-        }, {
-                where: { username: req.body.username }
-            }).then(([userArray, wasCreated]) => {
-                if (wasCreated) {
-                    res.send("success").end();
-                } else {
-                    res.send("taken").end();
-                }
-            });
+            where: { username: req.body.username },
+            defaults: {
+                username: req.body.username,
+                password: hash,
+                email: req.body.email
+            }
+        }).then(([userArray, wasCreated]) => {
+            if (wasCreated) {
+                res.send("success").end();
+            } else {
+                res.send("taken").end();
+            }
+        });
     });
 });
 
