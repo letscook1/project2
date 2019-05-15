@@ -1,0 +1,34 @@
+<!-- Cart page , for viewing the users current order and make adjustments as needed. -->
+<table class="table table-sm table-hover table-striped table-dark text-center m-auto">
+<caption>ID#<span class="badge badge-primary">{{dataValues.id}}</span></caption>
+  <thead class="thead-light">
+      <tr>
+          <th id="name-row-head" title="Name of Item ordered" scope="col">Item</th>
+          <th id="cost-row-head" title="Cost of item paid in US$" scope="col"><i class="fas fa-dollar-sign"></i> Cost</th>
+          <th id="update-row-head" title="Quantity ordered of Item" scope="col"><span class="d-none d-xl-inline">Bought </span>Quantity</th>
+      </tr>
+  </thead>
+    <!-- | (ID) orderId | (Order_total) Cost$ |  |  | -->
+  <tbody>
+      {{#if order}}
+          {{#each cart}}
+              <tr>
+                  {{#with product}}
+                      <th class="name-row" scope="row" title="Item {{name}}: {{description}}">{{name}}</th>
+                  {{/with}}
+                  <td class="cost-row" title="{{dataValues.product.name}} ${{dataValues.each_price}} "><i class="fas fa-dollar-sign"></i> {{dataValues.each_price}}</td>
+                  <td>{{dataValues.num}}</td>
+              </tr>
+          {{/each}}
+            <tr>
+              <th colspan="1">Total Paid: <span id="cart-item-cost" class="badge badge-primary p-2">###</span> </th>
+              <td colspan="2"><span class="d-none d-lg-inline">Number of items</span> Ordered:<span id="cart-item-quantity" class="badge badge-primary p-2">###</span></td>
+          </tr>                     
+      {{else}}
+      <tr>
+          <th scope="row" colspan="4" class="text-danger text-dark bg-warning py-3">Sorry couldn't Find a valid order for that Order ID<i class="fas fa-cart-plus"></i></th>
+      </tr>
+      {{/if}}
+  </tbody>    
+</table>
+<caption><i class="fas fa-receipt"> View Order</i><i class="fas fa-arrow-circle-up"></i></caption>

@@ -1,5 +1,5 @@
 <form>
-<!-- Account creation page JS in form.js / -->
+  <!-- Account creation page JS in form.js / -->
   <div class="form-row">
     <div class="form-group col-md-12">
       <label for="create-email">Email</label>
@@ -24,7 +24,9 @@
       <small id="create-password-verify-help" class="text-muted">REQUIREMENTS FOR PASSWORD HERE</small>
     </div>
   </div>
-
-  <button id="create-new-account" type="submit" class="btn btn-primary">Create Account<i class="ml-3 fas fa-user-plus"></i></button>
-  
+  <div id="account_error" class="alert alert-warning font-weight-bolder text-center invisible text-break" role="alert">
+  </div>
+  <div class="m-auto w-75 px-4">
+    <button id="create-new-account" type="submit" class="btn btn-primary btn-block">Create Account<i class="ml-3 fas fa-user-plus"></i></button>
+  </div>
 </form> 
