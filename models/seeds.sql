@@ -1,3 +1,4 @@
+USE project2_db;
 SET FOREIGN_KEY_CHECKS=0;
 
 -- inserts for products

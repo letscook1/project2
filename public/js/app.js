@@ -9,7 +9,7 @@ $(document).ready(function () {
     }
     $.post("/api/account/login", loginCheck)
       .then(function (response) {
-        console.log(response);
+        //console.log(response);
         if (response === "success") {
           $(location).attr('href', '/');
         } else {
@@ -31,23 +31,10 @@ $(document).ready(function () {
         .trim(),
       email: $('#create-email')
         .val()
-        .trim(),
-      full_name: $('#create-name')
-        .val()
-        .trim(),
-      address: $('#create-address')
-        .val()
-        .trim(),
-      city: $('#create-city')
-        .val()
-        .trim(),
-      state: $('#user-state').val(),
-      zip_code: $('#create-zipcode')
-        .val()
         .trim()
     };
 
-    console.log(newUser);
+    //console.log(newUser);
 
     $.ajax('/api/account/register', {
       type: 'POST',
@@ -73,19 +60,6 @@ $(document).ready(function () {
         .val()
         .trim(),
       email: $('#update-email')
-        .val()
-        .trim(),
-      full_name: $('#update-name')
-        .val()
-        .trim(),
-      address: $('#update-address')
-        .val()
-        .trim(),
-      city: $('#update-city')
-        .val()
-        .trim(),
-      state: $('#update-state').val(),
-      zip_code: $('#update-zipcode')
         .val()
         .trim()
     };
@@ -116,7 +90,7 @@ $(document).ready(function () {
       type: 'POST',
       data: addItem
     }).then(function (response) {
-      console.log(response);
+      //console.log(response);
       if (response === 'created' || response === 'updated') {
         $(location).attr('href', '/cart');
       } else {

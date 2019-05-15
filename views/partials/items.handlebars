@@ -6,26 +6,18 @@ May need an else statement for error placeholder cards --}}
           <h4><span class="badge badge-pill badge-primary"> Item: </span> {{dataValues.name}}</h4>
         </div>
         <div class="card-body p-1 font-weight-bold">
-            <img src="../images/{{dataValues.image_name}}" class="card-img-top img-thumbnail w-50" alt="Item Display image">
+            <img src="../images/{{dataValues.image_name}}" class="item-image" alt="Item Display image">
             <p class="card-text">{{dataValues.description}}</p>
             <p class="card-text">ItemID: <span class="badge badge-pill badge-primary py-2 mt-1 mb-0">{{dataValues.id}}</span> |  
             Cost: <span class="badge badge-pill badge-primary py-2 mt-1 mb-0"> ${{dataValues.price}}</span></p>
-            
         </div>
         <div class="card-footer">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <button class="btn btn-sm btn-outline-primary add-to-cart" type="button">Add To Cart <i class="fas fa-cart-plus"></i></button>
-                </div>
-                <input type="number" class="form-control-sm form-control border-primary w-25 add-to-cart-input" placeholder="1">
-
+            {{#if user}}
                 <button type="submit" class="btn badge-pill btn-sm btn-primary add-item" data-id="{{dataValues.id}}" data-price="{{dataValues.price}}" value="{{dataValues.id}}"
                 data-toggle="tooltip" title="Add {{dataValues.name}} to your cart.">
                     Add To Cart <i class="fas fa-cart-plus"></i>
                 </button>
-            </div>
-
+            {{/if}}
         </div>
     </div>
 </div>
-   
