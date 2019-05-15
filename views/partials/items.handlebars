@@ -13,20 +13,10 @@ May need an else statement for error placeholder cards --}}
         </div>
         <div class="card-footer">
             {{#if user}}
-            {{!-- If a user display add to cart button --}}
                 <button type="submit" class="btn badge-pill btn-sm btn-primary add-item" data-id="{{dataValues.id}}" data-price="{{dataValues.price}}" value="{{dataValues.id}}"
                 data-toggle="tooltip" title="Add {{dataValues.name}} to your cart.">
                     Add To Cart <i class="fas fa-cart-plus"></i>
                 </button>
-            {{else}}
-            {{!-- If not logged in user sees a log in to add to cart --}}
-            <div class="btn-group">
-                <a title="Log-in / Sign up to add an Item to cart" class="btn badge-pill btn-sm btn-primary" href="/login"><i class="fas fa-sign-in-alt"> Log-In</i></a>
-                <button disabled aria-disabled="true" class="btn badge-pill btn-sm btn-primary"
-                data-toggle="tooltip" title="Log-in to add {{dataValues.name}} to your cart.">
-                   to add to Cart <i class="fas fa-cart-plus"></i>
-                </button>
-            </div>
             {{/if}}
         </div>
     </div>
