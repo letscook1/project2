@@ -31,19 +31,42 @@ router.put("/api/cart/", (req, res) => {
 });
 
 // add an item to the cart
+// router.post("/api/cart", (req, res) => {
+//     db.cart_items.create({
+//         num: req.body.num,
+//         each_price: req.body.each_price,
+//         userId: req.body.userId,
+//         productId: req.body.productId
+//     }, {
+//             where: { id: req.body.id }
+//         }).then(function (result) {
+//             if (result.id) {
+//                 res.send("success").end();
+//             } else {
+//                 res.send("failed").end();
+//             }
+//         });
+// });
 router.post("/api/cart", (req, res) => {
-    db.cart_items.create({
+    db.cart_items.findOrCreate({
         num: req.body.num,
         each_price: req.body.each_price,
-        userId: req.body.userId,
+        userId: req.user,
         productId: req.body.productId
     }, {
-            where: { id: req.body.id }
-        }).then(function (result) {
-            if (result.id) {
+            where: { userId: req.user, productId: req.body.productId }
+        }).then(([cartItem, wasCreated]) => {
+            if (wasCreated) {
                 res.send("success").end();
             } else {
-                res.send("failed").end();
+                // update the quantity since the item already existed
+                db.cart_items.update({
+                    num: cartItem.num+req.body.num
+                }, {
+                        where: { id: cartItem.id }
+                    }).then(function (data) {
+                        res.redirect("/cart");
+                    });
             }
         });
 });
@@ -101,15 +124,28 @@ router.put("/api/account", (req, res) => {
 // register for an account
 router.post("/api/account/register", (req, res) => {
     bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-        db.users.create({
+        // db.users.create({
+        //     username: req.body.username,
+        //     password: hash,
+        //     email: req.body.email
+        // }).then(function (result) {
+        //     if (result.id) {
+        //         res.send("success").end();
+        //     } else {
+        //         res.send("failed").end();
+        //     }
+        // });
+        db.users.findOrCreate({
             username: req.body.username,
             password: hash,
             email: req.body.email
-        }).then(function (result) {
-            if (result.id) {
+        }, {
+            where: { username: req.body.username }
+        }).then(([userArray, wasCreated]) => {
+            if (wasCreated) {
                 res.send("success").end();
             } else {
-                res.send("failed").end();
+                res.send("taken").end();
             }
         });
     });

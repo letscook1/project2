@@ -73,10 +73,8 @@ router.get("/logout", (req, res) => {
 // login page
 router.get("/login", (req, res) => {
     if (req.isAuthenticated()) {
-        console.log(response);
         res.redirect("/")
-    }
-    else {
+    } else {
         db.categories.findAll({
             attributes: ['id', 'name', 'description', 'image_name'],
             order: [['id', 'ASC']]
