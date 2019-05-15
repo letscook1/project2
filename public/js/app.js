@@ -1,22 +1,22 @@
 'use strict';
 
-$(document).ready(function() {
+$(document).ready(function () {
   $("#login_btn").on("click", (event) => {
-      event.preventDefault();
-      var loginCheck = {
-          username: $("#username-login").val().trim(),
-          password: $("#user-password").val().trim()
-      }
-      $.post("/api/account/login", loginCheck)
-          .then(function (response) {
-              console.log(response);
-              if (response === "success") {
-                  $(location).attr('href', '/');
-              } else {
-                  $("#login_error").removeClass("invisible");
-                  $("#login_error").text(response);
-              }
-          });
+    event.preventDefault();
+    var loginCheck = {
+      username: $("#username-login").val().trim(),
+      password: $("#user-password").val().trim()
+    }
+    $.post("/api/account/login", loginCheck)
+      .then(function (response) {
+        console.log(response);
+        if (response === "success") {
+          $(location).attr('href', '/');
+        } else {
+          $("#login_error").removeClass("invisible");
+          $("#login_error").text(response);
+        }
+      });
   });
 
   $('#create-new-account').on('click', event => {
@@ -52,7 +52,7 @@ $(document).ready(function() {
     $.ajax('/api/account/register', {
       type: 'POST',
       data: newUser
-    }).then(function(response) {
+    }).then(function (response) {
       if (response === 'success') {
         $(location).attr('href', '/login');
       } else {
@@ -93,7 +93,7 @@ $(document).ready(function() {
     $.ajax('/api/account', {
       type: 'POST',
       data: updateUser
-    }).then(function(response) {
+    }).then(function (response) {
       if (response === 'success') {
         $(location).attr('href', '/account');
       } else {
@@ -103,16 +103,21 @@ $(document).ready(function() {
   });
 
   //Add A new Item to the cart
-  $('.add-item').on('click', event => {
+  $('.add-item').on('click', function(event) {
     event.preventDefault();
 
-    //
+    let addItem = {
+      num: 1,
+      each_price: $(this).data("price"),
+      productId : $(this).data("id")
+    };
 
-    $.ajax('/cart', {
+    $.ajax('/api/cart', {
       type: 'POST',
       data: addItem
-    }).then(function(response) {
-      if (response === 'success') {
+    }).then(function (response) {
+      console.log(response);
+      if (response === 'created' || response === 'updated') {
         $(location).attr('href', '/cart');
       } else {
         $(location).attr('href', '/');
@@ -129,7 +134,7 @@ $(document).ready(function() {
     $.ajax('/cart', {
       type: 'POST',
       data: deleteItem
-    }).then(function(response) {
+    }).then(function (response) {
       if (response === 'success') {
         $(location).attr('href', '/cart');
       } else {
@@ -147,7 +152,7 @@ $(document).ready(function() {
     $.ajax('/cart', {
       type: 'POST',
       data: updateQuantity
-    }).then(function(response) {
+    }).then(function (response) {
       if (response === 'success') {
         $(location).attr('href', '/cart');
       } else {
@@ -167,7 +172,7 @@ $(document).ready(function() {
     $.ajax('/search/:criteria', {
       type: 'GET',
       data: search
-    }).then(function(response) {
+    }).then(function (response) {
       if (response === 'success') {
         $(location).attr('href', '/:criteria');
       } else {

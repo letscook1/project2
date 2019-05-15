@@ -30,6 +30,7 @@ router.get("/category/:id", (req, res) => {
             where: { categoryId: req.params.id },
             order: [['id', 'ASC']]
         }).then(function (categoryitems) {
+            // res.json(categoryitems)
             res.render("category_items", { categoryitems, category, user: req.isAuthenticated() });
         });
     });

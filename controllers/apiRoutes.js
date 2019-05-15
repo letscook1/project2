@@ -49,26 +49,31 @@ router.put("/api/cart/", (req, res) => {
 // });
 router.post("/api/cart", (req, res) => {
     db.cart_items.findOrCreate({
-        num: req.body.num,
-        each_price: req.body.each_price,
-        userId: req.user,
-        productId: req.body.productId
-    }, {
-            where: { userId: req.user, productId: req.body.productId }
-        }).then(([cartItem, wasCreated]) => {
-            if (wasCreated) {
-                res.send("success").end();
-            } else {
-                // update the quantity since the item already existed
-                db.cart_items.update({
-                    num: cartItem.num+req.body.num
-                }, {
-                        where: { id: cartItem.id }
-                    }).then(function (data) {
-                        res.redirect("/cart");
-                    });
-            }
-        });
+        where: { userId: req.user, productId: req.body.productId },
+        defaults: {
+            num: parseInt(req.body.num),
+            each_price: req.body.each_price,
+            userId: req.user,
+            productId: req.body.productId
+        }
+    }).then(([cartItem, wasCreated]) => {
+        if (wasCreated) {
+            res.send("created").end();
+        } else {
+            // update the quantity since the item already existed
+            db.cart_items.update({
+                num: parseInt(cartItem.num) + parseInt(req.body.num)
+            }, {
+                    where: { id: cartItem.id }
+                }).then(function (data) {
+                    if (data) {
+                        res.send("updated").end();
+                    } else {
+                        res.send("error").end();
+                    }
+                });
+        }
+    });
 });
 
 // route for processing a submitted order
@@ -101,7 +106,7 @@ router.post("/api/cart/submitted", (req, res, next) => {
     });
     next();
 });
-// next, delete the cart and related cart_items of the cartId that was submitted
+// next, delete the cart_items of the cartId that was submitted
 router.post("/api/cart/submitted", (req, res) => {
     db.cart_items.destroy({
         where: { userId: userId }
@@ -140,14 +145,14 @@ router.post("/api/account/register", (req, res) => {
             password: hash,
             email: req.body.email
         }, {
-            where: { username: req.body.username }
-        }).then(([userArray, wasCreated]) => {
-            if (wasCreated) {
-                res.send("success").end();
-            } else {
-                res.send("taken").end();
-            }
-        });
+                where: { username: req.body.username }
+            }).then(([userArray, wasCreated]) => {
+                if (wasCreated) {
+                    res.send("success").end();
+                } else {
+                    res.send("taken").end();
+                }
+            });
     });
 });
 
