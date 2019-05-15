@@ -1,6 +1,5 @@
 <!-- Cart page , for viewing the users current order and make adjustments as needed. -->
 <table class="table table-sm table-hover table-striped table-dark text-center m-auto">
-    <caption><i class="fas fa-arrow-circle-up"></i> Your Shopping Cart <i class="fas fa-shopping-cart"></i></caption>
     <thead class="thead-light">
         <tr>
             <th id="name-row-head" title="Name of Item" scope="col">Item</th>
@@ -37,10 +36,17 @@
             <th scope="row" colspan="4" class="text-danger text-dark bg-warning py-3">Oh it looks like there is no items in your cart! Add items to cart to make a purchase.<i class="fas fa-cart-plus"></i></th>
         </tr>
         {{/if}}
-    </tbody>
+    </tbody>    
+    
 </table>
+<caption><i class="fas fa-arrow-circle-up"></i> Your Shopping Cart <i class="fas fa-shopping-cart"></i></caption>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Confirm Order <i class="fas fa-arrow-right"></i> <i class="fas fa-shopping-cart"> Checkout </i></button>
+{{!-- 
+<div class="m-auto w-50 px-1">
+  <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">Pay <i class="fas fa-arrow-right"></i> <i class="fas fa-shopping-cart">Checkout</i></button>
+</div> 
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -60,4 +66,4 @@
       </div>
     </div>
   </div>
-</div>
+</div>--}}
