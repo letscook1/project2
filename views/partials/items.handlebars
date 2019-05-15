@@ -1,18 +1,30 @@
 {{!-- template called by inside the category_items.handlebars file to show all the items from the database
 May need an else statement for error placeholder cards --}}
-<div class="col-md-6 col-lg-4 col-xl-3">
-    <div class="card text-white p-1 m-2 text-center">
-        <div class="card-header text-secondary shadow px-0 px-0">
-          <h4><span class="badge badge-primary"> Item: </span> {{dataValues.name}}</h4>
+<div class="col-10 col-md-8 col-lg-6 col-xl-4 mx-auto">
+    <div class="card p-1 m-2 text-center shadow-lg rounded-lg">
+        <div class="card-header text-secondary px-0 px-0">
+          <h4><span class="badge badge-pill badge-primary"> Item: </span> {{dataValues.name}}</h4>
         </div>
-        <div class="card-body p-0">
+        <div class="card-body p-1 font-weight-bold">
             <img src="../images/{{dataValues.image_name}}" class="card-img-top img-thumbnail w-50" alt="Item Display image">
-            <p class="card-text text-dark">{{dataValues.description}}</p>
-            <span class="badge badge-primary py-2 mt-1 mb-0">ItemID: {{dataValues.id}}</span> |  
-            <span class="badge badge-primary py-2 mt-1 mb-0">Cost: ${{dataValues.price}}</span>
+            <p class="card-text">{{dataValues.description}}</p>
+            <p class="card-text">ItemID: <span class="badge badge-pill badge-primary py-2 mt-1 mb-0">{{dataValues.id}}</span> |  
+            Cost: <span class="badge badge-pill badge-primary py-2 mt-1 mb-0"> ${{dataValues.price}}</span></p>
+            
         </div>
         <div class="card-footer">
-         <button type="button" class="btn btn-primary add-item" value="{{dataValues.id}}" data-toggle="tooltip" title="Add One {{dataValues.name}} to your cart."> Add To Cart <i class="fas fa-cart-plus"></i></button>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button class="btn btn-sm btn-outline-primary add-to-cart" type="button">Add To Cart <i class="fas fa-cart-plus"></i></button>
+                </div>
+                <input type="number" class="form-control-sm form-control border-primary w-25 add-to-cart-input" placeholder="1">
+
+                <button type="submit" class="btn badge-pill btn-sm btn-primary add-item" data-id="{{dataValues.id}}" data-price="{{dataValues.price}}" value="{{dataValues.id}}"
+                data-toggle="tooltip" title="Add {{dataValues.name}} to your cart.">
+                    Add To Cart <i class="fas fa-cart-plus"></i>
+                </button>
+            </div>
+
         </div>
     </div>
 </div>
