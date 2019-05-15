@@ -17,7 +17,7 @@
                   {{#with product}}
                       <th class="name-row" scope="row" title="Item {{name}}: {{description}}">{{name}}</th>
                   {{/with}}
-                  <td class="cost-row" title="{{dataValues.product.name}} ${{dataValues.each_price}} "><i class="fas fa-dollar-sign"></i> {{dataValues.each_price}}</td>
+                  <td class="cost-row" data-cost="{{dataValues.each_price}}" data-quantity="{{dataValues.num}}"  title="{{dataValues.product.name}} ${{dataValues.each_price}} "><i class="fas fa-dollar-sign"></i> {{dataValues.each_price}}</td>
                   <td class="update-row" title="Update Cart Quantity">
                       <div class="input-group">
                           <div class="input-group-append">
@@ -34,8 +34,8 @@
               </tr>
           {{/each}}
           <tr>
-              <th colspan="2">Total Cost of items: <span id="cart-item-cost" class="badge badge-primary p-2">###</span> </th>
-              <td colspan="2"><span class="d-none d-lg-inline">Number of items</span> Ordered:<span id="cart-item-quantity" class="badge badge-primary p-2">###</span></td>
+              <th colspan="2" title="Cart total cost">Total Cost of items: <span id="cart-item-cost" class="badge badge-primary p-2">###</span> </th>
+              <td colspan="2" title="Total amount of items in cart"><span class="d-none d-lg-inline">Number of items</span> Ordered:<span id="cart-item-quantity" class="badge badge-primary p-2">###</span></td>
           </tr>               
       {{else}}
       <tr>
@@ -44,7 +44,7 @@
       {{/if}}
   </tbody>    
 </table>
-<caption><i class="fas fa-arrow-circle-up"></i> Your Shopping Cart <i class="fas fa-shopping-cart"></i></caption>
+<caption title="Viewing your shopping cart above"><i class="fas fa-arrow-circle-up"></i> Your Shopping Cart <i class="fas fa-shopping-cart"></i></caption>
 {{!-- Make purchase button if there is a cart --}}
 {{#if cart}}
     <div class="m-auto w-50 px-2">
