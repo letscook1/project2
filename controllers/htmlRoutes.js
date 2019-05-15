@@ -146,7 +146,6 @@ router.get("/account/orders", (req, res) => {
 
 // find a specific order
 router.get("/account/orders/:id", (req, res) => {
-    var order_id = id;
     if (req.isAuthenticated()) {
         db.categories.findAll({
             attributes: ['id', 'name', 'description', 'image_name'],
@@ -154,7 +153,7 @@ router.get("/account/orders/:id", (req, res) => {
         }).then(function (category) {
             db.orders.findOne({
                 attributes: ['id', 'order_total', 'createdAt'],
-                where: { id: order_id },
+                where: { id: req.params.criteria },
                 include: [
                     { model: db.order_items, attributes: ['id', 'num', 'each_price', 'productId'] }
                 ]
