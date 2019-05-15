@@ -1,8 +1,7 @@
 /* Extra small devices (portrait phones, less than 576px)
 No media query for `xs` since this is the default in Bootstrap 
-0px - 576px styling
+0px - 576px styling 
 */
-
 /* Table styling for the checkout/cart page */
 #name-row-head {
     width: 40%;
@@ -16,15 +15,6 @@ No media query for `xs` since this is the default in Bootstrap
 #delete-row-head {
     width: 20%;
 }
-/* .name-row {
-}
-.cost-row {
-}
-.update-row {
-}
-.delete-row {
-} */
-
 
 /*
 576px - 768px styling
