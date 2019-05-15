@@ -23,15 +23,17 @@ $(document).ready(function () {
         // add input validation here
         var errorArray = [];
         var errors = false;
+        var errorArray = [];
+        var errors = false;
         if (!$("#create-username").val().trim().match(/^[a-zA-Z0-9 _-]{6,15}$/)) {
             errors = true;
-            errorArray.push("'Username' field was left blank or included special characters!");
+            errorArray.push("'Username' field must be from 6 to 15 characters with no special characters!");
         }
-        if (!$("#create-password").val().trim().match(/^[a-zA-Z0-9 _-!@#$%^&*]{6,15}$/)) {
+        if (!$("#create-password").val().trim().match(/^[a-zA-Z0-9 _-]{6,15}$/)) {
             errors = true;
             errorArray.push("'Password' field must be from 6 to 15 characters with no special characters!");
         }
-        if (!$("#create-email").val().trim().match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/)) {
+        if ($("#create-email").val().trim().match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/)) {
             errors = true;
             errorArray.push("'Email' field was not in the proper format!");
         }
