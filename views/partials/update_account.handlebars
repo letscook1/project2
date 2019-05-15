@@ -3,7 +3,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="create-username">Username</label>
-      <input readonly type="text" class="form-control" id="create-username" value="{{username}}">
+      <input readonly disabled type="text" class="form-control" id="update-username" value="{{username}}">
     </div>
     <div class="form-group col-md-6">
       <label for="update-email">Edit-Email</label>
@@ -21,6 +21,8 @@
       <input type="password" class="form-control" id="verify-update-password" placeholder="Verify new password" autocomplete="new-password">
       <small id="verify-update-pw-help" class="text-muted">Passwords Must Match</small>
     </div>
+  </div>
+  <div id="register_error" class="alert alert-warning font-weight-bolder text-center invisible text-break" role="alert">
   </div>
   <button id="update-account" type="submit" class="btn btn-primary">Edit Account <i class="ml-3 fas fa-users-cog"></i></button>
 </form>
