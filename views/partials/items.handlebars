@@ -12,12 +12,10 @@ May need an else statement for error placeholder cards --}}
             Cost: <span class="badge badge-pill badge-primary py-2 mt-1 mb-0"> ${{dataValues.price}}</span></p>
         </div>
         <div class="card-footer">
-            {{#if user}}
                 <button type="submit" class="btn badge-pill btn-sm btn-primary add-item" data-id="{{dataValues.id}}" data-price="{{dataValues.price}}" value="{{dataValues.id}}"
                 data-toggle="tooltip" title="Add {{dataValues.name}} to your cart.">
                     Add To Cart <i class="fas fa-cart-plus"></i>
                 </button>
-            {{/if}}
         </div>
     </div>
 </div>
