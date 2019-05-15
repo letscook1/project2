@@ -1,27 +1,6 @@
 # MarketPlace
 An Ecommerce Marketplace based off of a store inventory and user database that allows a user to place an order for items/services and checkout.
 
-## Presentation:
-
-We initially planned on building a game, but switched over to something with more real-world applications.
-
-So, we built an online store with a full shopping experience.
-
-Users must be logged in to add items to their cart.
-
-Once a user is registered and logged in, they can edit their account info, add items to their cart and checkout.
-
-We included a session store in our database so users will remain logged in even if the server is restarted... logging them out only when they've clicked Logout.
-
-User passwords are hashed and salted before they are added to the database.
-
-We included 4 new npm packages as our new technologies:
-* passport and express-session to create, use and manage user sessions
-* connect-session-sequelize to save sessions to the database
-* validator for input validation
-
----
-
 ## What the project does:
 
 * 

@@ -12,11 +12,14 @@ var db = require("../models");
 // delete an item from the cart
 router.delete("/api/cart/", (req, res) => {
     db.cart_items.destroy({
-        where: { id: req.body.id }
+        where: { userId: req.user, productId: req.body.id }
     }).then(function (data) {
-        res.redirect("/cart");
+        if (data.id) {
+            res.send("success").end();
+        } else {
+            res.send("error").end();
+        }
     });
-    res.redirect("/cart");
 });
 
 // update the quantity of an item in the cart
@@ -26,7 +29,11 @@ router.put("/api/cart/", (req, res) => {
     }, {
             where: { id: req.body.id }
         }).then(function (data) {
-            res.redirect("/cart");
+            if (data.id) {
+                res.send("success").end();
+            } else {
+                res.send("error").end();
+            }
         });
 });
 
@@ -66,7 +73,7 @@ var orderId = 0;
 var userId = 0;
 // first find the cart that has been submitted
 router.post("/api/cart/submitted", (req, res, next) => {
-    userId = req.body.id;
+    userId = req.user;
     db.cart_items.findAll({
         attributes: ['id', 'num', 'each_price', 'productId'],
         where: { userId: req.body.id }
@@ -95,35 +102,32 @@ router.post("/api/cart/submitted", (req, res) => {
     db.cart_items.destroy({
         where: { userId: userId }
     }).then(function () {
-        res.send("submitted", { orderId: orderId, user: req.isAuthenticated() }).end();
+        res.send(orderId);
     });
 });
 
 // update account info
 router.put("/api/account", (req, res) => {
-    db.users.update({
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email
-    }).then(function (data) {
-        res.redirect("/account");
+    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+        db.users.update({
+            username: req.body.username,
+            password: hash,
+            email: req.body.email
+        }, {
+                where: { id: req.user }
+            }).then(function (data) {
+                if (data.id) {
+                    res.send("success").end();
+                } else {
+                    res.send("failed").end();
+                }
+            });
     });
 });
 
 // register for an account
 router.post("/api/account/register", (req, res) => {
     bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-        // db.users.create({
-        //     username: req.body.username,
-        //     password: hash,
-        //     email: req.body.email
-        // }).then(function (result) {
-        //     if (result.id) {
-        //         res.send("success").end();
-        //     } else {
-        //         res.send("failed").end();
-        //     }
-        // });
         db.users.findOrCreate({
             where: { username: req.body.username },
             defaults: {

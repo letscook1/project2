@@ -9,7 +9,6 @@ $(document).ready(function () {
         }
         $.post("/api/account/login", loginCheck)
             .then(function (response) {
-                //console.log(response);
                 if (response === "success") {
                     $(location).attr('href', '/');
                 } else {
@@ -21,44 +20,77 @@ $(document).ready(function () {
 
     $('#create-new-account').on('click', event => {
         event.preventDefault();
-        let newUser = {
-            username: $('#create-username').val().trim(),
-            password: $('#create-password').val().trim(),
-            email: $('#create-email').val().trim()
-        };
-        $.ajax('/api/account/register', {
-            type: 'POST',
-            data: newUser
-        }).then(function (response) {
-            if (response === 'success') {
-                $(location).attr('href', '/login');
-            } else {
-                $("#register_error").removeClass("invisible");
-                $("#register_error").text("Sorry, that username is already taken!");
-            }
-        });
+        // add input validation here
+        var errorArray = [];
+        var errors = false;
+        if (!$("#create-username").val().trim().match(/^[a-zA-Z0-9 _-]{6,15}$/)) {
+            errors = true;
+            errorArray.push("'Username' field was left blank or included special characters!");
+        }
+        if (!$("#create-password").val().trim().match(/^[a-zA-Z0-9 _-!@#$%^&*]{6,15}$/)) {
+            errors = true;
+            errorArray.push("'Password' field must be from 6 to 15 characters with no special characters!");
+        }
+        if (!$("#create-email").val().trim().match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/)) {
+            errors = true;
+            errorArray.push("'Email' field was not in the proper format!");
+        }
+        if (errors) {
+            $("#register_error").removeClass("invisible");
+            $("#register_error").text(errorArray.toString());
+        } else {
+            let newUser = {
+                username: $('#create-username').val().trim(),
+                password: $('#create-password').val().trim(),
+                email: $('#create-email').val().trim()
+            };
+            $.ajax('/api/account/register', {
+                type: 'POST',
+                data: newUser
+            }).then(function (response) {
+                if (response === 'success') {
+                    $(location).attr('href', '/login');
+                } else {
+                    $("#register_error").removeClass("invisible");
+                    $("#register_error").text("Sorry, that username is already taken!");
+                }
+            });
+        }
     });
 
     //Update Account Info
     $('#update-account').on('click', event => {
         event.preventDefault();
-
-        let updateUser = {
-            username: $('#update-username').val().trim(),
-            password: $('#update-password').val().trim(),
-            email: $('#update-email').val().trim()
-        };
-
-        $.ajax('/api/account', {
-            type: 'POST',
-            data: updateUser
-        }).then(function (response) {
-            if (response === 'success') {
-                $(location).attr('href', '/account');
-            } else {
-                $(location).attr('href', '/');
-            }
-        });
+        var errorArray = [];
+        var errors = false;
+        if (!$("#update-password").val().trim().match(/^[a-zA-Z0-9 _-]{6,15}$/)) {
+            errors = true;
+            errorArray.push("'Password' field must be from 6 to 15 characters with no special characters!");
+        }
+        if ($("#update-email").val().trim().match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/)) {
+            errors = true;
+            errorArray.push("'Email' field was not in the proper format!");
+        }
+        if (errors) {
+            $("#account_error").removeClass("invisible");
+            $("#account_error").text(errorArray.toString());
+        } else {
+            let updateUser = {
+                username: $('#update-username').val().trim(),
+                password: $('#update-password').val().trim(),
+                email: $('#update-email').val().trim()
+            };
+            $.ajax('/api/account', {
+                type: 'PUT',
+                data: updateUser
+            }).then(function (response) {
+                if (response === 'success') {
+                    $(location).attr('href', '/account');
+                } else {
+                    $(location).attr('href', '/');
+                }
+            });
+        }
     });
 
     //Add A new Item to the cart
@@ -75,7 +107,6 @@ $(document).ready(function () {
             type: 'POST',
             data: addItem
         }).then(function (response) {
-            //console.log(response);
             if (response === 'created' || response === 'updated') {
                 $(location).attr('href', '/cart');
             } else {
@@ -85,19 +116,21 @@ $(document).ready(function () {
     });
 
     //delete an item from the cart
-    $('.delete-item').on('click', event => {
+    $('.delete-item').on('click', function (event) {
         event.preventDefault();
 
-        //
+        var deleteItem = {
+            id: $(this).val()
+        };
 
-        $.ajax('/cart', {
-            type: 'POST',
+        $.ajax('/api/cart', {
+            type: 'DELETE',
             data: deleteItem
         }).then(function (response) {
             if (response === 'success') {
                 $(location).attr('href', '/cart');
             } else {
-                $(location).attr('href', '/');
+                $(location).attr('href', '/cart');
             }
         });
     });
@@ -118,6 +151,15 @@ $(document).ready(function () {
                 $(location).attr('href', '/');
             }
         });
+    });
+
+    // submit an order
+    $("#payment-button").on("click", (event) => {
+        event.preventDefault();
+        $.post("/api/cart/submitted")
+            .then(function (response) {
+                $(location).attr('href', '/account/orders/' + response);
+            });
     });
 
     // Search Button
