@@ -88,6 +88,6 @@ The above **config/pwd.js** file was utilized to keep our local MySQL passwords 
 ## This project was created and is maintained by:
 
 * Michelle Williams | Vince Shury | Mike Gullo
-* heroku url of finished project goes here
+* https://glacial-bayou-58542.herokuapp.com/
 * https://github.com/letscook1/project2
 * Contact us at: letscook1@hotmail.com | vinceshury@gmail.com | mike4747@oh.rr.com for more info about this project.

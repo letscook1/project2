@@ -31,21 +31,49 @@ router.put("/api/cart/", (req, res) => {
 });
 
 // add an item to the cart
+// router.post("/api/cart", (req, res) => {
+//     db.cart_items.create({
+//         num: req.body.num,
+//         each_price: req.body.each_price,
+//         userId: req.body.userId,
+//         productId: req.body.productId
+//     }, {
+//             where: { id: req.body.id }
+//         }).then(function (result) {
+//             if (result.id) {
+//                 res.send("success").end();
+//             } else {
+//                 res.send("failed").end();
+//             }
+//         });
+// });
 router.post("/api/cart", (req, res) => {
-    db.cart_items.create({
-        num: req.body.num,
-        each_price: req.body.each_price,
-        userId: req.body.userId,
-        productId: req.body.productId
-    }, {
-            where: { id: req.body.id }
-        }).then(function (result) {
-            if (result.id) {
-                res.send("success").end();
-            } else {
-                res.send("failed").end();
-            }
-        });
+    db.cart_items.findOrCreate({
+        where: { userId: req.user, productId: req.body.productId },
+        defaults: {
+            num: parseInt(req.body.num),
+            each_price: req.body.each_price,
+            userId: req.user,
+            productId: req.body.productId
+        }
+    }).then(([cartItem, wasCreated]) => {
+        if (wasCreated) {
+            res.send("created").end();
+        } else {
+            // update the quantity since the item already existed
+            db.cart_items.update({
+                num: parseInt(cartItem.num) + parseInt(req.body.num)
+            }, {
+                    where: { id: cartItem.id }
+                }).then(function (data) {
+                    if (data) {
+                        res.send("updated").end();
+                    } else {
+                        res.send("error").end();
+                    }
+                });
+        }
+    });
 });
 
 // route for processing a submitted order
@@ -78,7 +106,7 @@ router.post("/api/cart/submitted", (req, res, next) => {
     });
     next();
 });
-// next, delete the cart and related cart_items of the cartId that was submitted
+// next, delete the cart_items of the cartId that was submitted
 router.post("/api/cart/submitted", (req, res) => {
     db.cart_items.destroy({
         where: { userId: userId }
@@ -101,17 +129,30 @@ router.put("/api/account", (req, res) => {
 // register for an account
 router.post("/api/account/register", (req, res) => {
     bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-        db.users.create({
+        // db.users.create({
+        //     username: req.body.username,
+        //     password: hash,
+        //     email: req.body.email
+        // }).then(function (result) {
+        //     if (result.id) {
+        //         res.send("success").end();
+        //     } else {
+        //         res.send("failed").end();
+        //     }
+        // });
+        db.users.findOrCreate({
             username: req.body.username,
             password: hash,
             email: req.body.email
-        }).then(function (result) {
-            if (result.id) {
-                res.send("success").end();
-            } else {
-                res.send("failed").end();
-            }
-        });
+        }, {
+                where: { username: req.body.username }
+            }).then(([userArray, wasCreated]) => {
+                if (wasCreated) {
+                    res.send("success").end();
+                } else {
+                    res.send("taken").end();
+                }
+            });
     });
 });
 
