@@ -76,11 +76,11 @@ router.post("/api/cart/submitted", (req, res, next) => {
     userId = req.user;
     db.cart_items.findAll({
         attributes: ['id', 'num', 'each_price', 'productId'],
-        where: { userId: req.body.id }
+        where: { userId: userId }
     }).then(function (data) {
         // then add the submitted cart to the orders table, then add each of the items from cart_items to the order_items table with the correct orderID
         db.orders.create({
-            shipping_cost: req.body.shipping_cost,
+            shipping_cost: 0,
             order_total: req.body.order_total,
             userId: userId
         }).then(function (result) {
@@ -102,7 +102,10 @@ router.post("/api/cart/submitted", (req, res) => {
     db.cart_items.destroy({
         where: { userId: userId }
     }).then(function () {
-        res.send(orderId);
+        var order = {
+            orderId: orderId
+        }
+        res.send(order);
     });
 });
 

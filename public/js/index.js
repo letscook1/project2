@@ -155,10 +155,14 @@ $(document).ready(function () {
 
     // submit an order
     $("#payment-button").on("click", (event) => {
+        var orderTotal = {
+            order_total: 1
+        }
         event.preventDefault();
-        $.post("/api/cart/submitted")
+        $.post("/api/cart/submitted", orderTotal)
             .then(function (response) {
-                $(location).attr('href', '/account/orders/' + response);
+                $(location).attr('href', '/');
+                // $(location).attr('href', '/account/orders/' + response.orderId);
             });
     });
 
