@@ -7,8 +7,26 @@ const op = Sequelize.Op;
 
 var db = require("../models");
 
+function getCategories() {
+    db.categories.findAll({
+        attributes: ['id', 'name', 'description', 'image_name'],
+        order: [['id', 'ASC']]
+    }).then(function (category) {
+        res.render("categories", { category, user: req.isAuthenticated() });
+    });
+}
+
+function cartContents(user_id) {
+    return ;
+}
+
 // find all categories and one product from each category
 router.get("/", (req, res) => {
+    if (req.isAuthenticated()) {
+        cartContents(req.user)
+    } else {
+
+    }
     console.log(req.user);
     console.log(req.isAuthenticated());
     db.categories.findAll({
@@ -82,7 +100,6 @@ router.get("/login", (req, res) => {
         }).then(function (category) {
             res.render("login", { category, user: req.isAuthenticated() });
         });
-
     }
 });
 

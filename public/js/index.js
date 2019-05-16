@@ -71,6 +71,10 @@ $(document).ready(function () {
         $("#account_success").addClass("invisible");
         var errorArray = [];
         var errors = false;
+        if (!$("#update-username").val().trim().match(/^[a-zA-Z0-9 _-]{6,15}$/)) {
+            errors = true;
+            errorArray.push("'Username' field must be from 6 to 15 characters with no special characters!");
+        }
         if ($("#update-password").val().trim() === "") {
             // password field was left blank so it won't update
         } else {
@@ -104,6 +108,9 @@ $(document).ready(function () {
                 if (response === 'success') {
                     $("#account_success").removeClass("invisible");
                     $("#account_success").text("You have successfully updated your account.");
+                } else if (response === 'duplicate') {
+                    $("#account_error").removeClass("invisible");
+                    $("#account_error").text("The submitted 'Username' is already in use.!");
                 } else {
                     $("#account_error").removeClass("invisible");
                     $("#account_error").text("Your account failed to update.");
