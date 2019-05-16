@@ -33,13 +33,17 @@ $(document).ready(function () {
             errors = true;
             errorArray.push("'Password' field must be from 6 to 15 characters with no special characters!");
         }
-        if ($("#create-email").val().trim().match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/)) {
+        if (!$("#create-email").val().trim().match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
             errors = true;
-            errorArray.push("'Email' field was not in the proper format!");
+            errorArray.push("'Email' field was blank or not in the proper format!");
+        }
+        if ($("#create-password").val().trim() !== $("#create-password-verify").val().trim()) {
+            errors = true;
+            errorArray.push("'Password' and 'Verify Password' fields don't match!");
         }
         if (errors) {
             $("#register_error").removeClass("invisible");
-            $("#register_error").text(errorArray.toString());
+            $("#register_error").html(errorArray.join("<br />"));
         } else {
             let newUser = {
                 username: $('#create-username').val().trim(),
@@ -63,19 +67,29 @@ $(document).ready(function () {
     //Update Account Info
     $('#update-account').on('click', event => {
         event.preventDefault();
+        $("#account_error").addClass("invisible");
+        $("#account_success").addClass("invisible");
         var errorArray = [];
         var errors = false;
-        if (!$("#update-password").val().trim().match(/^[a-zA-Z0-9 _-]{6,15}$/)) {
-            errors = true;
-            errorArray.push("'Password' field must be from 6 to 15 characters with no special characters!");
+        if ($("#update-password").val().trim() === "") {
+            // password field was left blank so it won't update
+        } else {
+            if (!$("#update-password").val().trim().match(/^[a-zA-Z0-9 _-]{6,15}$/)) {
+                errors = true;
+                errorArray.push("'Password' field must be from 6 to 15 characters with no special characters!");
+            }
         }
-        if ($("#update-email").val().trim().match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/)) {
+        if (!$("#update-email").val().trim().match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
             errors = true;
             errorArray.push("'Email' field was not in the proper format!");
         }
+        if ($("#update-password").val().trim() !== $("#verify-update-password").val().trim()) {
+            errors = true;
+            errorArray.push("'Password' and 'Verify Password' fields don't match!");
+        }
         if (errors) {
             $("#account_error").removeClass("invisible");
-            $("#account_error").text(errorArray.toString());
+            $("#account_error").html(errorArray.join("<br />"));
         } else {
             let updateUser = {
                 username: $('#update-username').val().trim(),
@@ -86,10 +100,13 @@ $(document).ready(function () {
                 type: 'PUT',
                 data: updateUser
             }).then(function (response) {
+                console.log(response);
                 if (response === 'success') {
-                    $(location).attr('href', '/account');
+                    $("#account_success").removeClass("invisible");
+                    $("#account_success").text("You have successfully updated your account.");
                 } else {
-                    $(location).attr('href', '/');
+                    $("#account_error").removeClass("invisible");
+                    $("#account_error").text("Your account failed to update.");
                 }
             });
         }
