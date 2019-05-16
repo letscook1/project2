@@ -111,21 +111,36 @@ router.post("/api/cart/submitted", (req, res) => {
 
 // update account info
 router.put("/api/account", (req, res) => {
-    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+    if (req.body.password === "") {
         db.users.update({
             username: req.body.username,
-            password: hash,
             email: req.body.email
         }, {
                 where: { id: req.user }
             }).then(function (data) {
-                if (data.id) {
+                if (data) {
                     res.send("success").end();
                 } else {
                     res.send("failed").end();
                 }
             });
-    });
+    } else {
+        bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+            db.users.update({
+                username: req.body.username,
+                password: hash,
+                email: req.body.email
+            }, {
+                    where: { id: req.user }
+                }).then(function (data) {
+                    if (data) {
+                        res.send("success").end();
+                    } else {
+                        res.send("failed").end();
+                    }
+                });
+        });
+    }
 });
 
 // register for an account
