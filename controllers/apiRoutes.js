@@ -123,6 +123,8 @@ router.put("/api/account", (req, res) => {
                 } else {
                     res.send("failed").end();
                 }
+            }).catch(function (err) {
+                res.send("duplicate").end();
             });
     } else {
         bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
