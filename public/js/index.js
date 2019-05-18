@@ -104,7 +104,6 @@ $(document).ready(function () {
                 type: 'PUT',
                 data: updateUser
             }).then(function (response) {
-                console.log(response);
                 if (response === 'success') {
                     $("#account_success").removeClass("invisible");
                     $("#account_success").text("You have successfully updated your account.");
