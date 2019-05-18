@@ -7,28 +7,8 @@ const op = Sequelize.Op;
 
 var db = require("../models");
 
-function getCategories() {
-    db.categories.findAll({
-        attributes: ['id', 'name', 'description', 'image_name'],
-        order: [['id', 'ASC']]
-    }).then(function (category) {
-        res.render("categories", { category, user: req.isAuthenticated() });
-    });
-}
-
-function cartContents(user_id) {
-    return ;
-}
-
 // find all categories and one product from each category
 router.get("/", (req, res) => {
-    if (req.isAuthenticated()) {
-        cartContents(req.user)
-    } else {
-
-    }
-    console.log(req.user);
-    console.log(req.isAuthenticated());
     db.categories.findAll({
         attributes: ['id', 'name', 'description', 'image_name'],
         order: [['id', 'ASC']]
@@ -170,15 +150,14 @@ router.get("/account/orders/:id", (req, res) => {
         }).then(function (category) {
             db.orders.findOne({
                 attributes: ['id', 'order_total', 'createdAt'],
-                where: { id: req.params.criteria },
+                where: { id: req.params.id, userId: 1 },
                 include: [
-                    { model: db.order_items, attributes: ['id', 'num', 'each_price', 'productId'] }
+                    { model: db.order_items, attributes: ['num', 'each_price'], include: [{ model: db.products, attributes: ['name', 'description'] }] }
                 ]
             }).then(function (order) {
                 res.render("orders", { order, category, user: req.isAuthenticated() });
             });
         });
-
     }
     else {
         res.redirect("/login");

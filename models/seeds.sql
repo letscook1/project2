@@ -33,12 +33,12 @@ INSERT INTO users (username, password, email, createdAt, updatedAt) VALUES
 
 -- inserts for cart_items
 INSERT INTO cart_items (num, each_price, userId, productId) VALUES
-('1', '20.99', '1', '13'),
-('1', '39.99', '1', '12'),
+('1', '20.99', '1', '12'),
+('1', '39.99', '1', '13'),
 ('4', '8.99', '1', '6'),
 ('3', '8.99', '2', '1'),
 ('2', '75.99', '2', '5'),
 ('1', '58.99', '2', '14'),
-('2', '20.99', '2', '13');
+('2', '20.99', '2', '12');
 
 SET FOREIGN_KEY_CHECKS=1;
