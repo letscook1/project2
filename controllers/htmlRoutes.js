@@ -129,7 +129,7 @@ router.get("/account", (req, res) => {
                 id: req.user
             }
         }).then(function (account) {
-            res.render("account", { account });
+            res.render("account", { account, user: req.isAuthenticated() });
         });
     }
     else {
