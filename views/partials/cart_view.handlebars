@@ -4,7 +4,8 @@
   <thead class="thead-light">
       <tr>
           <th id="name-row-head" title="Name of Item" scope="col">Item</th>
-          <th id="cost-row-head" title="Cost of item in US$" scope="col"><i class="fas fa-dollar-sign"></i> Cost</th>
+          <th id="each-cost-row-head" title="Each Cost of item in US$" scope="col"><i class="fas fa-dollar-sign"></i> Each Cost</th>
+          <th id="total-cost-row-head" title="Total Cost of items in US$" scope="col"><i class="fas fa-dollar-sign"></i> Total Cost</th>
           <th id="update-row-head" title="Quantity ordering of Item" scope="col"><span class="d-none d-xl-inline">Cart </span>Quantity</th>
           <th id="delete-row-head" title="Remove item from cart by clicking the X" scope="col">Remove<span class="d-none d-xl-inline"> From Cart <i class="fas fa-trash"></i></span></th>
       </tr>
@@ -15,27 +16,28 @@
           {{#each cart}}
               <tr>
                   {{#with product}}
-                      <th class="name-row" scope="row" title="Item {{name}}: {{description}}">{{name}}</th>
+                      <td class="name-row text-left pl-4" scope="row" title="Item {{name}}: {{description}}">{{name}}</td>
                   {{/with}}
-                  <td class="cost-row" data-cost="{{dataValues.each_price}}" data-quantity="{{dataValues.num}}"  title="{{dataValues.product.name}} ${{dataValues.each_price}} "><i class="fas fa-dollar-sign"></i> {{dataValues.each_price}}</td>
+                  <td class="cost-row" data-cost="{{each_price}}" data-quantity="{{num}}"  title="{{product.name}} ${{each_price}} "><i class="fas fa-dollar-sign"></i> {{each_price}}</td>
+                  <td class="cost-row" data-cost="{{total_price}}" data-quantity="{{num}}"  title="{{product.name}} ${{total_price}} "><i class="fas fa-dollar-sign"></i> {{total_price}}</td>
                   <td class="update-row" title="Update Cart Quantity">
                       <div class="input-group">
                           <div class="input-group-append">
                               <button class="update-quantity badge-dark badge badge-sm" type="button"><i class="fas fa-cog"></i></button>
                           </div>
-                          <input type="number" class="form-control form-control-sm p-0 m-0 mx-auto text-center" name="quantity" min="1" value="{{dataValues.num}}" >
+                          <input type="number" class="form-control form-control-sm p-0 m-0 mx-auto text-center" name="quantity" min="1" value="{{num}}" >
                       </div>
                   </td>
                   <td class="delete-row" title="Remove item from Cart">
                       <div>
-                          <button type="button" class="delete-item badge badge-sm badge-danger px-lg-2 mr-3 mr-md-5" data-id="{{dataValues.productId}}" value="{{dataValues.productId}}"><i class="fas fa-trash"></i></button>
+                          <button type="button" class="delete-item badge badge-sm badge-danger px-lg-2 mr-3 mr-md-5" data-id="{{productId}}" value="{{productId}}"><i class="fas fa-trash"></i></button>
                       </div>
                   </td> 
               </tr>
           {{/each}}
           <tr>
-              <th colspan="2" title="Cart total cost">Total Cost of items: <span id="cart-item-cost" class="badge badge-primary p-2">###</span> </th>
-              <td colspan="2" title="Total amount of items in cart"><span class="d-none d-lg-inline">Number of items</span> Ordered:<span id="cart-item-quantity" class="badge badge-primary p-2">###</span></td>
+              <td colspan="2" title="Cart total cost">Total Cost of items: <span id="cart-item-cost" class="badge badge-primary p-2">${{cart_total}}</span> </td>
+              <td colspan="2" title="Total amount of items in cart"><span class="d-none d-lg-inline">Number of items</span> Ordered: <span id="cart-item-quantity" class="badge badge-primary p-2">{{total_items}}</span></td>
           </tr>               
       {{else}}
       <tr>

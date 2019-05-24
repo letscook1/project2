@@ -142,7 +142,7 @@ router.get("/account/orders", (req, res) => {
     if (req.isAuthenticated()) {
         db.orders.findAll({
             attributes: ['id', 'order_total', 'createdAt'],
-            where: { userId: req.userId },
+            where: { userId: req.user },
             order: [['id', 'ASC']]
         }).then(function (data) {
             res.render("account", { data });
@@ -181,8 +181,23 @@ router.get("/cart", (req, res) => {
             include: [
                 { model: db.products, attributes: ['name', 'description'] }
             ]
-        }).then(function (cart) {
-            res.render("checkout", { cart });
+        }).then(function (data) {
+            var totalCost = 0;
+            var totalItems = 0;
+            var cart = [];
+            for (let i = 0; i < data.length; i++) {
+                var tempObj = {};
+                totalItems += data[i].num;
+                totalCost += data[i].num * data[i].each_price;
+                tempObj.id = data[i].id;
+                tempObj.num = data[i].num;
+                tempObj.each_price = data[i].each_price;
+                tempObj.total_price = data[i].num * data[i].each_price;
+                tempObj.productId = data[i].productId;
+                tempObj.product = data[i].product;
+                cart.push(tempObj);
+            }
+            res.render("checkout", { cart, cart_total: totalCost, total_items: totalItems });
         });
     }
     else {
