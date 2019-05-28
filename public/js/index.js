@@ -1,6 +1,28 @@
 'use strict';
 
 $(document).ready(function () {
+
+    $.get("/category/list", function (data) {
+        console.log(data);
+        data.categoryList.forEach(function(element) {
+            $("#dropdownItems").append("<a class='dropdown-item' href='/category/" + element.id + " ' title='" + element.description + "'>" + element.name + "</a>");
+        });
+    });
+
+    $.get("/user/status", function (data) {
+        console.log(data);
+        if (data.user) {
+            $("#account_link").removeClass("d-none");
+            $("#cart_logout").removeClass("d-none");
+            $("#login_register").addClass("d-none");
+            $.get("/cart/info", function (data) {
+                console.log(data.cartInfo);
+                $("#cart_info").removeClass("d-none");
+                $("#cart_info").text(data.cartInfo.totalItems + " items / $" + data.cartInfo.totalCost);
+            });
+        }
+    });
+
     $("#login_btn").on("click", (event) => {
         event.preventDefault();
         var loginCheck = {
@@ -197,4 +219,5 @@ $(document).ready(function () {
         let search = $('#navbar-search-input').val();
         $(location).attr('href', '/search/' + search);
     });
+
 });
