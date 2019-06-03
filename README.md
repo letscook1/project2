@@ -1,13 +1,6 @@
 # MarketPlace
 An Ecommerce Marketplace based off of a store inventory and user database that allows a user to place an order for items/services and checkout.
 
-## What the project does:
-
-* 
-* 
-
----
-
 ## How users can get started with the project:
 
 To use this project, you'll need to do the following:
@@ -44,10 +37,9 @@ The above **config/pwd.js** file was utilized to keep our local MySQL passwords 
 
 ---
 
-## About the code in this project:
+## Our MySQL database layout for this project:
 
-* 
-* 
+![MySQL Layout](/public/images/project2_database.png)
 
 ---
 
@@ -69,4 +61,4 @@ The above **config/pwd.js** file was utilized to keep our local MySQL passwords 
 * Michelle Williams | Vince Shury | Mike Gullo
 * https://glacial-bayou-58542.herokuapp.com/
 * https://github.com/letscook1/project2
-* Contact us at: letscook1@hotmail.com | vinceshury@gmail.com | mike4747@oh.rr.com for more info about this project.
+* Contact us at: letscook1@hotmail.com | vinceshury@gmail.com | mike14747@oh.rr.com for more info about this project.
