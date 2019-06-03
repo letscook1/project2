@@ -38,7 +38,7 @@ router.get("/cart/info", (req, res) => {
                 uniqueItems++;
                 totalItems += element.num;
             });
-            cartInfo.totalCost = totalCost;
+            cartInfo.totalCost = totalCost.toFixed("2");
             cartInfo.uniqueItems = uniqueItems;
             cartInfo.totalItems = totalItems;
             res.send({ cartInfo });
@@ -67,7 +67,7 @@ router.get("/category/:id", (req, res) => {
         order: [['id', 'ASC']]
     }).then(function (categoryitems) {
         // res.json(categoryitems)
-        res.render("category_items", { categoryitems });
+        res.render("category_items", { categoryitems, user: req.isAuthenticated() });
     });
 });
 
@@ -197,6 +197,7 @@ router.get("/cart", (req, res) => {
                 tempObj.product = data[i].product;
                 cart.push(tempObj);
             }
+            totalCost = totalCost.toFixed("2");
             res.render("checkout", { cart, cart_total: totalCost, total_items: totalItems });
         });
     }
