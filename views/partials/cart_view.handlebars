@@ -3,11 +3,13 @@
 
   <thead class="thead-light">
       <tr>
-          <th id="name-row-head" title="Name of Item" scope="col">Item</th>
-          <th id="each-cost-row-head" title="Each Cost of item in US$" scope="col"><i class="fas fa-dollar-sign"></i> Each Cost</th>
-          <th id="total-cost-row-head" title="Total Cost of items in US$" scope="col"><i class="fas fa-dollar-sign"></i> Total Cost</th>
-          <th id="update-row-head" title="Quantity ordering of Item" scope="col"><span class="d-none d-xl-inline">Cart </span>Quantity</th>
-          <th id="delete-row-head" title="Remove item from cart by clicking the X" scope="col">Remove<span class="d-none d-xl-inline"> From Cart <i class="fas fa-trash"></i></span></th>
+          {{#if cart}}
+            <th id="name-row-head" title="Name of Item" scope="col">Item</th>
+            <th id="each-cost-row-head" title="Each Cost of item in US$" scope="col"><i class="fas fa-dollar-sign"></i> Each Cost</th>
+            <th id="total-cost-row-head" title="Total Cost of items in US$" scope="col"><i class="fas fa-dollar-sign"></i> Total Cost</th>
+            <th id="update-row-head" title="Quantity ordering of Item" scope="col"><span class="d-none d-xl-inline">Cart </span>Quantity</th>
+            <th id="delete-row-head" title="Remove item from cart by clicking the X" scope="col">Remove<span class="d-none d-xl-inline"> From Cart <i class="fas fa-trash"></i></span></th>
+        {{/if}}
       </tr>
   </thead>
   
@@ -37,7 +39,7 @@
           {{/each}}
           <tr>
               <td colspan="2" title="Cart total cost">Total Cost of items: <span id="cart-item-cost" class="badge badge-primary p-2">${{cart_total}}</span> </td>
-              <td colspan="2" title="Total amount of items in cart"><span class="d-none d-lg-inline">Number of items</span> Ordered: <span id="cart-item-quantity" class="badge badge-primary p-2">{{total_items}}</span></td>
+              <td colspan="3" title="Total amount of items in cart"><span class="d-none d-lg-inline">Number of items</span> Ordered: <span id="cart-item-quantity" class="badge badge-primary p-2">{{total_items}}</span></td>
           </tr>               
       {{else}}
       <tr>

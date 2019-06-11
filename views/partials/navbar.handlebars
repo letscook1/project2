@@ -42,15 +42,15 @@
     </div>
     {{!-- IF user is logged in display CART/LOGOUT --}}
     <div id="cart_logout" class="d-none my-0 px-0 btn-group mx-0" role="group">
-        <button id="navbar-view-cart" class="btn btn-primary my-2" type="button" title="View your cart">
+        <button id="navbar-view-cart" class="btn btn-primary mx-0 my-2" type="button" title="View your cart">
             <a href="/cart" class="text-white text-decoration-none">
                 <span id="navbar-cart-amount" class="badge badge-light"></span>
-                <i class="fas fa-shopping-cart mr-2"></i>Cart
-                <span id="cart_info" class="ml-2 d-none"></span>
+                <i class="fas fa-shopping-cart mr-1"></i>Cart
+                <span id="cart_info" class="ml-1 d-none"></span>
             </a>
         </button>
-        <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#logout-modal" title="Log Out">
-            <i class="fas fa-sign-out-alt mr-2"></i>Log-Out
+        <button type="button" class="btn btn-primary mx-0 my-2" data-toggle="modal" data-target="#logout-modal" title="Log Out">
+            <i class="fas fa-sign-out-alt ml-0 mr-1"></i>Log-Out
         </button>
     </div>
     {{!-- ELSE user is not logged in , display login and sign up button --}}

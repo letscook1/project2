@@ -89,7 +89,7 @@ router.get("/search/:criteria", (req, res) => {
         },
         order: [['id', 'ASC']]
     }).then(function (categoryitems) {
-        res.render("category_items", { categoryitems });
+        res.render("category_items", { categoryitems, user: req.isAuthenticated() });
     });
 });
 

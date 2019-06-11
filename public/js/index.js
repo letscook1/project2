@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 'use strict';
 
-$(document).ready(function () {
+$(document).ready(()=> {
 
     $.get("/category/list", data => {
         data.categoryList.forEach(element=> $("#dropdownItems").append("<a class='dropdown-item' href='/category/" + element.id + " ' title='" + element.description + "'>" + element.name + "</a>"));
@@ -180,7 +180,9 @@ $(document).ready(function () {
     $('.update-quantity').on('click', event => {
         event.preventDefault();
 
-        //
+        
+
+        
 
         $.ajax('/cart', {
             type: 'POST',

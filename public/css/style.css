@@ -15,6 +15,9 @@ No media query for `xs` since this is the default in Bootstrap
 #delete-row-head {
     width: 20%;
 }
+#navbar-search-input{
+    width: 10%;
+}
 .read-only-form {
     opacity: .8;
 }
