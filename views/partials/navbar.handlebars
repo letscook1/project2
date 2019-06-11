@@ -5,68 +5,58 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a title="View home page" class="navbar-brand px-0 mr-0" href="/">eMarketplace</a>
+    <a title="Link to Github repository" class="navbar-brand px-0 mr-0" href="https://github.com/letscook1/project2">eMarketplace</a>
 
     <div class="collapse navbar-collapse" id="mainNavBar">
 
         <ul class="navbar-nav mr-auto mt-2">
-
             <li class="nav-item active">
-                <a title="View home page" class="nav-link" href="/">Home <span class="d-inline d-md-none d-lg-inline"><i
-                            class="fa fa-home"></i></span></a>
+                <a title="View home page" class="nav-link" href="/">Home 
+                    <span class="d-inline d-md-none d-lg-inline"><i class="fa fa-home"></i></span>
+                </a>
             </li>
-
             <li id="account_link" class="nav-item d-none">
-                <a title="View/edit account" class="nav-link px-0" href="/account">Account <span
-                        class="d-inline d-md-none d-lg-inline"><i class="fas fa-user-alt"></i></span></a>
+                <a title="View/edit account" class="nav-link px-0" href="/account">Account 
+                    <span class="d-inline d-md-none d-lg-inline"><i class="fas fa-user-alt"></i></span>
+                </a>
             </li>
-
             <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
-                    title="View Categories dropdown">Categories</a>
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" title="View Categories dropdown">Categories</a>
                 <div id="dropdownItems" class="dropdown-menu mb-2">
                     <a class="dropdown-item disabled" href="#">Select A Category</a>
                 </div>
             </li>
-
         </ul>
 
         {{!-- Search form that gets hidden in dropdown at MD breakpoint --}}
         <form class="navbar-form m-0 p-0 navbar-right">
             <div class="input-group">
                 <div class="input-group-btn">
-                    <button id="navbar-search-btn" class="btn btn-primary px-1" title="Search Product Name/Description"
-                        type="submit"><i class="fas fa-search mx-2"></i></button>
+                    <button id="navbar-search-btn" class="btn btn-primary px-1" title="Search Product Name/Description" type="submit">
+                    <i class="fas fa-search mx-2"></i></button>
                 </div>
-                <input id="navbar-search-input" class="form-control mr-1" title="Search Product Name/Description" type="text"
-                    placeholder="Search">
+                <input id="navbar-search-input" class="form-control mr-1" title="Search Product Name/Description" type="text" placeholder="Search">
             </div>
         </form>
 
     </div>
-
-    <div class="my-0 px-0 btn-group mx-0" role="group">
-
-        {{!-- IF user is logged in display CART/LOGOUT --}}
-        <div id="cart_logout" class="d-none">
-            <button id="navbar-view-cart" class="btn btn-primary my-2" type="button" title="View your cart">
-                <a href="/cart" class="text-white text-decoration-none">
-                    <span id="navbar-cart-amount" class="badge badge-light"></span>
-                    <i class="fas fa-shopping-cart mr-2"></i>Cart
-                    <span id="cart_info" class="ml-2 d-none"></span>
-                </a>
-            </button>
-            <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#logout-modal"
-                title="Log Out"><i class="fas fa-sign-out-alt mr-2"></i>Log-Out</button>
-        </div>
-
-        {{!-- ELSE user is not logged in , display login and sign up button --}}
-        <div id="login_register">
-            <a title="Log-in" class="btn btn-primary my-2" href="/login"><i class="fas fa-sign-in-alt mr-2"></i>Log-In</a>
-            <a title="Create an account" class="btn btn-primary my-2" href="/register"><i class="fas fa-user-plus mr-2"></i>Sign
-                    Up</a>
-        </div>
-
+    {{!-- IF user is logged in display CART/LOGOUT --}}
+    <div id="cart_logout" class="d-none my-0 px-0 btn-group mx-0" role="group">
+        <button id="navbar-view-cart" class="btn btn-primary my-2" type="button" title="View your cart">
+            <a href="/cart" class="text-white text-decoration-none">
+                <span id="navbar-cart-amount" class="badge badge-light"></span>
+                <i class="fas fa-shopping-cart mr-2"></i>Cart
+                <span id="cart_info" class="ml-2 d-none"></span>
+            </a>
+        </button>
+        <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#logout-modal" title="Log Out">
+            <i class="fas fa-sign-out-alt mr-2"></i>Log-Out
+        </button>
     </div>
-
+    {{!-- ELSE user is not logged in , display login and sign up button --}}
+    <div id="login_register" class="my-0 px-0 btn-group mx-0" role="group">
+        <a title="Log-in" class="btn btn-primary my-2" href="/login"><i class="fas fa-sign-in-alt mr-2"></i>Log-In</a>
+        <a title="Create an account" class="btn btn-primary my-2" href="/register"><i class="fas fa-user-plus mr-2"></i>Sign
+                Up</a>
+    </div>
 </nav>

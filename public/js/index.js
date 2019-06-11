@@ -1,19 +1,18 @@
+/* eslint-disable no-undef */
 'use strict';
 
 $(document).ready(function () {
 
-    $.get("/category/list", function (data) {
-        data.categoryList.forEach(function(element) {
-            $("#dropdownItems").append("<a class='dropdown-item' href='/category/" + element.id + " ' title='" + element.description + "'>" + element.name + "</a>");
-        });
+    $.get("/category/list", data => {
+        data.categoryList.forEach(element=> $("#dropdownItems").append("<a class='dropdown-item' href='/category/" + element.id + " ' title='" + element.description + "'>" + element.name + "</a>"));
     });
 
-    $.get("/user/status", function (data) {
+    $.get("/user/status", data => {
         if (data.user) {
             $("#account_link").removeClass("d-none");
             $("#cart_logout").removeClass("d-none");
             $("#login_register").addClass("d-none");
-            $.get("/cart/info", function (data) {
+            $.get("/cart/info", data => {
                 $("#cart_info").removeClass("d-none");
                 $("#cart_info").text(data.cartInfo.totalItems + " items / $" + data.cartInfo.totalCost);
             });
@@ -27,12 +26,12 @@ $(document).ready(function () {
             password: $("#user-password").val().trim()
         }
         $.post("/api/account/login", loginCheck)
-            .then(function (response) {
-                if (response === "success") {
+            .then(res=> {
+                if (res === "success") {
                     $(location).attr('href', '/');
                 } else {
                     $("#login_error").removeClass("invisible");
-                    $("#login_error").text(response);
+                    $("#login_error").text(res);
                 }
             });
     });
@@ -40,8 +39,6 @@ $(document).ready(function () {
     $('#create-new-account').on('click', event => {
         event.preventDefault();
         // add input validation here
-        var errorArray = [];
-        var errors = false;
         var errorArray = [];
         var errors = false;
         if (!$("#create-username").val().trim().match(/^[a-zA-Z0-9 _-]{6,15}$/)) {
@@ -72,8 +69,8 @@ $(document).ready(function () {
             $.ajax('/api/account/register', {
                 type: 'POST',
                 data: newUser
-            }).then(function (response) {
-                if (response === 'success') {
+            }).then(res => {
+                if (res === 'success') {
                     $(location).attr('href', '/login');
                 } else {
                     $("#register_error").removeClass("invisible");
@@ -122,11 +119,11 @@ $(document).ready(function () {
             $.ajax('/api/account', {
                 type: 'PUT',
                 data: updateUser
-            }).then(function (response) {
-                if (response === 'success') {
+            }).then( res =>{
+                if (res === 'success') {
                     $("#account_success").removeClass("invisible");
                     $("#account_success").text("You have successfully updated your account.");
-                } else if (response === 'duplicate') {
+                } else if (res === 'duplicate') {
                     $("#account_error").removeClass("invisible");
                     $("#account_error").text("The submitted 'Username' is already in use.!");
                 } else {
@@ -150,8 +147,8 @@ $(document).ready(function () {
         $.ajax('/api/cart', {
             type: 'POST',
             data: addItem
-        }).then(function (response) {
-            if (response === 'created' || response === 'updated') {
+        }).then(res=> {
+            if (res === 'created' || res === 'updated') {
                 $(location).attr('href', '/cart');
             } else {
                 $(location).attr('href', '/');
@@ -170,8 +167,8 @@ $(document).ready(function () {
         $.ajax('/api/cart', {
             type: 'DELETE',
             data: deleteItem
-        }).then(function (response) {
-            if (response === 'success') {
+        }).then(res => {
+            if (res === 'success') {
                 $(location).attr('href', '/cart');
             } else {
                 $(location).attr('href', '/cart');
@@ -188,8 +185,8 @@ $(document).ready(function () {
         $.ajax('/cart', {
             type: 'POST',
             data: updateQuantity
-        }).then(function (response) {
-            if (response === 'success') {
+        }).then(res => {
+            if (res === 'success') {
                 $(location).attr('href', '/cart');
             } else {
                 $(location).attr('href', '/');
@@ -203,11 +200,7 @@ $(document).ready(function () {
             order_total: 1
         }
         event.preventDefault();
-        $.post("/api/cart/submitted", orderTotal)
-            .then(function (response) {
-                $(location).attr('href', '/');
-                // $(location).attr('href', '/account/orders/' + response.orderId);
-            });
+        $.post("/api/cart/submitted", orderTotal).then(()=> $(location).attr('href', '/'));
     });
 
     // Search Button
