@@ -14,7 +14,7 @@ $(document).ready(()=> {
             $("#login_register").addClass("d-none");
             $.get("/cart/info", data => {
                 $("#cart_info").removeClass("d-none");
-                $("#cart_info").text(data.cartInfo.totalItems + " items / $" + data.cartInfo.totalCost);
+                $("#cart_info").text(data.cartInfo.totalItems + " items| $" + data.cartInfo.totalCost);
             });
         }
     });
@@ -182,7 +182,7 @@ $(document).ready(()=> {
 
         
 
-        
+
 
         $.ajax('/cart', {
             type: 'POST',
