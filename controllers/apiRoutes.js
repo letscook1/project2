@@ -166,7 +166,7 @@ router.post("/api/account/register", (req, res) => {
 });
 
 // login with an existing username and password
-var userId = 0;
+userId = 0;
 var pwd = "";
 router.post("/api/account/login", (req, res) => {
     pwd = req.body.password;
