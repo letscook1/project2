@@ -23,12 +23,12 @@
                   <td class="cost-row" data-cost="{{each_price}}" data-quantity="{{num}}"  title="{{product.name}}: ${{each_price}} "><i class="fas fa-dollar-sign"></i> {{each_price}}</td>
                   <td class="totals-row" data-cost="{{total_price}}" data-quantity="{{num}}"  title="{{product.name}}: {{num}} x {{each_price}} = ${{total_price}} "><i class="fas fa-dollar-sign"></i> {{total_price}}</td>
                   <td class="update-row" title="Update Cart Quantity">
-                      <div class="input-group">
+                      <form class="input-group input-group-sm">
                           <div class="input-group-append">
-                              <button class="update-quantity badge-dark badge badge-sm" type="button"><i class="fas fa-cart-plus"></i></button>
+                              <button class="update-quantity badge-dark badge badge-sm" type="submit"><i class="fas fa-cart-plus"></i></button>
                           </div>
-                          <input type="number" class="form-control form-control-sm p-0 m-0 mx-auto text-center" name="quantity" min="1" value="{{num}}" >
-                      </div>
+                          <input type="number" class="form-control form-control-sm p-0 m-0 mx-auto text-center" data-itemid="{{id}}" name="quantity" min="1" value="{{num}}" >
+                      </form>
                   </td>
                   <td class="delete-row" title="Remove item from Cart">
                       <div>

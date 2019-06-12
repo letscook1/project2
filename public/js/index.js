@@ -181,23 +181,31 @@ $(document).ready(()=> {
     });
 
     //update quantity of an item
-    $('.update-quantity').on('click', event => {
+    $('.update-quantity').on('click', function(event)  {
         event.preventDefault();
 
-        
+        //go up the DOM tree and find the parent sibling input from the button clicked/submitted input
+        let numberInput = $(this).parent().siblings();
+        let newQuantity = Number(numberInput.val());
 
+        if(newQuantity >= 1 ) {
+            //only do update if updated number is greater then or equal to 1.
+            $.ajax('/api/cart', {
+                type: 'PUT',
+                data:  {
+                    num: newQuantity,
+                    id: numberInput.attr("data-itemid")
+                }
+            }).then(res => {
+                if (res === 'success') {
+                    $(location).attr('href', '/cart');
+                } else {
+                    $(location).attr('href', '/');
+                }
+            });
 
+        }
 
-        $.ajax('/cart', {
-            type: 'POST',
-            data: updateQuantity
-        }).then(res => {
-            if (res === 'success') {
-                $(location).attr('href', '/cart');
-            } else {
-                $(location).attr('href', '/');
-            }
-        });
     });
 
     // submit an order
