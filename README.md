@@ -58,7 +58,7 @@ The above **config/pwd.js** file was utilized to keep our local MySQL passwords 
 
 ## This project was created and is maintained by:
 
-* Michelle Williams | Vince Shury | Mike Gullo
+* [Michelle Williams](https://github.com/letscook1) | [Vincent Shury](https://www.linkedin.com/feed/) [Github](https://github.com/Vincent440) [Portfolio](https://vincent440.github.io/) | [Mike Gullo](https://mike14747.github.io/)
 * https://glacial-bayou-58542.herokuapp.com/
 * https://github.com/letscook1/project2
 * Contact us at: letscook1@hotmail.com | vinceshury@gmail.com | mike14747@oh.rr.com for more info about this project.
