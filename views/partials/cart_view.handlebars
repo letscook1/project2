@@ -27,13 +27,11 @@
                           <div class="input-group-append">
                               <button class="update-quantity badge-dark badge badge-sm" type="submit"><i class="fas fa-cart-plus"></i></button>
                           </div>
-                          <input type="number" class="form-control form-control-sm p-0 m-0 mx-auto text-center" data-itemid="{{id}}" name="quantity" min="1" value="{{num}}" >
+                          <input type="number" class="form-control form-control-sm p-0 m-0 mx-auto text-center" data-itemid="{{id}}" name="quantity" min="1" value="{{num}}">
                       </form>
                   </td>
                   <td class="delete-row" title="Remove item from Cart">
-                      <div>
-                          <button type="button" class="delete-item badge badge-sm badge-danger px-lg-2 mr-3 mr-md-5" data-id="{{id}}" value="{{id}}"><i class="fas fa-trash"></i></button>
-                      </div>
+                     <button type="button" class="delete-item badge badge-sm badge-danger px-lg-2 mr-3 mr-md-5" data-itemid="{{id}}"><i class="fas fa-trash"></i></button>
                   </td> 
               </tr>
           {{/each}}
@@ -43,7 +41,7 @@
           </tr>               
       {{else}}
       <tr>
-          <th scope="row" colspan="4" class="text-danger text-dark bg-warning py-3">No items currently in your cart! Add items to cart to make a purchase.<i class="fas fa-cart-plus"></i></th>
+          <th scope="row" colspan="4" class="text-dark bg-warning py-5"><h4>No items currently in your cart!<br> Add items to cart to make a purchase.<i class="fas fa-cart-plus"></i></h4></th>
       </tr>
       {{/if}}
   </tbody>    
