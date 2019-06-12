@@ -10,9 +10,9 @@ const saltRounds = 10;
 var db = require("../models");
 
 // delete an item from the cart
-router.delete("/api/cart/", (req, res) => {
+router.delete("/api/cart", (req, res) => {
     db.cart_items.destroy({
-        where: { userId: req.user, productId: req.body.id }
+        where: { userId: req.user, id: req.body.id }
     }).then(function (data) {
         if (data.id) {
             res.send("success").end();
@@ -23,13 +23,13 @@ router.delete("/api/cart/", (req, res) => {
 });
 
 // update the quantity of an item in the cart
-router.put("/api/cart/", (req, res) => {
+router.put("/api/cart", (req, res) => {
     db.cart_items.update({
         num: req.body.num
     }, {
             where: { id: req.body.id }
         }).then(function (data) {
-            if (data.id) {
+            if (data) {
                 res.send("success").end();
             } else {
                 res.send("error").end();
