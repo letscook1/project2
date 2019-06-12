@@ -92,7 +92,11 @@ router.post("/api/cart/submitted", (req, res, next) => {
                     orderId: orderId,
                     productId: element.productId
                 });
-            });
+            });        
+        var order = {
+            orderId: orderId
+        }
+            res.send(order);
         });
     });
     next();
@@ -101,12 +105,7 @@ router.post("/api/cart/submitted", (req, res, next) => {
 router.post("/api/cart/submitted", (req, res) => {
     db.cart_items.destroy({
         where: { userId: userId }
-    }).then(function () {
-        var order = {
-            orderId: orderId
-        }
-        res.send(order);
-    });
+    }).then();
 });
 
 // update account info

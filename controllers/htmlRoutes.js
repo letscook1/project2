@@ -144,9 +144,7 @@ router.get("/account/orders", (req, res) => {
             attributes: ['id', 'order_total', 'createdAt'],
             where: { userId: req.user },
             order: [['id', 'ASC']]
-        }).then(function (data) {
-            res.render("account", { data });
-        });
+        }).then(orderHistory=> res.render("orders", { orderHistory }));
     }
     else {
         res.redirect("/login");
@@ -158,7 +156,7 @@ router.get("/account/orders/:id", (req, res) => {
     if (req.isAuthenticated()) {
         db.orders.findOne({
             attributes: ['id', 'order_total', 'createdAt'],
-            where: { id: req.params.id, userId: 1 },
+            where: { id: req.params.id, userId: req.user },
             include: [
                 { model: db.order_items, attributes: ['num', 'each_price'], include: [{ model: db.products, attributes: ['name', 'description'] }] }
             ]

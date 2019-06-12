@@ -52,7 +52,7 @@ $(document).ready(()=> {
             data: addItem
         }).then(res=> {
             if (res === 'created' || res === 'updated') {
-                $(location).attr('href', '/cart');
+                location.reload();
             } else {
                 $(location).attr('href', '/');
             }
@@ -107,7 +107,7 @@ $(document).ready(()=> {
             order_total: total
         }
         $.post("/api/cart/submitted", orderTotal).then((res)=> {
-            $(location).attr('href', '/')//'/account/orders/'+res.orderId
+            $(location).attr('href', '/account/orders/'+res.orderId)//'/account/orders/'+res.orderId
         });
     });
     // Search Button

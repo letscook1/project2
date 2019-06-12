@@ -25,7 +25,15 @@
   </div>
   <div id="account_error" class="alert alert-warning font-weight-bolder text-center invisible text-break" role="alert"></div>
   <div id="account_success" class="alert alert-success font-weight-bolder text-center invisible text-break" role="alert"></div>
-  <div class="m-auto w-75 px-4">
-    <button id="update-account" type="submit" class="btn btn-block btn-primary">Edit Account <i class="ml-3 fas fa-users-cog"></i></button>
-  </div>
+  <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <button id="update-account" type="submit" class="btn btn-primary" title="Update account"><i class="fas fa-users-cog"> Update Account</i></button>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-primary" href="/account/orders" title="View Past orders"><i class="fas fa-receipt"> Past Orders</i></a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-primary" href="/"  title="Browse categories"><i class="fas fa-store-alt"> Shop</i></a>
+        </li>
+  </ul>
 </form>

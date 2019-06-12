@@ -2,8 +2,6 @@
 No media query for `xs` since this is the default in Bootstrap 
 0px - 576px styling 
 */
-
-
 #navbar-search-form{
     width: 9rem;
 }
