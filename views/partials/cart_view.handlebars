@@ -27,13 +27,11 @@
                           <div class="input-group-append">
                               <button class="update-quantity badge-dark badge badge-sm" type="submit"><i class="fas fa-cart-plus"></i></button>
                           </div>
-                          <input type="number" class="form-control form-control-sm p-0 m-0 mx-auto text-center" data-itemid="{{id}}" name="quantity" min="1" value="{{num}}" >
+                          <input type="number" class="form-control form-control-sm p-0 m-0 mx-auto text-center" data-itemid="{{id}}" name="quantity" min="1" value="{{num}}">
                       </form>
                   </td>
                   <td class="delete-row" title="Remove item from Cart">
-                      <div>
-                          <button type="button" class="delete-item badge badge-sm badge-danger px-lg-2 mr-3 mr-md-5" data-id="{{productId}}" value="{{productId}}"><i class="fas fa-trash"></i></button>
-                      </div>
+                     <button type="button" class="delete-item badge badge-sm badge-danger px-lg-2 mr-3 mr-md-5" data-itemid="{{id}}"><i class="fas fa-trash"></i></button>
                   </td> 
               </tr>
           {{/each}}

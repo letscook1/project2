@@ -62,7 +62,7 @@ $(document).ready(()=> {
     $('.delete-item').on('click', function (event) {
         event.preventDefault();
         const deleteItem = {
-            id: $(this).val()
+            id: $(this).attr("data-itemid")
         };
         $.ajax('/api/cart', {
             type: 'DELETE',
