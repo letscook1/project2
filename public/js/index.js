@@ -14,7 +14,11 @@ $(document).ready(()=> {
             $("#login_register").addClass("d-none");
             $.get("/cart/info", data => {
                 $("#cart_info").removeClass("d-none");
-                $("#cart_info").text(data.cartInfo.totalItems + " items| $" + data.cartInfo.totalCost);
+                $("#navbar-cart-amount").text(data.cartInfo.totalItems);
+                $("#navbar-cart-amount::after").text("items in");
+                if(data.cartInfo.totalCost > 0){
+                    $("#cart_info").html(`<i class="fas fa-dollar-sign px-0">${data.cartInfo.totalCost}</i> `);
+                }
             });
         }
     });

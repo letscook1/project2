@@ -4,11 +4,11 @@
   <thead class="thead-light">
       <tr>
           {{#if cart}}
-            <th id="name-row-head" title="Name of Item" scope="col">Item</th>
-            <th id="each-cost-row-head" title="Each Cost of item in US$" scope="col"><i class="fas fa-dollar-sign"></i> Each Cost</th>
-            <th id="total-cost-row-head" title="Total Cost of items in US$" scope="col"><i class="fas fa-dollar-sign"></i> Total Cost</th>
-            <th id="update-row-head" title="Quantity ordering of Item" scope="col"><span class="d-none d-xl-inline">Cart </span>Quantity</th>
-            <th id="delete-row-head" title="Remove item from cart by clicking the X" scope="col">Remove<span class="d-none d-xl-inline"> From Cart <i class="fas fa-trash"></i></span></th>
+            <th id="name-row-head" class="px-0" title="Name of Item" scope="col">Item</th>
+            <th id="each-cost-row-head" title="Each Cost of item in US$" scope="col"><i class="fas fa-dollar-sign d-none d-lg-inline"> Each</i> Cost</th>
+            <th id="total-cost-row-head" title="Total Cost of items in US$" scope="col"><i class="fas fa-dollar-sign"></i> Total <span class="d-none d-lg-inline">Cost</span></th>
+            <th id="update-row-head" title="Quantity ordering of Item" scope="col"><span class="d-none d-lg-inline">Cart </span>Quantity</th>
+            <th id="delete-row-head" title="Remove item from cart by clicking the X" scope="col"><i class="fas fa-trash"></i><span class="d-none d-lg-inline"> Remove</span> </th>
         {{/if}}
       </tr>
   </thead>
@@ -18,14 +18,14 @@
           {{#each cart}}
               <tr>
                   {{#with product}}
-                      <td class="name-row text-left pl-4" scope="row" title="Item {{name}}: {{description}}">{{name}}</td>
+                      <td class="name-row text-center px-0" scope="row" title="Item {{name}}: {{description}}">{{name}}</td>
                   {{/with}}
-                  <td class="cost-row" data-cost="{{each_price}}" data-quantity="{{num}}"  title="{{product.name}} ${{each_price}} "><i class="fas fa-dollar-sign"></i> {{each_price}}</td>
-                  <td class="cost-row" data-cost="{{total_price}}" data-quantity="{{num}}"  title="{{product.name}} ${{total_price}} "><i class="fas fa-dollar-sign"></i> {{total_price}}</td>
+                  <td class="cost-row" data-cost="{{each_price}}" data-quantity="{{num}}"  title="{{product.name}}: ${{each_price}} "><i class="fas fa-dollar-sign"></i> {{each_price}}</td>
+                  <td class="totals-row" data-cost="{{total_price}}" data-quantity="{{num}}"  title="{{product.name}}: {{num}} x {{each_price}} = ${{total_price}} "><i class="fas fa-dollar-sign"></i> {{total_price}}</td>
                   <td class="update-row" title="Update Cart Quantity">
                       <div class="input-group">
                           <div class="input-group-append">
-                              <button class="update-quantity badge-dark badge badge-sm" type="button"><i class="fas fa-cog"></i></button>
+                              <button class="update-quantity badge-dark badge badge-sm" type="button"><i class="fas fa-cart-plus"></i></button>
                           </div>
                           <input type="number" class="form-control form-control-sm p-0 m-0 mx-auto text-center" name="quantity" min="1" value="{{num}}" >
                       </div>

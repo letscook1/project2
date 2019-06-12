@@ -192,12 +192,12 @@ router.get("/cart", (req, res) => {
                 tempObj.id = data[i].id;
                 tempObj.num = data[i].num;
                 tempObj.each_price = data[i].each_price;
-                tempObj.total_price = data[i].num * data[i].each_price;
+                tempObj.total_price = (data[i].num * data[i].each_price).toFixed(2);
                 tempObj.productId = data[i].productId;
                 tempObj.product = data[i].product;
                 cart.push(tempObj);
             }
-            totalCost = totalCost.toFixed("2");
+            totalCost = totalCost.toFixed(2);
             res.render("checkout", { cart, cart_total: totalCost, total_items: totalItems });
         });
     }
