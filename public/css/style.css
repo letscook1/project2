@@ -2,23 +2,32 @@
 No media query for `xs` since this is the default in Bootstrap 
 0px - 576px styling 
 */
-/* Table styling for the checkout/cart page */
-#name-row-head {
-    width: 40%;
-}
-#cost-row-head {
-    width: 20%;
-}
-#update-row-head {
-    width: 20%;
-}
-#delete-row-head {
-    width: 20%;
+
+
+#navbar-search-form{
+    width: 9rem;
 }
 .read-only-form {
     opacity: .8;
 }
 
+/* ================================================================== */
+/* Table styling for the checkout/cart page */
+#name-row-head {
+    width: 42%;
+}
+#each-cost-row-head {
+    width: 15%;
+}
+#total-cost-row-head {
+    width: 18%;
+}
+#update-row-head {
+    width: 18%;
+}
+#delete-row-head {
+    width: 7%;
+}
 /*
 576px - 768px styling
  Small devices (landscape phones, 576px and up) */
@@ -26,14 +35,17 @@ No media query for `xs` since this is the default in Bootstrap
     #name-row-head {
         width: 40%;
     }
-    #cost-row-head {
+    #each-cost-row-head {
         width: 20%;
+    }
+    #total-cost-row-head {
+        width: 15%;
     }
     #update-row-head {
         width: 20%;
     }
     #delete-row-head {
-        width: 20%;
+        width: 10%;
     }
 }
 
@@ -43,7 +55,10 @@ No media query for `xs` since this is the default in Bootstrap
     #name-row-head {
         width: 45%;
     }
-    #cost-row-head {
+    #each-cost-row-head {
+        width: 15%;
+    }
+    #total-cost-row-head {
         width: 15%;
     }
     #update-row-head {
@@ -57,16 +72,19 @@ No media query for `xs` since this is the default in Bootstrap
  Large devices (desktops, 992px and up) LG bootstrap */
 @media (min-width: 992px) {
     #name-row-head {
-        width: 50%;
+        width: 28%;
     }
-    #cost-row-head {
-        width: 10%;
+    #each-cost-row-head {
+        width: 15%;
+    }
+    #total-cost-row-head {
+        width: 15%;
     }
     #update-row-head {
-        width: 15%;
+        width: 14%;
     }
     #delete-row-head {
-        width: 15%;
+        width: 10%;
     }
 }
 
@@ -74,15 +92,18 @@ No media query for `xs` since this is the default in Bootstrap
  Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
     #name-row-head {
-        width: 50%;
+        width: 38%;
     }
-    #cost-row-head {
-        width: 10%;
+    #each-cost-row-head {
+        width: 15%;
+    }
+    #total-cost-row-head {
+        width: 15%;
     }
     #update-row-head {
         width: 15%;
     }
     #delete-row-head {
-        width: 18%;
+        width: 15%;
     }
 } 
