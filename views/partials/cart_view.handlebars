@@ -50,7 +50,7 @@
 {{!-- Make purchase button if there is a cart --}}
 {{#if cart}}
     <div class="m-auto w-50 px-2">
-        <button type="button" id="display-payment-button" class="btn btn-primary btn-block mb-3" data-toggle="modal" data-target="#payment-modal">
+        <button type="button" id="display-payment-button" data-totalcost="{{cart_total}}" class="btn btn-primary btn-block mb-3" data-toggle="modal" data-target="#payment-modal">
             <i class="fas fa-dollar-sign"> Pay </i> <i class="fas fa-arrow-right"> </i> <i class="fas fa-shopping-cart"> Checkout</i>
         </button>
     </div>
