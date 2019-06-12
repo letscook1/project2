@@ -2,11 +2,11 @@
 'use strict';
 
 $(document).ready(()=> {
-
+    // Get category dropdown after each page loads.
     $.get("/category/list", data => {
         data.categoryList.forEach(element=> $("#dropdownItems").append("<a class='dropdown-item' href='/category/" + element.id + " ' title='" + element.description + "'>" + element.name + "</a>"));
     });
-
+    //Get user logged in status
     $.get("/user/status", data => {
         if (data.user) {
             $("#account_link").removeClass("d-none");
@@ -22,7 +22,7 @@ $(document).ready(()=> {
             });
         }
     });
-
+    // Log user in
     $("#login_btn").on("click", (event) => {
         event.preventDefault();
         const loginCheck = {
@@ -39,17 +39,14 @@ $(document).ready(()=> {
                 }
             });
     });
-
     //Add A new Item to the cart
     $('.add-item').on('click', function (event) {
         event.preventDefault();
-
         const addItem = {
             num: 1,
             each_price: $(this).data("price"),
             productId: $(this).data("id")
         };
-
         $.ajax('/api/cart', {
             type: 'POST',
             data: addItem
@@ -61,15 +58,12 @@ $(document).ready(()=> {
             }
         });
     });
-
     //delete an item from the cart
     $('.delete-item').on('click', function (event) {
         event.preventDefault();
-
         const deleteItem = {
             id: $(this).val()
         };
-
         $.ajax('/api/cart', {
             type: 'DELETE',
             data: deleteItem
@@ -81,15 +75,12 @@ $(document).ready(()=> {
             }
         });
     });
-
     //update quantity of an item
     $('.update-quantity').on('click', function(event)  {
         event.preventDefault();
-
         //go up the DOM tree and find the parent sibling input from the button clicked/submitted input
         const numberInput = $(this).parent().siblings();
         const newQuantity = Number(numberInput.val());
-
         if(newQuantity >= 1 ) {
             //only do update if updated number is greater then or equal to 1.
             $.ajax('/api/cart', {
@@ -105,11 +96,8 @@ $(document).ready(()=> {
                     $(location).attr('href', '/');
                 }
             });
-
         }
-
     });
-
     // submit an order
     $("#payment-button").on("click", (event) => {
         event.preventDefault();
@@ -118,16 +106,13 @@ $(document).ready(()=> {
             order_total: 1
         }
         $.post("/api/cart/submitted", orderTotal).then((res)=> {
-            debugger;
             $(location).attr('href', '/')
         });
     });
-
     // Search Button
     $('#navbar-search-btn').on('click', event => {
         event.preventDefault();
         let search = $('#navbar-search-input').val();
         $(location).attr('href', '/search/' + search);
     });
-
 });
