@@ -1,7 +1,17 @@
-# MarketPlace
-An e-commerce Marketplace simulating a digital store inventory with a user account system that allows users to place an order for items/services and checkout.
+# eMarketplace
+An online marketplace simulating a digital store inventory with a user account system that allows users to place an order for items/services and checkout.
+This store allows a user to:
+* Create an account
+* Log in & Edit an account
+* Add items to a cart
+* Update and remove Items from the cart
+* Submit an order. 
+* View placed order.
+* View all orders placed from that account.
 
-## How users can get started with the project:
+---
+
+## Getting Started
 
 To use this project, you'll need to do the following:
 
@@ -9,17 +19,19 @@ To use this project, you'll need to do the following:
 
 * If you're running it locally on your pc, also perform these steps:
 
-    * run 'npm i' from the terminal (this will install the npm modules: dotenv, bcrypt, connect-session-sequelize, express, express-handlebars, express-session, mysql2, passport, sequelize and validator)
-    * create a mysql database using the schema in: **schema.sql** (this will create the database, but it won't have any tables... just yet)
-    * run 'server.js' to dynamically the tables necessary
-    * populate the newly created database with the data in: **seeds.sql**
-    * create a `.env` file with the following contents (since this was included in the `.gitignore` file):
+    * run `npm i` from the terminal (this will install the npm modules: dotenv, bcrypt, connect-session-sequelize, express, express-handlebars, express-session, mysql2, passport, sequelize and validator)
+    * create the mysql database using the `schema.sql` file
+    * run 'server.js' to dynamically create the required tables
+    * seed the newly created database tables with the `seeds.sql` file
+    * create a `.env` file with your MySQL Database password in the following format 
+      * (this was included in the `.gitignore` file to prevent the password from being exposed on Github):
 
 ```
 PASSWORD="your_database_password_here"
 ```
+This file will be imported by `config/index.js` On a local setup.
 
-This file will only be imported by 'config/index.js' if you're running this app locally because we modified 'config/index.js' in the following way:
+This works because `config/index.js` was modified in the following way:
 
 ```js
 let sequelize;
@@ -30,8 +42,6 @@ if (config.use_env_variable) {
     sequelize = new Sequelize(config.database, config.username, password, config); // config.password was replaced by pwd
 }
 ```
-
-The above `.env` file was utilized to keep our local MySQL passwords from being uploaded to the github repository.
 
 ---
 
@@ -55,9 +65,9 @@ The above `.env` file was utilized to keep our local MySQL passwords from being 
 
 ---
 
-## This project was created and is maintained by:
+## eMarketplace was created by:
 
-* [Vincent Shury](https://www.linkedin.com/feed/) ( [Github Profile](https://github.com/Vincent440), [Portfolio](https://vincent440.github.io/) ) | [Mike Gullo](https://mike14747.github.io/) | [Michelle Williams](https://github.com/letscook1)
+* [Vincent Shury](https://www.linkedin.com/feed/) ( [Github Profile](https://github.com/Vincent440) | [Portfolio](https://vincent440.github.io/) ) | | [Mike Gullo](https://mike14747.github.io/) | | [Michelle Williams](https://github.com/letscook1)
 * [Live Website](https://glacial-bayou-58542.herokuapp.com/)
 * [master REPO](https://github.com/letscook1/project2)
 * Contact us at: letscook1@hotmail.com | vinceshury@gmail.com | mike14747@oh.rr.com for more info about this project.
