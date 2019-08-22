@@ -38,8 +38,9 @@ let sequelize;
 if (config.use_env_variable) {
     sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-    const password = process.env.PASSWORD; // this new line pulls in the local password from the `.env` file. 
-    sequelize = new Sequelize(config.database, config.username, password, config); // config.password was replaced by pwd
+    // assign the local password from the `.env` to a new password variable. 
+    const password = process.env.PASSWORD;
+    sequelize = new Sequelize(config.database, config.username,/*config.password is now*/ password, config);
 }
 ```
 
