@@ -68,7 +68,8 @@ if (config.use_env_variable) {
 
 ## eMarketplace was created by:
 
-* [Vincent Shury](www.linkedin.com/in/vincent-shury) ( [Github Profile](https://github.com/Vincent440) | [Portfolio](https://vincent440.github.io/) ) | | [Mike Gullo](https://mike14747.github.io/) | | [Michelle Williams](https://github.com/letscook1)
+* Vincent Shury's [LinkedIn Profile](https://www.linkedin.com/in/vincent-shury/), [Github Profile](https://github.com/Vincent440), [Portfolio](https://vincent440.github.io/) 
+* [Mike Gullo's Portfolio](https://mike14747.github.io/) | | [Michelle William's Github](https://github.com/letscook1)
 * [Live Website](https://emarketplace.herokuapp.com)
 
 * Contact us at: letscook1@hotmail.com | vinceshury@gmail.com | mike14747@oh.rr.com for more info about this project.
