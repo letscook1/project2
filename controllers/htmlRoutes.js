@@ -55,7 +55,7 @@ router.get("/", (req, res) => {
         attributes: ['id', 'name', 'description', 'image_name'],
         order: [['id', 'ASC']]
     }).then(function (category) {
-        res.render("categories", { category });
+        res.render("categories", { layout:'guest', category });
     });
 });
 
