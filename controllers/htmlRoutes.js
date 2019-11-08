@@ -7,7 +7,7 @@ const op = Sequelize.Op;
 
 const db = require("../models");
 
-// find out if the user is looged in
+// find out if the user is logged in
 router.get("/user/status", (req, res) => {
     res.send({ user: req.isAuthenticated() });
 });
@@ -55,7 +55,13 @@ router.get("/", (req, res) => {
         attributes: ['id', 'name', 'description', 'image_name'],
         order: [['id', 'ASC']]
     }).then(function (category) {
-        res.render("categories", { layout:'guest', category });
+        if (req.isAuthenticated()) {
+            res.render("categories", { category });
+        }
+        else {
+            res.render("categories", { layout:'guest', category });
+        }
+        
     });
 });
 
@@ -66,8 +72,13 @@ router.get("/category/:id", (req, res) => {
         where: { categoryId: req.params.id },
         order: [['id', 'ASC']]
     }).then(function (categoryitems) {
-        // res.json(categoryitems)
-        res.render("category_items", { categoryitems, user: req.isAuthenticated() });
+        if (req.isAuthenticated()) {
+            res.render("category_items", { categoryitems});
+        }
+        else {
+            res.render("guest_category_items", { layout:'guest', categoryitems});
+        }
+        
     });
 });
 
@@ -89,7 +100,12 @@ router.get("/search/:criteria", (req, res) => {
         },
         order: [['id', 'ASC']]
     }).then(function (categoryitems) {
-        res.render("category_items", { categoryitems, user: req.isAuthenticated() });
+        if (req.isAuthenticated()) {
+            res.render("category_items", { categoryitems });
+        }
+        else {
+            res.render("category_items", { layout:'guest', categoryitems });
+        }
     });
 });
 
@@ -106,7 +122,7 @@ router.get("/login", (req, res) => {
     if (req.isAuthenticated()) {
         res.redirect("/")
     } else {
-        res.render("login");
+        res.render("login", { layout:'guest' });
     }
 });
 
@@ -116,7 +132,7 @@ router.get("/register", (req, res) => {
         res.redirect("/account");
     }
     else {
-        res.render("account");
+        res.render("register", { layout:'guest' });
     }
 });
 
@@ -129,7 +145,7 @@ router.get("/account", (req, res) => {
                 id: req.user
             }
         }).then(function (account) {
-            res.render("account", { account, user: req.isAuthenticated() });
+            res.render("account", { account });
         });
     }
     else {
@@ -144,7 +160,7 @@ router.get("/account/orders", (req, res) => {
             attributes: ['id', 'order_total', 'createdAt'],
             where: { userId: req.user },
             order: [['id', 'ASC']]
-        }).then(orderHistory=> res.render("orders", { orderHistory }));
+        }).then(orderHistory => res.render("order_history", { orderHistory }));
     }
     else {
         res.redirect("/login");
@@ -161,7 +177,7 @@ router.get("/account/orders/:id", (req, res) => {
                 { model: db.order_items, attributes: ['num', 'each_price'], include: [{ model: db.products, attributes: ['name', 'description'] }] }
             ]
         }).then(function (order) {
-            res.render("orders", { order });
+            res.render("order_details", { order });
         });
     }
     else {
