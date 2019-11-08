@@ -1,13 +1,13 @@
 "use strict";
 
-var express = require("express");
-var router = express.Router();
-var passport = require("passport");
+const express = require("express");
+const router = express.Router();
+const passport = require("passport");
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-var db = require("../models");
+const db = require("../models");
 
 // delete an item from the cart
 router.delete("/api/cart", (req, res) => {
@@ -69,8 +69,8 @@ router.post("/api/cart", (req, res) => {
 
 // route for processing a submitted order
 // set variables for submitting an order
-var orderId = 0;
-var userId = 0;
+let orderId = 0;
+let userId = 0;
 // first find the cart that has been submitted
 router.post("/api/cart/submitted", (req, res, next) => {
     userId = req.user;
@@ -93,7 +93,7 @@ router.post("/api/cart/submitted", (req, res, next) => {
                     productId: element.productId
                 });
             });        
-        var order = {
+        let order = {
             orderId: orderId
         }
             res.send(order);
@@ -165,7 +165,7 @@ router.post("/api/account/register", (req, res) => {
 });
 
 // login with an existing username and password
-var pwd = "";
+let pwd = "";
 router.post("/api/account/login", (req, res) => {
     pwd = req.body.password;
     db.users.findOne({

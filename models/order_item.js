@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    var OrderItem = sequelize.define("order_items", {
+    let OrderItem = sequelize.define("order_items", {
         num: {
             type: DataTypes.INTEGER,
             allowNull: false

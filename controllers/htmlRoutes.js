@@ -1,11 +1,11 @@
 "use strict";
 
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const Sequelize = require('sequelize');
 const op = Sequelize.Op;
 
-var db = require("../models");
+const db = require("../models");
 
 // find out if the user is looged in
 router.get("/user/status", (req, res) => {
@@ -29,10 +29,10 @@ router.get("/cart/info", (req, res) => {
             attributes: ['id', 'num', 'each_price', 'productId'],
             where: { userId: req.user }
         }).then(function (cart) {
-            var cartInfo = {};
-            var totalCost = 0;
-            var uniqueItems = 0;
-            var totalItems = 0;
+            let cartInfo = {};
+            let totalCost = 0;
+            let uniqueItems = 0;
+            let totalItems = 0;
             cart.forEach(function (element) {
                 totalCost += element.num * element.each_price;
                 uniqueItems++;
@@ -180,11 +180,11 @@ router.get("/cart", (req, res) => {
                 { model: db.products, attributes: ['name', 'description'] }
             ]
         }).then(function (data) {
-            var totalCost = 0;
-            var totalItems = 0;
-            var cart = [];
+            let totalCost = 0;
+            let totalItems = 0;
+            let cart = [];
             for (let i = 0; i < data.length; i++) {
-                var tempObj = {};
+                let tempObj = {};
                 totalItems += data[i].num;
                 totalCost += data[i].num * data[i].each_price;
                 tempObj.id = data[i].id;

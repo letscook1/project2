@@ -1,19 +1,19 @@
 "use strict";
 require('dotenv').config()
-var express = require("express");
-var app = express();
+const express = require("express");
+const app = express();
 
-var PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-var db = require("./models");
+const db = require("./models");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-var session = require("express-session");
-var passport = require("passport");
-var SequelizeStore = require('connect-session-sequelize')(session.Store);
+const session = require("express-session");
+const passport = require("passport");
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 app.use(session({
     secret: 'asdwelhjt',
@@ -29,15 +29,15 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-var exphbs = require("express-handlebars");
+const exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-var apiRoutes = require("./controllers/apiRoutes.js");
+const apiRoutes = require("./controllers/apiRoutes.js");
 app.use(apiRoutes);
 
-var htmlRoutes = require("./controllers/htmlRoutes.js");
+const htmlRoutes = require("./controllers/htmlRoutes.js");
 app.use(htmlRoutes);
 
 db.sequelize.sync({ force: false }).then(function () {

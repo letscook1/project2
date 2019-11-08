@@ -12,7 +12,7 @@ let sequelize;
 if (config.use_env_variable) {
     sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-    const password = process.env.PASSWORD;
+    const password = process.env.DB_PASSWORD;
     sequelize = new Sequelize(config.database, config.username, password, config);
 }
 

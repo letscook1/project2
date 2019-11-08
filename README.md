@@ -21,34 +21,36 @@ To use this project, you'll need to do the following:
 
     * run `npm i` from the terminal (this will install the npm modules: dotenv, bcrypt, connect-session-sequelize, express, express-handlebars, express-session, mysql2, passport, sequelize and validator)
     * create the mysql database using the `schema.sql` file
-    * run 'server.js' to dynamically create the required tables
-    * seed the newly created database tables with the `seeds.sql` file
     * create a `.env` file with your MySQL Database password in the following format 
-      * (this was included in the `.gitignore` file to prevent the password from being exposed on Github):
+     (this was included in the `.gitignore` file to prevent the password from being exposed on Github):
+    ```
+    DB_PASSWORD="your_database_password_here"
+    ```
 
-```
-PASSWORD="your_database_password_here"
-```
-This file will be imported by `config/index.js` On a local setup.
+This file will be imported by `config/index.js` while running on your computer locally because of the following changes to the `config/index.js` file.
 
-This works because `config/index.js` was modified in the following way:
+    ```js
+    let sequelize;
+    if (config.use_env_variable) {
+        sequelize = new Sequelize(process.env[config.use_env_variable], config);
+    } else {
+        // assign the local password from the `.env` to a new password variable. 
+        const password = process.env.DB_PASSWORD;
+        sequelize = new Sequelize(config.database, config.username,/*config.password is now*/ password, config);
+    }
+    ```
 
-```js
-let sequelize;
-if (config.use_env_variable) {
-    sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-    // assign the local password from the `.env` to a new password variable. 
-    const password = process.env.PASSWORD;
-    sequelize = new Sequelize(config.database, config.username,/*config.password is now*/ password, config);
-}
-```
+* run 'server.js' to dynamically create the required tables
+* seed the newly created database tables with the `seeds.sql` file
+
+
+
 
 ---
 
 ## Our MySQL database layout for this project:
 
-![MySQL Layout](/public/images/project2_database.png)
+![MySQL Layout](./public/images/project2_database.png)
 
 ---
 
