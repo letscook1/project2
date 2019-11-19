@@ -31,7 +31,7 @@ app.use(passport.session());
 
 const exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "user" }));
 app.set("view engine", "handlebars");
 
 const apiRoutes = require("./controllers/apiRoutes.js");

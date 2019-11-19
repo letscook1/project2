@@ -9,11 +9,7 @@ $(document).ready(()=> {
     //Get user logged in status
     $.get("/user/status", data => {
         if (data.user) {
-            $("#account_link").removeClass("d-none");
-            $("#cart_logout").removeClass("d-none");
-            $("#login_register").addClass("d-none");
             $.get("/cart/info", data => {
-                $("#cart_info").removeClass("d-none");
                 $("#navbar-cart-amount").text(data.cartInfo.totalItems);
                 $("#navbar-cart-amount::after").text("items in");
                 if(data.cartInfo.totalCost > 0){
