@@ -1,6 +1,6 @@
 {
     "name": "emarketplace",
-    "version": "0.7.1",
+    "version": "0.7.5",
     "description": "An ecommerce application using Express, Handlebars view engine, MySQL and sequelize ORM.",
     "main": "server.js",
     "scripts": {
@@ -9,8 +9,8 @@
         "dev": "nodemon server.js"
     },
     "engines": {
-        "node":">=12.13.0",
-        "yarn":">=1.19.1"
+        "node": ">=12.13.0",
+        "yarn": ">=1.19.1"
     },
     "repository": {
         "type": "git",
@@ -18,7 +18,10 @@
     },
     "keywords": [],
     "author": "Vincent Shury",
-    "contributors": ["Mike Gullo","Michelle Williams"],
+    "contributors": [
+        "Mike Gullo",
+        "Michelle Williams"
+    ],
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/letscook1/project2/issues"
@@ -36,6 +39,7 @@
         "sequelize": "^5.8.5"
     },
     "devDependencies": {
-        "nodemon": "^1.19.4"
+        "nodemon": "^1.19.4",
+        "standard": "^14.3.1"
     }
 }

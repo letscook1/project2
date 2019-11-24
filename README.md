@@ -1,4 +1,7 @@
 # eMarketplace
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+
 An online marketplace simulating a digital store inventory with a user account system that allows users to place an order for items/services and checkout.
 This store allows a user to:
 * Create an account
@@ -55,16 +58,20 @@ This file will be imported by `config/index.js` while running on your computer l
 ---
 
 ## NPM Packages used in this project
-* [dotenv](https://www.npmjs.com/package/dotenv)
+*Dependencies:*
 * [bcrypt](https://www.npmjs.com/package/bcrypt)
 * [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize)
+* [dotenv](https://www.npmjs.com/package/dotenv)
 * [express](https://www.npmjs.com/package/express)
 * [express-handlebars](https://www.npmjs.com/package/express-handlebars)
 * [express-session](https://www.npmjs.com/package/express-session)
 * [mysql2](https://www.npmjs.com/package/mysql2)
 * [passport](https://www.npmjs.com/package/passport)
 * [sequelize](https://www.npmjs.com/package/sequelize)
-* [validator](https://www.npmjs.com/package/validator)
+
+*Devevelopment Dependencies:*
+* [Nodemon](https://www.npmjs.com/package/nodemon)
+* [Standard](https://www.npmjs.com/package/standard)
 
 ---
 
