@@ -1,19 +1,16 @@
 'use strict'
-
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
-
 const bcrypt = require('bcrypt')
-const saltRounds = 10
-
 const db = require('../models')
+const saltRounds = 10
 
 // delete an item from the cart
 router.delete('/api/cart', (req, res) => {
   db.cart_items.destroy({
     where: { userId: req.user, id: req.body.id }
-  }).then(function (data) {
+  }).then((data) => {
     if (data.id) {
       res.send('success').end()
     } else {
@@ -28,7 +25,7 @@ router.put('/api/cart', (req, res) => {
     num: req.body.num
   }, {
     where: { id: req.body.id }
-  }).then(function (data) {
+  }).then((data) => {
     if (data) {
       res.send('success').end()
     } else {
@@ -56,7 +53,7 @@ router.post('/api/cart', (req, res) => {
         num: parseInt(cartItem.num) + parseInt(req.body.num)
       }, {
         where: { id: cartItem.id }
-      }).then(function (data) {
+      }).then((data) => {
         if (data) {
           res.send('updated').end()
         } else {
@@ -67,8 +64,7 @@ router.post('/api/cart', (req, res) => {
   })
 })
 
-// route for processing a submitted order
-// set variables for submitting an order
+// route for processing a submitted order / set variables for submitting an order
 let orderId = 0
 let userId = 0
 // first find the cart that has been submitted
@@ -77,15 +73,15 @@ router.post('/api/cart/submitted', (req, res, next) => {
   db.cart_items.findAll({
     attributes: ['id', 'num', 'each_price', 'productId'],
     where: { userId: userId }
-  }).then(function (data) {
+  }).then((data) => {
     // then add the submitted cart to the orders table, then add each of the items from cart_items to the order_items table with the correct orderID
     db.orders.create({
       shipping_cost: 0,
       order_total: req.body.order_total,
       userId: userId
-    }).then(function (result) {
+    }).then((result) => {
       orderId = result.id
-      data.forEach(function (element) {
+      data.forEach((element) => {
         db.order_items.create({
           num: element.num,
           each_price: element.each_price,
@@ -116,20 +112,20 @@ router.put('/api/account', (req, res) => {
       email: req.body.email
     }, {
       where: { id: req.user }
-    }).then(function (data) {
+    }).then((data) => {
       if (data) {
         res.send('success').end()
       } else {
         res.send('failed').end()
       }
-    }).catch(function (err) {
+    }).catch((err) => {
       if (err) {
         console.log(err)
       }
       res.send('duplicate').end()
     })
   } else {
-    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+    bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
       if (err) {
         console.log(err)
       }
@@ -139,12 +135,8 @@ router.put('/api/account', (req, res) => {
         email: req.body.email
       }, {
         where: { id: req.user }
-      }).then(function (data) {
-        if (data) {
-          res.send('success').end()
-        } else {
-          res.send('failed').end()
-        }
+      }).then((data) => {
+        res.send(data ? 'success' : 'failed').end()
       })
     })
   }
@@ -152,7 +144,7 @@ router.put('/api/account', (req, res) => {
 
 // register for an account
 router.post('/api/account/register', (req, res) => {
-  bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+  bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
     if (err) {
       console.log(err)
     }
@@ -182,13 +174,13 @@ router.post('/api/account/login', (req, res) => {
     where: {
       username: req.body.username
     }
-  }).then(function (data) {
+  }).then((data) => {
     if (data) {
-      bcrypt.compare(pwd, data.password, function (err, isMatch) {
+      bcrypt.compare(pwd, data.password, (err, isMatch) => {
         if (err) throw err
         if (isMatch) {
           userId = data.id
-          req.login(userId, function (err) {
+          req.login(userId, (err) => {
             if (err) throw err
             console.log('\nUser is being logged in!\n')
             res.send('success').end()
@@ -205,11 +197,11 @@ router.post('/api/account/login', (req, res) => {
   })
 })
 
-passport.serializeUser(function (userId, done) {
+passport.serializeUser((userId, done) => {
   done(null, userId)
 })
 
-passport.deserializeUser(function (userId, done) {
+passport.deserializeUser((userId, done) => {
   done(null, userId)
 })
 

@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define('products', {
     name: {
       type: DataTypes.STRING,
@@ -24,7 +24,7 @@ module.exports = function (sequelize, DataTypes) {
   }, {
     freezeTableName: true
   })
-  Product.associate = function (models) {
+  Product.associate = (models) => {
     Product.hasMany(models.reviews, {
       foreignKey: { name: 'productId', allowNull: false },
       onDelete: 'cascade'

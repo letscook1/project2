@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const Order = sequelize.define('orders', {
     shipping_cost: {
       type: DataTypes.DECIMAL(10, 2),
@@ -11,7 +11,7 @@ module.exports = function (sequelize, DataTypes) {
   }, {
     freezeTableName: true
   })
-  Order.associate = function (models) {
+  Order.associate = (models) => {
     Order.belongsTo(models.users, {
       foreignKey: { name: 'userId', allowNull: false },
       onDelete: 'cascade'

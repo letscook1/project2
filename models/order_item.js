@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const OrderItem = sequelize.define('order_items', {
     num: {
       type: DataTypes.INTEGER,
@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
     timestamps: false
   })
 
-  OrderItem.associate = function (models) {
+  OrderItem.associate = (models) => {
     OrderItem.belongsTo(models.orders, {
       foreignKey: { name: 'orderId', allowNull: false },
       onDelete: 'cascade'

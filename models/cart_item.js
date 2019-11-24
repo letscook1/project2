@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const CartItem = sequelize.define('cart_items', {
     num: {
       type: DataTypes.INTEGER,
@@ -12,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
     freezeTableName: true,
     timestamps: false
   })
-  CartItem.associate = function (models) {
+  CartItem.associate = (models) => {
     CartItem.belongsTo(models.users, {
       foreignKey: { name: 'userId', allowNull: false },
       onDelete: 'cascade'

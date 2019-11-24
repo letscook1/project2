@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const Category = sequelize.define('categories', {
     name: {
       type: DataTypes.STRING,
@@ -16,7 +16,7 @@ module.exports = function (sequelize, DataTypes) {
     freezeTableName: true,
     timestamps: false
   })
-  Category.associate = function (models) {
+  Category.associate = (models) => {
     Category.hasMany(models.products, {
       foreignKey: { name: 'categoryId', allowNull: false },
       onDelete: 'cascade'

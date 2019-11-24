@@ -17,7 +17,7 @@ router.get('/category/list', (req, res) => {
   db.categories.findAll({
     attributes: ['id', 'name', 'description'],
     order: [['id', 'ASC']]
-  }).then(function (categoryList) {
+  }).then((categoryList) => {
     res.send({ categoryList })
   })
 })
@@ -28,12 +28,12 @@ router.get('/cart/info', (req, res) => {
     db.cart_items.findAll({
       attributes: ['id', 'num', 'each_price', 'productId'],
       where: { userId: req.user }
-    }).then(function (cart) {
+    }).then((cart) => {
       const cartInfo = {}
       let totalCost = 0
       let uniqueItems = 0
       let totalItems = 0
-      cart.forEach(function (element) {
+      cart.forEach((element) => {
         totalCost += element.num * element.each_price
         uniqueItems++
         totalItems += element.num
@@ -53,7 +53,7 @@ router.get('/', (req, res) => {
   db.categories.findAll({
     attributes: ['id', 'name', 'description', 'image_name'],
     order: [['id', 'ASC']]
-  }).then(function (category) {
+  }).then((category) => {
     if (req.isAuthenticated()) {
       res.render('categories', { category })
     } else {
@@ -68,7 +68,7 @@ router.get('/category/:id', (req, res) => {
     attributes: ['id', 'name', 'description', 'image_name', 'price'],
     where: { categoryId: req.params.id },
     order: [['id', 'ASC']]
-  }).then(function (categoryitems) {
+  }).then((categoryitems) => {
     if (req.isAuthenticated()) {
       res.render('category_items', { categoryitems })
     } else {
@@ -94,11 +94,11 @@ router.get('/search/:criteria', (req, res) => {
       ]
     },
     order: [['id', 'ASC']]
-  }).then(function (categoryitems) {
+  }).then((categoryitems) => {
     if (req.isAuthenticated()) {
       res.render('category_items', { categoryitems })
     } else {
-      res.render('category_items', { layout: 'guest', categoryitems })
+      res.render('guest_category_items', { layout: 'guest', categoryitems })
     }
   })
 })
@@ -140,7 +140,7 @@ router.get('/account', (req, res) => {
       where: {
         id: req.user
       }
-    }).then(function (account) {
+    }).then((account) => {
       res.render('account', { account })
     })
   } else {
@@ -170,7 +170,7 @@ router.get('/account/orders/:id', (req, res) => {
       include: [
         { model: db.order_items, attributes: ['num', 'each_price'], include: [{ model: db.products, attributes: ['name', 'description'] }] }
       ]
-    }).then(function (order) {
+    }).then((order) => {
       res.render('order_details', { order })
     })
   } else {
@@ -188,7 +188,7 @@ router.get('/cart', (req, res) => {
       include: [
         { model: db.products, attributes: ['name', 'description'] }
       ]
-    }).then(function (data) {
+    }).then((data) => {
       let totalCost = 0
       let totalItems = 0
       const cart = []

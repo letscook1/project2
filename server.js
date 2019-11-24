@@ -40,8 +40,8 @@ app.use(apiRoutes)
 const htmlRoutes = require('./controllers/htmlRoutes.js')
 app.use(htmlRoutes)
 
-db.sequelize.sync({ force: false }).then(function () {
-  app.listen(PORT, () => console.log(`Server listening on: http://localhost:${PORT}`))
-}).catch(function (error) {
+db.sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log(`\nServer listening on: http://localhost:${PORT}`))
+}).catch((error) => {
   console.log(error)
 })

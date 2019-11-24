@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const Review = sequelize.define('reviews', {
     rating: {
       type: DataTypes.INTEGER,
@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
   }, {
     freezeTableName: true
   })
-  Review.associate = function (models) {
+  Review.associate = (models) => {
     Review.belongsTo(models.users, {
       foreignKey: { name: 'userId', allowNull: false },
       onDelete: 'cascade'
