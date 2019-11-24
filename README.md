@@ -1,7 +1,20 @@
-# MarketPlace
-An Ecommerce Marketplace based off of a store inventory and user database that allows a user to place an order for items/services and checkout.
+# eMarketplace
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-## How users can get started with the project:
+
+An online marketplace simulating a digital store inventory with a user account system that allows users to place an order for items/services and checkout.
+This store allows a user to:
+* Create an account
+* Log in & Edit an account
+* Add items to a cart
+* Update and remove Items from the cart
+* Submit an order. 
+* View placed order.
+* View all orders placed from that account.
+
+---
+
+## Getting Started
 
 To use this project, you'll need to do the following:
 
@@ -9,56 +22,69 @@ To use this project, you'll need to do the following:
 
 * If you're running it locally on your pc, also perform these steps:
 
-    * run 'npm i' from the terminal (this will install the npm modules: bcrypt, connect-session-sequelize, express, express-handlebars, express-session, mysql2, passport, sequelize and validator)
-    * create a mysql database using the schema in: **schema.sql** (this will create the database, but it won't have any tables... just yet)
-    * run 'server.js' to dynamically the tables necessary
-    * populate the newly created database with the data in: **seeds.sql**
-    * create a **config/pwd.js** file with the following contents (since this was excluded from being sent to guthub in the .gitignore file):
+    * run `npm i` from the terminal (this will install the npm modules: dotenv, bcrypt, connect-session-sequelize, express, express-handlebars, express-session, mysql2, passport, sequelize and validator)
+    * create the mysql database using the `schema.sql` file
+    * create a `.env` file with your MySQL Database password in the following format 
+     (this was included in the `.gitignore` file to prevent the password from being exposed on Github):
+    ```
+    DB_PASSWORD="your_database_password_here"
+    ```
 
-```
-var pwd = "your_password";
+This file will be imported by `config/index.js` while running on your computer locally because of the following changes to the `config/index.js` file.
 
-module.exports = pwd;
-```
+    ```js
+    let sequelize;
+    if (config.use_env_variable) {
+        sequelize = new Sequelize(process.env[config.use_env_variable], config);
+    } else {
+        // assign the local password from the `.env` to a new password variable. 
+        const password = process.env.DB_PASSWORD;
+        sequelize = new Sequelize(config.database, config.username,/*config.password is now*/ password, config);
+    }
+    ```
 
-This file will only be imported by 'config/index.js' if you're running this app locally because we modified 'config/index.js' in the following way:
+* run 'server.js' to dynamically create the required tables
+* seed the newly created database tables with the `seeds.sql` file
 
-```
-let sequelize;
-if (config.use_env_variable) {
-    sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-    const pwd = require("../config/pwd.js"); // this line was added
-    sequelize = new Sequelize(config.database, config.username, pwd, config); // config.password was replaced by pwd
-}
-```
 
-The above **config/pwd.js** file was utilized to keep our local MySQL passwords from being uploaded to the github repository.
+
 
 ---
 
 ## Our MySQL database layout for this project:
 
-![MySQL Layout](/public/images/project2_database.png)
+![MySQL Layout](./public/images/project2_database.png)
 
 ---
 
 ## NPM Packages used in this project
-* bcrypt (https://www.npmjs.com/package/bcrypt)
-* connect-session-sequelize (https://www.npmjs.com/package/connect-session-sequelize)
-* express (https://www.npmjs.com/package/express)
-* express-handlebars (https://www.npmjs.com/package/express-handlebars)
-* express-session (https://www.npmjs.com/package/express-session)
-* mysql2 (https://www.npmjs.com/package/mysql2)
-* passport (https://www.npmjs.com/package/passport)
-* sequelize (https://www.npmjs.com/package/sequelize)
-* validator (https://www.npmjs.com/package/validator)
+*Dependencies:*
+* [bcrypt](https://www.npmjs.com/package/bcrypt)
+* [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize)
+* [dotenv](https://www.npmjs.com/package/dotenv)
+* [express](https://www.npmjs.com/package/express)
+* [express-handlebars](https://www.npmjs.com/package/express-handlebars)
+* [express-session](https://www.npmjs.com/package/express-session)
+* [mysql2](https://www.npmjs.com/package/mysql2)
+* [passport](https://www.npmjs.com/package/passport)
+* [sequelize](https://www.npmjs.com/package/sequelize)
+
+*Devevelopment Dependencies:*
+* [Nodemon](https://www.npmjs.com/package/nodemon)
+* [Standard](https://www.npmjs.com/package/standard)
 
 ---
 
-## This project was created and is maintained by:
+## eMarketplace was created by:
 
-* [Michelle Williams](https://github.com/letscook1) | [Vincent Shury](https://www.linkedin.com/feed/) [Github](https://github.com/Vincent440) [Portfolio](https://vincent440.github.io/) | [Mike Gullo](https://mike14747.github.io/)
-* https://glacial-bayou-58542.herokuapp.com/
-* https://github.com/letscook1/project2
+* Mike Gullo
+    * Portfolio: [https://mike14747.github.io/](https://mike14747.github.io/)
+* Michelle William
+    * Github: [https://github.com/letscook1](https://github.com/letscook1)
+* Vincent Shury
+    * LinkedIn: [https://www.linkedin.com/in/vincent-shury/](https://www.linkedin.com/in/vincent-shury/)
+    * Github Portfolio: [https://vincent440.github.io/](https://vincent440.github.io/)
+    * Github Profile: [https://github.com/Vincent440](https://github.com/Vincent440) 
+* Link to the website is in the Github repository description [Here](#repo-meta-edit)
+
 * Contact us at: letscook1@hotmail.com | vinceshury@gmail.com | mike14747@oh.rr.com for more info about this project.

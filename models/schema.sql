@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS project2_db;
-CREATE DATABASE project2_db;
-USE project2_db;
+DROP DATABASE IF EXISTS emarketplace_db;
+CREATE DATABASE emarketplace_db;
+USE emarketplace_db;

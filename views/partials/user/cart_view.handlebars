@@ -46,7 +46,7 @@
       {{/if}}
   </tbody>    
 </table>
-<caption title="Viewing your shopping cart above"><i class="fas fa-arrow-circle-up"></i> Your Shopping Cart <i class="fas fa-shopping-cart"></i></caption>
+<caption title="Viewing your shopping cart above" class=""><i class="fas fa-arrow-circle-up text-light"> Your Shopping Cart</i> <i class="fas fa-shopping-cart text-light"></i></caption>
 {{!-- Make purchase button if there is a cart --}}
 {{#if cart}}
     <div class="m-auto w-50 px-2">
@@ -54,7 +54,7 @@
             <i class="fas fa-dollar-sign"> Pay </i> <i class="fas fa-arrow-right"> </i> <i class="fas fa-shopping-cart"> Checkout</i>
         </button>
     </div>
-    {{>payment_modal}}
+    {{>user/payment_modal}}
 {{else}}
     <div class="m-auto w-50 px-sm-1 px-md-5">
         <a class="btn btn-primary btn-block mb-3" href="/"><i class="fas fa-store-alt"> Browse All Categories</i></a>
