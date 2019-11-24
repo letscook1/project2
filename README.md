@@ -77,8 +77,14 @@ This file will be imported by `config/index.js` while running on your computer l
 
 ## eMarketplace was created by:
 
-* Vincent Shury's [LinkedIn Profile](https://www.linkedin.com/in/vincent-shury/), [Github Profile](https://github.com/Vincent440), [Portfolio](https://vincent440.github.io/) 
-* [Mike Gullo's Portfolio](https://mike14747.github.io/) | | [Michelle William's Github](https://github.com/letscook1)
-* [Live Website](https://emarketplace.herokuapp.com)
+* Mike Gullo
+    * Portfolio: [https://mike14747.github.io/](https://mike14747.github.io/)
+* Michelle William
+    * Github: [https://github.com/letscook1](https://github.com/letscook1)
+* Vincent Shury
+    * LinkedIn: [https://www.linkedin.com/in/vincent-shury/](https://www.linkedin.com/in/vincent-shury/)
+    * Github Portfolio: [https://vincent440.github.io/](https://vincent440.github.io/)
+    * Github Profile: [https://github.com/Vincent440](https://github.com/Vincent440) 
+* Link to the website is in the Github repository description [Here](#repo-meta-edit)
 
 * Contact us at: letscook1@hotmail.com | vinceshury@gmail.com | mike14747@oh.rr.com for more info about this project.
